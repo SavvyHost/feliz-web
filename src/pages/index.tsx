@@ -14,8 +14,6 @@ import CallToActionSection from "@/components/organisms/CTAsection";
 import fetchData from "@/helper/FetchData";
 import { TourPackage, ToursData } from "@/types/tour";
 import { Destination } from "./blogs";
-import TravelCard from "@/components/organisms/TrAvEl";
-import TourCard from "@/components/organisms/TrAvEl";
 
 type Blog = {
   id: number;

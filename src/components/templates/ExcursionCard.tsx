@@ -11,7 +11,7 @@ const ExcursionCard: React.FC<ExcursionCardProps> = ({
   recommendation,
 }) => (
   <div
-    className="rounded-lg ml-5 overflow-hidden shadow-md border border-transparent hover:border-yellow-500 transition-border duration-300 ease-in-out"
+    className="rounded-lg ml-3 cursor-pointer overflow-hidden shadow-md border border-transparent hover:border-yellow-500 transition-border duration-300 ease-in-out"
     style={{ width: "90%" }} // Reduce card width
   >
     <div className="relative w-full" style={{ height: "100px" }}>

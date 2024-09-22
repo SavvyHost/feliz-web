@@ -16,7 +16,7 @@ const sliderSettings = {
   dots: false,
   infinite: false,
   speed: 500,
-  slidesToShow: 8,
+  slidesToShow: 4,
   slidesToScroll: 1,
   centerMode: false,
   arrows: false,
@@ -43,13 +43,13 @@ const sliderSettings = {
 
 const Explore: React.FC = () => {
   return (
-    <div className="mx-0  py-8">
+    <div className="mr-2 py-8">
       <h2 className="md:text-3xl text-xl font-segoe ml-3 mb-6 text-start">
         Explore Excursions
       </h2>
 
       {/* Carousel for both mobile and desktop */}
-      <div className="block">
+      <div className="block lg:w-1/2">
         <Slider {...sliderSettings}>
           {excursions.map((excursion) => (
             <div key={excursion.id} className="">

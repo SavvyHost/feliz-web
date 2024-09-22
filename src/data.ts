@@ -655,16 +655,6 @@ export const excursions = [
       recommendation: "Travelers recommend",
     },
     {
-      id: 5,
-      imageSrc: Exp,
-      recommendation: "Travelers recommend",
-    },
-    {
-      id: 6,
-      imageSrc: Exp,
-      recommendation: "Travelers recommend",
-    },
-    {
       id: 1,
       imageSrc: Exp,
       recommendation: "Travelers recommend",
@@ -684,16 +674,7 @@ export const excursions = [
       imageSrc: Exp,
       recommendation: "Travelers recommend",
     },
-    {
-      id: 5,
-      imageSrc: Exp,
-      recommendation: "Travelers recommend",
-    },
-    {
-      id: 6,
-      imageSrc: Exp,
-      recommendation: "Travelers recommend",
-    },
+
 ];
   
 

@@ -14,6 +14,13 @@ const MobileFilter: React.FC<MobileFilterProps> = ({
   onOpenModal,
 }) => (
   <div className="flex items-center w-full overflow-hidden">
+    <Button
+      className=" flex text-nowrap justify-between capitalize items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg text-black"
+      onClick={onOpenModal}
+    >
+      <CustomSvgIcon />
+      All filters
+    </Button>
     <div className="w-7/12 flex overflow-x-auto">
       {options.map((filter) => (
         <Select
@@ -44,13 +51,6 @@ const MobileFilter: React.FC<MobileFilterProps> = ({
         </Select>
       ))}
     </div>
-    <Button
-      className="ml-4 flex text-nowrap justify-between capitalize items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg text-black"
-      onClick={onOpenModal}
-    >
-      <CustomSvgIcon />
-      All filters
-    </Button>
   </div>
 );
 

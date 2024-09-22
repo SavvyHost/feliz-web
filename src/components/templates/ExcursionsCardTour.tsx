@@ -5,7 +5,7 @@ import { BsHeart, BsMap, BsClock, BsFillCircleFill } from "react-icons/bs";
 import { Button } from "@mui/material";
 import Link from "next/link";
 import { TourPackage } from "@/types/tour";
-import defaultImage from "../../../../public/assets/camels.jpeg";
+import defaultImage from "../../../public/assets/camels.jpeg";
 
 interface ExcursionsProps {
   toursData: TourPackage[];
@@ -172,46 +172,59 @@ const sampleToursData: TourPackage[] = [
     rating: 4.5, // Optional rating
     is_best_deal: 0, // Optional best deal flag
   },
+  {
+    id: 1,
+    name: "Giza Pyramids Tour", // Added name
+    main_image: defaultImage,
+    title: "Giza Pyramids Tour",
+    destination: "Giza",
+    duration: "1",
+    starRating: 5,
+    min_price: 50,
+    price: 40, // Added price
+    amenities: ["Guide", "Transport"], // Added amenities
+    accommodationType: "Hotel", // Added accommodation type
+    tour_prices: [{ prices: [{ price: 40 }] }],
+    description: "Explore the majestic Giza Pyramids with a guided tour.", // Optional description
+    age_range: "All Ages", // Added age range
+    language: "English", // Added language
+    location: "Giza, Egypt", // Optional location
+    rating: 4.8, // Optional rating
+    is_best_deal: 1, // Optional best deal flag
+  },
+  {
+    id: 2,
+    name: "Nile Cruise", // Added name
+    main_image: defaultImage,
+    title: "Nile Cruise Adventure",
+    destination: "Cairo",
+    duration: "3",
+    starRating: 4,
+    min_price: 150,
+    price: 120, // Added price
+    amenities: ["Meals", "Entertainment"], // Added amenities
+    accommodationType: "Cruise Ship", // Added accommodation type
+    tour_prices: [{ prices: [{ price: 120 }] }],
+    description: "Enjoy a relaxing cruise on the Nile River.", // Optional description
+    age_range: "12 and up", // Added age range
+    language: "Arabic", // Added language
+    location: "Cairo, Egypt", // Optional location
+    rating: 4.5, // Optional rating
+    is_best_deal: 0, // Optional best deal flag
+  },
   // Add more sample tours here as needed
 ];
 
-export default function Excursions({ toursData }: ExcursionsProps) {
-  const sliderRef = React.useRef<Slider>(null);
-
-  const settings = {
-    dots: false,
-    infinite: false,
-    speed: 300,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2.5,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1.1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-
+export default function ExcursionsCardTour({ toursData }: ExcursionsProps) {
   // Use sample data if toursData is null or an empty array
   const dataToDisplay =
     toursData === null || toursData.length === 0 ? sampleToursData : toursData;
 
   return (
     <div className="relative">
-      <Slider {...settings} ref={sliderRef}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
         {dataToDisplay.map((excursion: TourPackage) => (
-          <div key={excursion.id} className="px-[5px] md:px-[9px] mb-3">
+          <div key={excursion.id} className="px-[5px] md:px-[5px] mb-3">
             <Link href="/top-excursions">
               <div className="px-[4px] mb-3">
                 <div className="flex flex-col max-w-lg mx-auto cursor-pointer border hover:border-black border-gray-200 rounded-lg overflow-hidden shadow-lg bg-white h-[500px] transition-all duration-300 ease-in-out">
@@ -277,7 +290,7 @@ export default function Excursions({ toursData }: ExcursionsProps) {
             </Link>
           </div>
         ))}
-      </Slider>
+      </div>
     </div>
   );
 }
