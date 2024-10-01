@@ -119,7 +119,7 @@ const SearchModal: React.FC<SearchModalProps> = ({
             )}
           </div>
           <button
-            className="bg-[#232323] text-white font-segoe rounded-md px-4 py-2 w-full flex items-center justify-center"
+            className="bg-[#36cc42] text-white font-segoe rounded-md px-4 py-2 w-full flex items-center justify-center"
             onClick={() => setIsModalOpen(false)}
           >
             <Search className="mr-2 w-5 h-5" />

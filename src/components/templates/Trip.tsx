@@ -50,8 +50,8 @@ const TripInfo: React.FC<TripInfoProps> = ({ DetailTour }) => {
             key={index}
             className="flex flex-col items-center text-center bg-white p-4 border border-gray-200 rounded-lg shadow-sm"
           >
-            <item.icon className="text-3xl text-[#945E13] mb-2" />
-            <h3 className="font-semibold text-[#945E13]">{item.title}</h3>
+            <item.icon className="text-3xl text-[#6ece49] mb-2" />
+            <h3 className="font-semibold text-[#377020]">{item.title}</h3>
             <p className="text-gray-800">{item.value}</p>
             <p className="text-sm text-gray-500">{item.subvalue}</p>
           </div>

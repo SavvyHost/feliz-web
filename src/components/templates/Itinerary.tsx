@@ -51,8 +51,8 @@ const TourItinerary: React.FC<TourItineraryProps> = ({ DetailTour }) => {
       </div>
 
       {/* Button with Icon */}
-      <Button className="mt-6 flex capitalize items-center px-4 py-2 border border-opacity-60 border-yellow-700 bg-yellow-100 text-[#A16207] font-segoe text-lg rounded-md hover:bg-[#8a4c03] hover:text-white transition-colors duration-300">
-        <FaDownload className="mr-2 text-[#A16207]" />
+      <Button className="mt-6 flex text-green-900 bg capitalize items-center px-4 py-2 border border-opacity-60 border-green-700 bg-green-100  font-segoe text-lg rounded-md hover:bg-[#1b5e2e] hover:text-white transition-colors duration-300">
+        <FaDownload className="mr-2 text-[#53d869]" />
         Download Brochure
       </Button>
     </div>

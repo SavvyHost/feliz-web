@@ -43,7 +43,7 @@ export default function BookingFormModal({ DetailTour }) {
   return (
     <>
       <Button
-        className="py-2 capitalize w-full bg-custom-gradient text-white rounded-none hover:bg-yellow-500 transition duration-300 font-segoe fixed top-[58px] right-0 z-40 md:hidden"
+        className="py-2 capitalize w-full bg-green-700 text-white rounded-none hover:bg-yellow-500 transition duration-300 font-segoe fixed top-[58px] right-0 z-40 md:hidden"
         onClick={() => setIsModalOpen(true)}
       >
         Open Booking Form

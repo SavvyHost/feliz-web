@@ -26,7 +26,7 @@ const Home: React.FC<HomeProps> = ({ toursData }) => {
         <h2 className="md:text-3xl text-xl font-segoe mx-5 my-6 text-start">
           Tours and Tickets to Experience Giza Pyramids
         </h2>
-        <div className="lg:px-5 px-3">
+        <div className="lg:px-5 px-2">
           <Excursions toursData={toursData} />
         </div>
       </div>

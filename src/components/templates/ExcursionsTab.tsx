@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import TravelPackagePage from "@/components/molecules/TravelCardSearch/TravelCardSearch";
-import MobileSidebar from "../atoms/Filters/MobileSidebar";
+
 import { useMediaQuery } from "@mui/material";
 import LargeScreenSidebar from "../atoms/Filters/LargeScreenSidebar";
 import { ToursData, TourPackage } from "@/types/tour";
 import MobileSearchModal from "../atoms/Search/MobileSearchModal";
+import MobileSidebar from "../atoms/Filters/MobileSidebar";
 
 interface ExcursionsTabProps {
   toursData: ToursData; // Define props type to include toursData
@@ -62,10 +63,10 @@ const ExcursionsTab: React.FC<ExcursionsTabProps> = ({ toursData }) => {
           />
         </div>
       ) : (
-        <div className="fixed top-14 z-30 left-0 bg-white pb-6 pt-8 px-6 md:hidden flex justify-center ">
+        <div className="fixed top-12 z-30 left-0 bg-white pb-6 pt-8 px-6 md:hidden flex justify-center ">
           <button
             onClick={() => setIsModalOpen(true)}
-            className="bg-custom-gradient p-3 text-white mr-4 rounded-lg  w-full max-w-[130px]"
+            className="bg-green-800 p-3 text-white mr-4 rounded-lg  w-full max-w-[130px]"
           >
             Show Filters
           </button>
@@ -74,7 +75,7 @@ const ExcursionsTab: React.FC<ExcursionsTabProps> = ({ toursData }) => {
         </div>
       )}
 
-      <div className="w-full md:w-3/4 mb-5 lg:mt-0 mt-20 lg:mb-4">
+      <div className="w-full md:w-3/4 mb-5 lg:mt-0 mt-16 lg:mb-4">
         <TravelPackagePage toursData={toursData} />
       </div>
 
