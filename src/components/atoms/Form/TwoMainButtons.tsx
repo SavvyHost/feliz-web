@@ -44,7 +44,7 @@ const HeroOverlay: React.FC<Props> = () => {
         </p>
         <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0">
           <Link href="/inquire" passHref>
-            <button className="bg-gray-800 capitalize font-segoe text-white font-semibold py-3 px-8 lg:py-4 lg:px-10 rounded-md mb-4 sm:mb-0 sm:mr-4 shadow-lg transition-all duration-300 ease-in-out  hover:bg-white hover:border-gray-300 hover:text-black hover:shadow-xl transform hover:scale-105">
+            <button className="bg-green-800 capitalize font-segoe text-white font-semibold py-3 px-8 lg:py-4 lg:px-10 rounded-md mb-4 sm:mb-0 sm:mr-4 shadow-lg transition-all duration-300 ease-in-out  hover:bg-white hover:border-gray-300 hover:text-black hover:shadow-xl transform hover:scale-105">
               Inquire Now
             </button>
           </Link>
@@ -52,7 +52,7 @@ const HeroOverlay: React.FC<Props> = () => {
             Or
           </span>
           <Link href="/top-packages" passHref>
-            <button className="bg-black capitalize font-segoe text-white font-semibold py-3 px-8 lg:py-4 lg:px-10 rounded-md shadow-lg transition-all duration-300 ease-in-out  hover:bg-white hover:border-gray-300 hover:text-black hover:shadow-xl transform hover:scale-105">
+            <button className="bg-green-900 capitalize font-segoe text-white font-semibold py-3 px-8 lg:py-4 lg:px-10 rounded-md shadow-lg transition-all duration-300 ease-in-out  hover:bg-white hover:border-gray-300 hover:text-black hover:shadow-xl transform hover:scale-105">
               Discover Travel Packages
             </button>
           </Link>
@@ -64,7 +64,7 @@ const HeroOverlay: React.FC<Props> = () => {
         <div className="fixed top-16 bg-[#FAFAFA] left-0 w-full py-4 z-20">
           <div className="flex flex-row items-center justify-center space-x-2 px-4">
             <Link href="/inquire" className="w-full">
-              <button className="w-full bg-black hover:bg-gray-600 text-white font-normal text-nowrap py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+              <button className="w-full bg-green-500 hover:bg-gray-600 text-white font-normal text-nowrap py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
                 Inquire Now
               </button>
             </Link>
@@ -74,7 +74,7 @@ const HeroOverlay: React.FC<Props> = () => {
               <div className="flex-grow border-t border-gray-300"></div>
             </div>
             <Link href="/top-packages" className="w-full">
-              <button className="w-full bg-gray-900 hover:bg-gray-700 text-white font-normal text-nowrap py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+              <button className="w-full bg-green-900 hover:bg-gray-700 text-white font-normal text-nowrap py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
                 Discover Travel Packages
               </button>
             </Link>

@@ -33,17 +33,17 @@ const Pagination: React.FC<PaginationProps> = ({ pageCount, onPageChange }) => {
         onPageChange={onPageChange}
         containerClassName={"flex space-x-1"}
         pageClassName={
-          "inline-flex items-center  justify-center px-3 py-1 bg-custom-gradient border border-gray-300 rounded-md text-gray-700"
+          "inline-flex items-center  justify-center px-3 py-1 bg-green-500 border border-gray-300 rounded-md text-gray-700"
         }
         pageLinkClassName={"cursor-pointer"}
         previousClassName={
-          "inline-flex items-center justify-center px-3 py-1 bg-custom-gradient border border-gray-300 rounded-md text-gray-700"
+          "inline-flex items-center justify-center px-3 py-1 bg-green-500 border border-gray-300 rounded-md text-gray-700"
         }
         nextClassName={
-          "inline-flex items-center justify-center px-3 py-1 bg-custom-gradient border border-gray-300 rounded-md text-gray-700"
+          "inline-flex items-center justify-center px-3 py-1 bg-green-500 border border-gray-300 rounded-md text-gray-700"
         }
         breakClassName={
-          "inline-flex items-center justify-center px-3 py-1 bg-custom-gradient border border-gray-300 rounded-md text-gray-700"
+          "inline-flex items-center justify-center px-3 py-1 bg-green-500 border border-gray-300 rounded-md text-gray-700"
         }
         activeClassName={"bg-blue-500 text-white"}
         disabledClassName={"bg-gray-200 text-gray-400 cursor-not-allowed"}

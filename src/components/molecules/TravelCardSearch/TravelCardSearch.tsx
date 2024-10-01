@@ -34,7 +34,7 @@ const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
               <div className="flex flex-col md:flex-row">
                 <div className="w-full md:w-2/6 p-3 h-64 md:h-auto relative">
                   <Image
-                    src={pkg.main_image || defaultImage} // Use default image if main_image is not available
+                    src={pkg.main_image.url || defaultImage} // Use default image if main_image is not available
                     alt={pkg.title}
                     width={100}
                     height={100}

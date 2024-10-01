@@ -1,133 +1,96 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { CiGlobe } from "react-icons/ci";
-import {
-  AiOutlineLogin,
-  AiOutlineMenuFold,
-  AiOutlineSearch,
-} from "react-icons/ai"; // Import login and search icons
-import { MobileMenu } from "./MobileMenu";
-import { useRouter } from "next/router";
+import { Facebook, Instagram, Twitter, Globe, Menu } from "lucide-react";
+import MobileMenu from "./MobileMenu";
+import DesktopMenu from "./DesktopMenu";
 
-type HeaderProps_TP = {
-  header: string;
-  className?: string;
-};
-
-export const Header = ({ header, className }: HeaderProps_TP) => {
+export const Header = ({ header, className }: any) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isFixed, setIsFixed] = useState(true);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const router = useRouter();
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop =
-        window.pageYOffset || document.documentElement.scrollTop;
-
-      if (scrollTop === 0) {
-        setIsScrolled(false);
-        setIsFixed(true);
-      } else {
-        setIsScrolled(true);
-      }
-
-      if (window.innerWidth >= 1024) {
-        let lastScrollTop = 0;
-        if (scrollTop > lastScrollTop) {
-          setIsFixed(false);
-        } else if (scrollTop < lastScrollTop || scrollTop === 0) {
-          setIsFixed(true);
-        }
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-      } else {
-        setIsFixed(true);
-      }
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024); // 1024px is typically the breakpoint for lg in Tailwind
     };
 
+    handleResize(); // Set initial value
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const handleScroll = () => {
+    if (!isDesktop) return; // Only apply scroll behavior on desktop
+
+    const currentScrollPos = window.pageYOffset;
+    setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
+    setPrevScrollPos(currentScrollPos);
+  };
+
+  useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [prevScrollPos, visible, isDesktop]);
 
   const handleLanguageChange = () => {
     alert("Language change button clicked!");
   };
 
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/top-packages", label: "Tour Packages" },
+    { href: "/top-excursions", label: "Short Excursions" },
+    { href: "/nile-cruises", label: "Nile Cruises" },
+    { href: "/blogs", label: "Blogs" },
+  ];
+
   return (
     <>
       <header
-        className={`${
-          isFixed ? "fixed" : "relative"
-        } bg-white shadow-md top-0 w-full font-sans tracking-wide z-40 sm:px-16 px-4 transition-transform duration-500 ease-in-out transform ${
-          isFixed ? "translate-y-0" : "-translate-y-full"
-        } ${className}`}
+        className={`fixed top-0 w-full z-40 px-4 sm:px-16 bg-white shadow-md transition-transform duration-300 ${
+          isDesktop && !visible ? "-translate-y-full" : "translate-y-0"
+        }`}
       >
-        <div className="grid grid-cols-2 lg:grid-cols-3 items-center">
-          {/* Logo */}
-          <Link href="/" className="p-6">
-            <div className="text-nowrap">Egypt Raisen Tours</div>
-          </Link>
-
-          {/* Desktop Navigation Links (Hidden on Mobile) */}
-          <div className="hidden lg:flex lg:items-center lg:justify-center">
-            <ul className="flex flex-col mr-12 items-center gap-y-4 lg:flex-row lg:gap-x-0 lg:space-y-0">
-              {[
-                { href: "/", label: "Home" },
-                { href: "/top-packages", label: "Tour Packages" },
-                { href: "/top-excursions", label: "Short Excursions" },
-                { href: "/nile-cruises", label: "Nile Cruises" },
-                { href: "/blogs", label: "Blogs" },
-              ].map(({ href, label }) => (
-                <Link href={href} key={href}>
-                  <li
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`block font-segoe font-semibold text-nowrap text-[14px] px-3 py-1 rounded transition-colors duration-300 ${
-                      router.pathname === href
-                        ? "text-gray-600"
-                        : "text-black hover:text-gray-300"
-                    }`}
-                  >
-                    {label}
-                  </li>
-                </Link>
-              ))}
-            </ul>
+        <div className="flex items-center justify-between py-4">
+          {/* Logo aligned to the left */}
+          <div className="flex-shrink-0 lg:w-3/12">
+            <Link href="/">
+              <span className="text-xl font-bold">Feliz Tour Egypt</span>
+            </Link>
           </div>
 
-          {/* Icons and Mobile Menu Button */}
-          <div className="flex items-center justify-end space-x-6">
-            {/* Earth Icon for Language Change - hidden on mobile */}
+          {/* Center - Desktop Menu (links centered only on desktop) */}
+          <div className="hidden lg:flex lg:w-2/3 justify-center">
+            <DesktopMenu navLinks={navLinks} />
+          </div>
+
+          {/* Right side - Social Icons, Language Change, and Book Tour Button */}
+          <div className="flex items-center lg:w-1/3 justify-end space-x-4">
+            <div className="hidden sm:flex space-x-2">
+              <Facebook className="w-5 h-5 text-green-700 cursor-pointer" />
+              <Instagram className="w-5 h-5 text-green-700 cursor-pointer" />
+              <Twitter className="w-5 h-5 text-green-700 cursor-pointer" />
+            </div>
             <button
               className="hidden lg:block focus:outline-none"
               onClick={handleLanguageChange}
               title="Change Language"
             >
-              <CiGlobe size={30} />
+              <Globe className="w-6 h-6 text-[#132f4e]" />
             </button>
-
-            {/* Search Button - hidden on mobile */}
-            <button
-              className="hidden lg:block focus:outline-none"
-              title="Search"
-            >
-              <AiOutlineSearch size={30} className="text-black" />
-            </button>
-
-            {/* Login Button - hidden on mobile */}
-            <Link href="/login" className="hidden lg:flex items-center">
-              <span className="ml-2 bg-black p-2 rounded-md px-10 text-white">
-                Login
-              </span>
-            </Link>
-
-            {/* Mobile Menu Button (Visible on Mobile Only) */}
-            <button
-              className="lg:hidden text-gray-900 focus:outline-none"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              <AiOutlineMenuFold size={30} />
+            <button className="bg-green-700 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-[#45ca34]">
+              Book Tour Now
             </button>
           </div>
+
+          {/* Mobile Menu Toggle (visible on small screens) */}
+          <button
+            className="lg:hidden text-[#191e61] focus:outline-none"
+            onClick={() => setIsMenuOpen(true)}
+          >
+            <Menu className="w-6 h-6" />
+          </button>
         </div>
       </header>
 
@@ -135,6 +98,7 @@ export const Header = ({ header, className }: HeaderProps_TP) => {
       <MobileMenu
         isOpen={isMenuOpen}
         onClose={() => setIsMenuOpen(false)}
+        navLinks={navLinks}
         onLanguageChange={handleLanguageChange}
       />
     </>

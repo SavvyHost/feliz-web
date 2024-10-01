@@ -11,7 +11,7 @@ interface TourItineraryProps {
 
 const TourItinerary: React.FC<TourItineraryProps> = ({ DetailTour }) => {
   return (
-    <div className="p-4">
+    <div className="">
       <h2 className="text-3xl font-segoe text-start mt-9 mb-6">Itinerary</h2>
 
       <div className="flex flex-col md:flex-row max-w-6xl mx-auto overflow-hidden">

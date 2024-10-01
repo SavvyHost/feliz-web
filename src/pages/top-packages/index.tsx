@@ -1,5 +1,6 @@
 import Laptop from "@/components/templates/laptop/Laptop";
 import Mobile from "@/components/templates/mobile/Mobile";
+
 import fetchData from "@/helper/FetchData";
 import { ToursData } from "@/types/tour";
 

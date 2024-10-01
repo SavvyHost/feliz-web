@@ -28,11 +28,12 @@ type Props = {
 };
 
 const BLogs: React.FC<Props> = ({ blogData, Destinations }) => {
+  const limitedDestinations = Destinations.slice(0, 8);
   return (
     <div>
       <HeroBlog />
       <InterestsSection />
-      <DestinationSection Destinations={Destinations} />
+      <DestinationSection Destinations={limitedDestinations} />
       <BlogSection blogData={blogData} />
     </div>
   );
@@ -40,7 +41,7 @@ const BLogs: React.FC<Props> = ({ blogData, Destinations }) => {
 
 export async function getServerSideProps() {
   const blogData = await fetchData("blogs"); // Fetch blogs data
-  const Destinations = await fetchData("countries"); // Fetch destinations data
+  const Destinations = await fetchData("cities"); // Fetch destinations data
 
   return {
     props: {

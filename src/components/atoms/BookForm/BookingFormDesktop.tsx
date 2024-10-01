@@ -10,12 +10,12 @@ export default function BookingFormDesktop({ DetailTour }) {
   };
 
   return (
-    <div className="hidden md:block p-6 bg-white rounded-lg shadow-lg">
+    <div className="hidden md:block p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-sm text-gray-500 mb-2">
         From ${DetailTour?.min_price}
       </h2>
       <h1 className="text-2xl font-bold mb-4 text-gray-800">
-        US ${DetailTour?.min_price}
+        US ${DetailTour?.min_price} / Per person
       </h1>
 
       <MainDataBookingForm

@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 import LocationDropdown from "./LocationDropdown";
+import DatePickerInput from "./DataPickerInput";
 import dayjs from "dayjs";
-import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
 type DateRange = [Date | null, Date | null];
 
@@ -16,7 +18,6 @@ interface SearchModalProps {
   locations: string[];
   dateRange: DateRange;
   setDateRange: (range: DateRange) => void;
-  setOpenDatePickerModal: (open: boolean) => void; // Prop for opening DatePickerModal
 }
 
 const SearchModal: React.FC<SearchModalProps> = ({
@@ -27,10 +28,8 @@ const SearchModal: React.FC<SearchModalProps> = ({
   locations,
   dateRange,
   setDateRange,
-  setOpenDatePickerModal,
 }) => {
-  const [option, setOption] = useState<string>("");
-  const options: string[] = ["Packages", "Nile Cruise", "Excursions"];
+  const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | null>(null);
 
   const formatDateRange = () => {
     const [start, end] = dateRange;
@@ -40,61 +39,77 @@ const SearchModal: React.FC<SearchModalProps> = ({
     return "Select dates";
   };
 
+  const handleDateChange = (newValue: dayjs.Dayjs | null) => {
+    setSelectedDate(newValue);
+    if (newValue) {
+      setDateRange([newValue.toDate(), newValue.add(1, "day").toDate()]);
+    }
+  };
+
+  const handleSearch = () => {
+    // Add logic to handle the search action, e.g., fetching data based on location and date range
+    console.log(
+      "Searching for excursions in",
+      location,
+      "from",
+      formatDateRange()
+    );
+    setOpenModal(false); // Close modal after searching
+  };
+
   return (
     <Modal
       open={openModal}
       onClose={() => setOpenModal(false)}
-      className="flex items-center justify-center p-4"
+      className="flex items-start justify-center p-0"
     >
       <Box
         sx={{
-          width: "90%",
-          maxWidth: 600,
+          width: "100%", // Full width
+          maxWidth: "none", // Disable max width
           bgcolor: "background.paper",
-          borderRadius: 2,
+          borderRadius: 0, // Remove border radius for full-screen modal
           boxShadow: 24,
-          p: 4,
-          display: "flex",
-          flexDirection: "column",
+          p: 2,
+          position: "relative", // For positioning close button
+          minHeight: "10vh", // Full screen height
         }}
       >
-        <div className="flex flex-col space-y-4">
+        {/* Close Button */}
+        <IconButton
+          onClick={() => setOpenModal(false)}
+          sx={{
+            position: "absolute",
+            top: 5,
+            right: 16,
+            zIndex: 10, // Ensure the button is above all other content
+          }}
+        >
+          <CloseIcon className="text-green-700" />
+        </IconButton>
+
+        <div className="flex flex-col space-y-4 mt-10">
           <LocationDropdown
             location={location}
             setLocation={setLocation}
             locations={locations}
           />
-          <input
-            type="text"
-            readOnly
-            value={formatDateRange()}
-            onClick={() => setOpenDatePickerModal(true)} // Open DatePickerModal
-            className="border border-gray-300 rounded-md px-3 py-2 w-full sm:w-[200px] cursor-pointer"
+          <DatePickerInput
+            selectedDate={selectedDate}
+            onDateChange={handleDateChange}
+            width="100%" // You can adjust this width as needed
+            labelProps={{
+              fontSize: "14px",
+              color: "rgba(0, 0, 0, 0.6)",
+              transform: "translate(14px, 20px) scale(1)",
+            }}
           />
-
-          {/* Options Dropdown */}
-          <FormControl size="small" className="flex-1 mb-4">
-            <InputLabel id="option-label">Options</InputLabel>
-            <Select
-              labelId="option-label"
-              value={option}
-              onChange={(e) => setOption(e.target.value)}
-              label="Options"
-            >
-              {options.map((opt) => (
-                <MenuItem key={opt} value={opt}>
-                  {opt}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-
           <Button
-            onClick={() => setOpenModal(false)}
+            onClick={handleSearch} // Use handleSearch to handle the search logic
             variant="contained"
             color="primary"
             fullWidth
-            className="bg-custom-gradient"
+            className="bg-green-700"
           >
             Search
           </Button>

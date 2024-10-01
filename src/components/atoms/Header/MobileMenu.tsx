@@ -1,95 +1,75 @@
-// MobileMenu.tsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { CiGlobe } from "react-icons/ci";
-import { AiOutlineLogin, AiOutlineSearch } from "react-icons/ai"; // Import icons
+import { Globe, X } from "lucide-react";
 
-type MobileMenuProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  onLanguageChange: () => void;
-};
+const MobileMenu = ({ isOpen, onClose, navLinks, onLanguageChange }) => {
+  const [bgVisible, setBgVisible] = useState(false);
 
-export const MobileMenu: React.FC<MobileMenuProps> = ({
-  isOpen,
-  onClose,
-  onLanguageChange,
-}) => {
-  const router = useRouter();
+  useEffect(() => {
+    if (isOpen) {
+      setBgVisible(true); // Show background after sidebar is fully open
+    } else {
+      setBgVisible(false); // Hide background when sidebar closes
+    }
+  }, [isOpen]);
 
   return (
-    <div
-      className={`fixed inset-y-0 right-0 z-50 bg-white p-6 w-[100%] max-w-full mx-auto rounded-lg shadow-lg transform transition-transform duration-300 ease-in-out ${
-        isOpen ? "translate-x-0" : "translate-x-full"
-      }`}
-    >
-      <button
-        className="absolute top-4 right-4 text-[#945E13] focus:outline-none"
-        onClick={onClose}
+    <>
+      {/* Right-Side Menu Drawer */}
+      <div
+        className={`fixed inset-y-0 right-0 z-50 transform ${
+          isOpen ? "translate-x-0" : "translate-x-full"
+        } transition-transform duration-300 ease-in-out w-64 bg-white lg:hidden`}
       >
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M6 18L18 6M6 6l12 12"
-          />
-        </svg>
-      </button>
-
-      <ul className="flex flex-col items-center gap-y-4 mt-12">
-        {[
-          "Explore",
-          "Top Packages",
-          "Top Excursions",
-          "Nile Cruises",
-          "Blogs",
-        ].map((item) => (
-          <li key={item} onClick={onClose}>
-            <Link
-              href={
-                item === "Explore"
-                  ? "/"
-                  : `/${item.toLowerCase().replace(" ", "-")}`
-              }
-              className={`block font-segoe font-semibold text-[14px] px-3 py-1 rounded ${
-                router.pathname === `/${item.toLowerCase().replace(" ", "-")}`
-                  ? "bg-[#e6af62] text-white"
-                  : "text-[#945E13] hover:bg-[#f0e6d6] hover:text-[#e6af62]"
-              }`}
+        <nav className="relative z-10 px-8 py-4 h-full">
+          {/* Close Button and Menu Title */}
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="text-xl font-bold">Menu</h2>
+            <button
+              onClick={onClose}
+              className="text-gray-500 hover:text-gray-700"
             >
-              {item}
-            </Link>
-          </li>
-        ))}
-      </ul>
-      <Link href="/login" className="flex items-center justify-center mt-4">
-        <AiOutlineLogin size={30} className="text-[#945E13]" />
-        <span className="ml-2">Login</span>
-      </Link>
-      <div className="flex items-center justify-center mt-8">
-        <button
-          className="text-black focus:outline-none"
-          onClick={onLanguageChange}
-          title="Change Language"
-        >
-          <CiGlobe size={30} />
-        </button>
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+
+          {/* Navigation Links */}
+          <ul className="space-y-4">
+            {navLinks.map(({ href, label }) => (
+              <li key={href}>
+                <Link
+                  href={href}
+                  className="block py-2 text-gray-800 hover:text-blue-600"
+                  onClick={onClose}
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          {/* Language Change Button */}
+          <button
+            onClick={onLanguageChange}
+            className="mt-8 flex items-center text-gray-800 hover:text-blue-600"
+          >
+            <Globe className="w-5 h-5 mr-2" />
+            Change Language
+          </button>
+        </nav>
       </div>
 
-      {/* Login Button */}
-
-      {/* Search Button */}
-      {/* <button className="flex items-center justify-center mt-4" title="Search">
-        <AiOutlineSearch size={30} className="text-[#945E13]" />
-      </button> */}
-    </div>
+      {/* Background Overlay */}
+      {isOpen && (
+        <div
+          className={`fixed inset-0 z-40 bg-black transition-opacity duration-300 ${
+            bgVisible ? "opacity-65" : "opacity-0"
+          }`}
+          onClick={onClose}
+        ></div>
+      )}
+    </>
   );
 };
+
+export default MobileMenu;

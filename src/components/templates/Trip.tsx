@@ -40,9 +40,11 @@ const TripInfo: React.FC<TripInfoProps> = ({ DetailTour }) => {
   ];
 
   return (
-    <div className="p-4">
-      <h2 className="text-3xl font-segoe text-start mt-9">Trip Information</h2>
-      <div className="grid grid-cols-2 gap-6 mt-8">
+    <div className="">
+      <h2 className="text-3xl font-segoe text-start mt-3 lg:mt-4 ">
+        Trip Information
+      </h2>
+      <div className="grid lg:grid-cols-4 grid-cols-2 gap-6 mt-3 lg:mt-4">
         {items.map((item, index) => (
           <div
             key={index}
@@ -55,12 +57,13 @@ const TripInfo: React.FC<TripInfoProps> = ({ DetailTour }) => {
           </div>
         ))}
       </div>
-      <p className="pt-3 text-gray-600">
-        Start in Japan is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industrys standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book.
-      </p>
+
+      <div
+        className="font-segoe mt-5 text-xl"
+        dangerouslySetInnerHTML={{
+          __html: DetailTour.description ?? "No description available.",
+        }}
+      />
     </div>
   );
 };

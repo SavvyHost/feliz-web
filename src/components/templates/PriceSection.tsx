@@ -1,7 +1,7 @@
 import React from "react";
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaUsers, FaBed, FaHotel } from "react-icons/fa";
 
-// Define the type for a price plan
+// Define the types for price plans
 type PricePlan = {
   title: string;
   price: string;
@@ -18,58 +18,83 @@ interface DetailTour {
   tour_prices: PricePlanDetail[];
 }
 
-// Define the PricePlanCard component
+// PricePlanCard Component
 const PricePlanCard: React.FC<{
   title: string;
   period: string;
   plans: PricePlan[];
 }> = ({ title, period, plans }) => {
+  const getIcon = (index: number) => {
+    switch (index) {
+      case 0:
+        return <FaUser className="h-6 w-6 text-yellow-600 m-5" />;
+      case 1:
+        return <FaUsers className="h-6 w-6 text-yellow-600 m-5" />;
+      case 2:
+        return <FaBed className="h-6 w-6 text-yellow-600 m-5" />;
+      case 3:
+        return <FaHotel className="h-6 w-6 text-yellow-600 m-5" />;
+      default:
+        return <FaUser className="h-6 w-6 text-yellow-600 m-5" />;
+    }
+  };
+
+  // Filter out unwanted price plans (if needed)
+  const filteredPlans = plans.filter(
+    (plan) => plan.title !== "Beach View" && plan.title !== "Mountain View"
+  );
+
   return (
-    <div className="w-full bg-white rounded-lg p-4">
-      <h2 className="text-xl font-segoe my-4 text-center">{title}</h2>
-      <p className="m-4 font-segoe">{period}</p>
-      <div className="flex flex-col space-y-4">
-        {plans?.map((p, i) => (
-          <div
-            key={i}
-            className="bg-[#FFF9F9] p-3 md:p-4 rounded-lg flex flex-col md:flex-row justify-around items-center text-center space-y-2 md:space-y-0"
-          >
-            <FaUser className="text-xl md:text-2xl text-yellow-800" />
-            <p className="text-base md:text-lg font-segoe">{p.title}</p>
-            <p className="font-semibold">{p.price}</p>
-          </div>
-        ))}
+    <div className="bg-white shadow-md rounded-lg p-6 w-full">
+      <h2 className="text-xl font-segoe mb-4">{title}</h2>
+      <p className="text-sm text-gray-600 mb-4">{period}</p>
+      <div className="space-y-4">
+        {/* Display Single and Double in the same row */}
+        <div className="flex items-center space-x-4">
+          {filteredPlans.slice(0, 2).map((plan, index) => (
+            <div key={index} className="flex items-center">
+              <div className="mr-2">{getIcon(index)}</div>
+              <div>
+                <p className="text-sm font-medium">{plan?.title}</p>
+                <p className="text-lg font-bold text-nowrap">{plan?.price}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        {/* Display Triple and Family in the same row */}
+        <div className="flex items-center space-x-4">
+          {filteredPlans.slice(2, 4).map((plan, index) => (
+            <div key={index} className="flex items-center">
+              <div className="mr-2">{getIcon(index + 2)}</div>
+              <div>
+                <p className="text-sm font-medium">{plan?.title}</p>
+                <p className="text-lg font-bold text-nowrap">{plan?.price}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
 };
 
-// Define the PricePlans component
-const PricePlans: React.FC<{
-  DetailTour: { tour_prices: PricePlanDetail[] };
-}> = ({ DetailTour }) => {
+// PricePlans Component
+const PricePlans: React.FC<{ DetailTour: DetailTour }> = ({ DetailTour }) => {
   return (
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto ">
       <h2 className="text-2xl md:text-3xl font-segoe text-start mt-6 md:mt-9 mb-4 md:mb-6">
         Prices & Accommodation
       </h2>
-      <div className="flex flex-col space-y-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {DetailTour.tour_prices.map((plan, index) => (
-          <div
+          <PricePlanCard
             key={index}
-            className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0"
-          >
-            <PricePlanCard
-              title={`${plan.title} - Option ${index + 1}`}
-              period={`${plan.from_month} - ${plan.to_month}`}
-              plans={plan.prices}
-            />
-          </div>
+            title={plan.title}
+            period={`${plan.from_month} - ${plan.to_month}`}
+            plans={plan.prices}
+          />
         ))}
       </div>
-      <h2 className="text-2xl md:text-3xl font-segoe text-start mt-6 md:mt-9 mb-4 md:mb-6">
-        Travelers Photos
-      </h2>
     </div>
   );
 };

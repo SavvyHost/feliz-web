@@ -41,21 +41,21 @@ export default function Home({
   console.log("🚀 ~ Home ~ toursData:", toursData);
   console.log("🚀 ~ Home ~ excursionData:", excursionData);
   console.log("🚀 ~ Home ~ blogData:", blogData);
-
+  const limitedDestinations = Destinations.slice(0, 8);
   return (
     <>
       <HeroSection />
-      {/* <OffersSection /> */}
+      <OffersSection />
       <WhyUsSection />
       <ToursSection toursData={toursData} />
-      <ExcursionsSection toursData={excursionData} /> {/* Use excursionData */}
-      <DestinationSection Destinations={Destinations} />
+      {/* <ExcursionsSection toursData={excursionData} /> */}
+      <DestinationSection Destinations={limitedDestinations} />
       <AttractionsSection />
       <AdventuresSection />
       <CallToActionSection />
       <PeaopleSaySection />
       {/* Add Blog Section */}
-      <BlogSection blogData={blogData} />
+      {/* <BlogSection blogData={blogData} /> */}
     </>
   );
 }
@@ -63,7 +63,7 @@ export default function Home({
 export async function getServerSideProps() {
   const toursData: ToursData = await fetchData("tours");
   const excursionData = await fetchData("tours?type=excursion"); // Rename this variable
-  const Destinations = await fetchData("countries");
+  const Destinations = await fetchData("cities");
   const blogData = await fetchData("blogs");
 
   return {

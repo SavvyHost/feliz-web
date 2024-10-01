@@ -47,7 +47,7 @@ const Tours: React.FC<ToursProps> = ({ toursData }) => {
                 title={attraction.title}
                 location={attraction.location}
                 price={attraction.min_price}
-                image={attraction.main_image}
+                image={attraction.main_image.url}
                 rating={2} // Pass the rating prop
                 duration={attraction.duration} // Pass duration prop
                 ageRange={attraction.age_range} // Pass age range prop

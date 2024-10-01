@@ -1,13 +1,7 @@
 import React, { useState } from "react";
-import {
-  Modal,
-  Slide,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-} from "@mui/material";
+import { Modal } from "@mui/material";
 import { ChevronDown, Search } from "lucide-react";
+import { AiOutlineClose } from "react-icons/ai"; // Importing close icon
 
 interface SearchModalProps {
   isModalOpen: boolean;
@@ -28,19 +22,24 @@ const SearchModal: React.FC<SearchModalProps> = ({
   const [month, setMonth] = useState<string>("");
   const [isMonthDropdownOpen, setIsMonthDropdownOpen] =
     useState<boolean>(false);
-  const [option, setOption] = useState<string>("");
-
-  const options = ["Packages", "Nile Cruise", "Excursions"];
 
   return (
     <Modal
       open={isModalOpen}
       onClose={() => setIsModalOpen(false)}
-      className="flex items-center justify-center p-4"
+      className="flex items-start justify-center"
     >
-      <Slide direction="up" in={isModalOpen} mountOnEnter unmountOnExit>
-        <div className="bg-white rounded-lg p-4 max-w-md w-full md:max-w-lg md:w-auto h-auto flex flex-col">
-          {/* Location Input */}
+      <div className="absolute top-0 left-0 right-0 p-4 bg-white rounded-none shadow-lg">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-lg font-semibold">Search</h2>
+          <button
+            onClick={() => setIsModalOpen(false)}
+            className="text-gray-500"
+          >
+            <AiOutlineClose className="w-6 h-6" />
+          </button>
+        </div>
+        <div className="flex flex-col">
           <div className="relative mb-3">
             <input
               type="text"
@@ -71,8 +70,6 @@ const SearchModal: React.FC<SearchModalProps> = ({
               </div>
             )}
           </div>
-
-          {/* Month Input */}
           <div className="relative mb-4">
             <input
               type="text"
@@ -121,25 +118,6 @@ const SearchModal: React.FC<SearchModalProps> = ({
               </div>
             )}
           </div>
-
-          {/* Options Select */}
-          <FormControl size="small" margin="dense" className="flex-1 mb-4">
-            <InputLabel id="option-label">Options</InputLabel>
-            <Select
-              labelId="option-label"
-              value={option}
-              onChange={(e) => setOption(e.target.value)}
-              label="Options"
-            >
-              {options.map((opt) => (
-                <MenuItem key={opt} value={opt}>
-                  {opt}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-
-          {/* Search Button */}
           <button
             className="bg-[#232323] text-white font-segoe rounded-md px-4 py-2 w-full flex items-center justify-center"
             onClick={() => setIsModalOpen(false)}
@@ -148,7 +126,7 @@ const SearchModal: React.FC<SearchModalProps> = ({
             Search
           </button>
         </div>
-      </Slide>
+      </div>
     </Modal>
   );
 };

@@ -1,48 +1,61 @@
+import React, { useState } from "react";
 import BaseInputField from "@/components/molecules/formik-fields/BaseInputField";
 import SelectMonth from "@/components/molecules/selects/SelectMonth";
 import SelectNationality from "@/components/molecules/selects/SelectNationality";
 import { Form, Formik } from "formik";
 import { Minus, Plus } from "lucide-react";
 import PhoneInput from "react-phone-number-input";
-import DateInputComp from "../FormikError/DateInputComp";
 import Dropdown from "./Dropdown";
 import { useMutate } from "@/hooks/UseMutate";
+import DatePickerModal from "@/components/molecules/dataPicker"; // Adjust the path accordingly
+import { Input } from "@mui/material"; // Import Input component
+import dayjs, { Dayjs } from "dayjs"; // Make sure to import Dayjs correctly
+import { Spinner } from "../UI/Spinner";
+import { notify } from "@/utils/toast";
 
 function MainDataBookingForm({ DetailTour, setIsThanksVisible }) {
-  const { mutate } = useMutate({
+  const { mutate, isPending } = useMutate({
     mutationKey: ["bookings"],
     endpoint: `bookings`,
     onSuccess: () => {
-      //   notify("success");
       setIsThanksVisible(true);
     },
     onError: (err) => {
-      //   notify("error", err?.response?.data?.message);
+      notify("error", err?.response?.data?.message);
     },
     formData: true,
   });
+
+  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null); // Ensure this is initialized as null or Dayjs
+  const [rangeDays, setRangeDays] = useState(1);
+
+  const handleDateChange = (date: Dayjs | null, days: number) => {
+    setSelectedDate(date ? dayjs(date) : null);
+    setRangeDays(days);
+  };
   return (
     <div>
       <Formik
-        className="space-y-6"
         initialValues={{
           name: "",
           email: "",
           nationality_id: "",
           month: "",
           phone: "",
-          start_at: "",
+          start_at: selectedDate ? selectedDate.format("YYYY-MM-DD") : "",
           num_of_adults: 1,
           num_of_children: 0,
           num_of_infants: 0,
           tour_id: DetailTour?.id,
-          duration: DetailTour?.duration,
+          duration: "",
           phone_code: "+20",
         }}
         onSubmit={(values) =>
           mutate({
             ...values,
             phone: values?.phone.slice(2),
+            start_at: selectedDate ? selectedDate.format("YYYY-MM-DD") : "",
           })
         }
       >
@@ -68,7 +81,6 @@ function MainDataBookingForm({ DetailTour, setIsThanksVisible }) {
                 placeholder="Select Nationality"
               />
             </div>
-
             <SelectMonth name="month" placeholder="Select Month" />
 
             <div className="relative flex items-center mt-2">
@@ -76,19 +88,37 @@ function MainDataBookingForm({ DetailTour, setIsThanksVisible }) {
                 placeholder="Enter Your Number"
                 value={values.phone}
                 onChange={(value) => setFieldValue("phone", value)}
-                countries={["EG"]}
                 defaultCountry="EG"
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 border border-gray-300 rounded-md"
               />
             </div>
             <div className="my-2">
-              <DateInputComp
-                name={"start_at"}
-                countDays={DetailTour?.duration}
-              />
+              <div className="relative">
+                <Input
+                  type="text"
+                  placeholder="Start Date"
+                  value={
+                    selectedDate
+                      ? `${selectedDate.format("YYYY-MM-DD")} to ${selectedDate
+                          .add(rangeDays - 1, "day")
+                          .format("YYYY-MM-DD")}`
+                      : "Select a date range"
+                  }
+                  onClick={() => setIsDatePickerOpen(true)}
+                  className="w-full p-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
             </div>
 
-            <div className="space-y-4">
+            {/* DatePickerModal Integration */}
+            <DatePickerModal
+              open={isDatePickerOpen}
+              onClose={() => setIsDatePickerOpen(false)}
+              onDateChange={handleDateChange}
+              setFieldValue={setFieldValue}
+            />
+
+            <div className="space-y-4 mt-3 mb-2">
               {[
                 { label: "Adults", name: "num_of_adults" },
                 { label: "Children", name: "num_of_children" },
@@ -118,12 +148,20 @@ function MainDataBookingForm({ DetailTour, setIsThanksVisible }) {
                 </div>
               ))}
             </div>
+
+            {/* Additional Details */}
+            <textarea
+              placeholder="Tell us More Details"
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+              rows={4}
+            ></textarea>
+
             <div className="pt-4">
               <button
                 type="submit"
-                className="w-full p-3 bg-[#986518] text-white rounded-md hover:bg-yellow-700 transition duration-150"
+                className="w-full p-3 bg-green-950 text-white rounded-md hover:bg-green-700 transition duration-150"
               >
-                Submit
+                {isPending ? <Spinner /> : "Submit"}
               </button>
             </div>
           </Form>

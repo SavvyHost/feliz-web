@@ -1,13 +1,5 @@
 import React, { useState } from "react";
 import { ChevronDown, Search } from "lucide-react";
-import {
-  Modal,
-  Slide,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-} from "@mui/material";
 
 const SearchInput = () => {
   const [location, setLocation] = useState("Where");
@@ -87,12 +79,12 @@ const SearchInput = () => {
           <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-transparent" />
           {isMonthDropdownOpen && (
             <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg">
-              <div className="grid grid-cols-2 p-3 ">
+              <div className="grid grid-cols-2 p-3">
                 <div className="flex flex-col">
                   {months.slice(0, 6).map((m) => (
                     <div
                       key={m}
-                      className=" p-2 cursor-pointer font-segoe text-sm"
+                      className="p-2 cursor-pointer font-segoe text-sm"
                       onClick={() => {
                         setMonth(m);
                         setIsMonthDropdownOpen(false);
@@ -106,7 +98,7 @@ const SearchInput = () => {
                   {months.slice(6).map((m) => (
                     <div
                       key={m}
-                      className=" p-2 cursor-pointer font-segoe text-sm"
+                      className="p-2 cursor-pointer font-segoe text-sm"
                       onClick={() => {
                         setMonth(m);
                         setIsMonthDropdownOpen(false);
@@ -121,22 +113,23 @@ const SearchInput = () => {
           )}
         </div>
 
-        {/* Dropdown for Options */}
-        <FormControl size="small" margin="dense" className="flex-1">
-          <InputLabel id="option-label">Options</InputLabel>
-          <Select
-            labelId="option-label"
+        {/* Tailwind Dropdown for Options */}
+        <div className="relative flex-1">
+          <select
             value={option}
             onChange={(e) => setOption(e.target.value)}
-            label="Options"
+            className="bg-transparent border h-11 border-gray-300 rounded-md pl-3 pr-10 py-2 w-full focus:outline-none cursor-pointer"
           >
+            <option value="" disabled>
+              Options
+            </option>
             {options.map((opt) => (
-              <MenuItem key={opt} value={opt}>
+              <option key={opt} value={opt} className="cursor-pointer">
                 {opt}
-              </MenuItem>
+              </option>
             ))}
-          </Select>
-        </FormControl>
+          </select>
+        </div>
 
         {/* Search Button */}
         <button className="bg-[#232323] text-white font-segoe rounded-md px-4 py-2 flex items-center text-center justify-center w-full md:w-auto">

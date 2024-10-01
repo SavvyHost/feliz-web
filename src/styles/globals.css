@@ -122,3 +122,15 @@ body {
     padding: 0 !important;
     margin: 0 !important;
 }
+
+.overlay {
+    pointer-events: none;
+    /* Allow swiping through */
+    z-index: 1;
+    /* Ensure it's visible above the image */
+}
+
+.overlay-content {
+    pointer-events: auto;
+    /* Allow clicking on the "See More" button */
+}

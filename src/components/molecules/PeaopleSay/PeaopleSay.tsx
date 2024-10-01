@@ -106,7 +106,7 @@ const ProfileCardsContainer: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full overflow-hidden">
+    <div className="relative w-full overflow-hidden cursor-pointer">
       {/* Custom Previous Arrow */}
       <div
         className="custom-prev-arrow  hidden bg-gray-800 p-3 rounded-full absolute left-32 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer shadow-lg transition-transform duration-300 hover:scale-110 hover:bg-gray-700"

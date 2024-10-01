@@ -1,65 +1,49 @@
 import React, { useState } from "react";
 import { Button, Modal, Slide, IconButton, Input } from "@mui/material";
+import { Form, Formik } from "formik";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
+import { Plus, Minus, X } from "lucide-react";
+import dayjs from "dayjs";
+import BaseInputField from "@/components/molecules/formik-fields/BaseInputField";
+import SelectNationality from "@/components/molecules/selects/SelectNationality";
 import Dropdown from "./Dropdown";
-import { ChevronDown, Plus, Minus, X } from "lucide-react";
-import { Dayjs } from "dayjs";
 import DatePickerModal from "@/components/molecules/dataPicker";
+import { useMutate } from "@/hooks/UseMutate";
+import { notify } from "@/utils/toast";
+import { Spinner } from "../UI/Spinner";
 import Thanks from "@/components/molecules/Thanks";
+import SelectMonth from "@/components/molecules/selects/SelectMonth";
 
-const locations = ["New York", "London", "Paris", "Tokyo"];
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-
-// Define E164Number type if not imported
-type E164Number = string;
-
-export default function BookingFormModal() {
-  const [adults, setAdults] = useState(1);
-  const [children, setChildren] = useState(1);
-  const [infants, setInfants] = useState(0);
-  const [location, setLocation] = useState("Where");
-  const [month, setMonth] = useState("");
-  const [isLocationDropdownOpen, setIsLocationDropdownOpen] = useState(false);
-  const [isMonthDropdownOpen, setIsMonthDropdownOpen] = useState(false);
+export default function BookingFormModal({ DetailTour }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [value, setValue] = useState<E164Number>(""); // Use E164Number type for phone input
   const [isDatePickerModalOpen, setIsDatePickerModalOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
+  const [selectedDate, setSelectedDate] = useState(null);
   const [rangeDays, setRangeDays] = useState(1);
-  const [showThanks, setShowThanks] = useState(false); // State to control Thanks component
+  const [showThanks, setShowThanks] = useState(false);
 
-  const handleDateChange = (date: Dayjs | null, days: number) => {
-    setSelectedDate(date);
+  const { mutate, isPending } = useMutate({
+    mutationKey: ["bookings"],
+    endpoint: `bookings`,
+    onSuccess: () => {
+      setIsModalOpen(false); // Close the form modal after success
+      setShowThanks(true); // Show the Thanks modal
+    },
+    onError: (err) => {
+      notify("error", err?.response?.data?.message);
+    },
+    formData: true,
+  });
+
+  const handleDateChange = (date, days) => {
+    setSelectedDate(date ? dayjs(date) : null);
     setRangeDays(days);
-  };
-
-  const handleSubmit = () => {
-    setShowThanks(true); // Show Thanks component on submit
-    setIsModalOpen(false); // Close the booking form modal
-  };
-
-  const handleCloseThanks = () => {
-    setShowThanks(false); // Hide Thanks component
   };
 
   return (
     <>
       <Button
-        className="py-2 capitalize w-full bg-custom-gradient text-white rounded-none hover:bg-yellow-500 transition duration-300 font-segoe fixed top-16 right-0 z-40 md:hidden"
+        className="py-2 capitalize w-full bg-custom-gradient text-white rounded-none hover:bg-yellow-500 transition duration-300 font-segoe fixed top-[58px] right-0 z-40 md:hidden"
         onClick={() => setIsModalOpen(true)}
       >
         Open Booking Form
@@ -71,144 +55,187 @@ export default function BookingFormModal() {
         className="flex w-full h-full"
       >
         <Slide direction="up" in={isModalOpen} mountOnEnter unmountOnExit>
-          <div className="bg-white w-full h-full flex flex-col p-6 relative">
-            {/* Close Icon */}
-            <IconButton
-              onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-4"
-            >
-              <X size={24} />
-            </IconButton>
-
-            <div className="flex-1 overflow-y-auto">
-              <h2 className="text-sm text-gray-500 mb-2">From $2000</h2>
-              <h1 className="text-2xl font-bold mb-4 text-gray-800">
-                US $1000
-              </h1>
-
-              <form className="space-y-6">
-                <Dropdown
-                  items={locations}
-                  selectedItem={location}
-                  onSelect={setLocation}
-                  placeholder="Where"
-                  isDropdownOpen={isLocationDropdownOpen}
-                  setIsDropdownOpen={setIsLocationDropdownOpen}
-                />
-
-                <Dropdown
-                  items={months}
-                  selectedItem={month}
-                  onSelect={setMonth}
-                  placeholder="Select month"
-                  isDropdownOpen={isMonthDropdownOpen}
-                  setIsDropdownOpen={setIsMonthDropdownOpen}
-                />
-
-                <div className="relative flex items-center">
-                  <PhoneInput
-                    placeholder="Enter Your Number"
-                    value={value}
-                    onChange={(newValue) => setValue(newValue || "")} // Handle the E164Number type
-                    defaultCountry="US"
-                    className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-
-                <div className="relative ">
-                  <Input
-                    type="text"
-                    placeholder="Start Date"
-                    value={
-                      selectedDate
-                        ? `${selectedDate.format(
-                            "YYYY-MM-DD"
-                          )} to ${selectedDate
-                            .add(rangeDays - 1, "day")
-                            .format("YYYY-MM-DD")}`
-                        : "Select a date range"
-                    }
-                    onClick={() => setIsDatePickerModalOpen(true)}
-                    className="w-full p-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-
-                <div className="relative">
-                  <input
-                    type="text"
-                    placeholder="Select Your Nationality"
-                    className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                  <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                </div>
-
-                <textarea
-                  placeholder="Tell us More Details"
-                  className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  rows={4}
-                ></textarea>
-
-                <div className="space-y-4">
-                  {[
-                    { label: "Adults", value: adults, setValue: setAdults },
-                    {
-                      label: "Children",
-                      value: children,
-                      setValue: setChildren,
-                    },
-                    { label: "Infants", value: infants, setValue: setInfants },
-                  ].map(({ label, value, setValue }) => (
-                    <div
-                      key={label}
-                      className="flex justify-between items-center"
-                    >
-                      <span className="text-gray-700">{`Number of ${label}`}</span>
-                      <div className="flex items-center space-x-2">
-                        <Button
-                          onClick={() => setValue(Math.max(0, value - 1))}
-                          className="p-2 border border-gray-300 rounded-md hover:bg-gray-100 active:bg-gray-200 transition duration-150"
-                        >
-                          <Minus size={16} />
-                        </Button>
-                        <span>{value}</span>
-                        <Button
-                          onClick={() => setValue(value + 1)}
-                          className="p-2 border border-gray-300 rounded-md hover:bg-gray-100 active:bg-gray-200 transition duration-150"
-                        >
-                          <Plus size={16} />
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </form>
+          <div className="relative w-full h-full bg-white overflow-y-auto">
+            {/* Fixed X Icon at the top */}
+            <div className="fixed top-0 left-0 right-0  bg-white z-50 p-4">
+              <h2 className="text-xl font-bold text-gray-800">
+                US ${DetailTour?.min_price} / Per person
+              </h2>
+              <IconButton
+                onClick={() => setIsModalOpen(false)}
+                className="absolute top-2 right-2"
+              >
+                <X />
+              </IconButton>
+              <h2 className="text-2xl font-bold mb-4"></h2>
             </div>
 
-            <div className="pt-4">
-              <Button
-                className="w-full p-3 bg-[#986518] text-white rounded-md hover:bg-yellow-700 transition duration-150"
-                onClick={handleSubmit} // Handle submit to show Thanks component
+            <div className="pt-[80px] p-4 pb-[80px]">
+              {" "}
+              {/* Adjust the padding for space */}
+              <Formik
+                initialValues={{
+                  name: "",
+                  email: "",
+                  nationality_id: "",
+                  month: "",
+                  phone: "",
+                  start_at: selectedDate
+                    ? selectedDate.format("YYYY-MM-DD")
+                    : "",
+                  num_of_adults: 1,
+                  num_of_children: 0,
+                  num_of_infants: 0,
+                  tour_id: DetailTour?.id,
+                  duration: "",
+                  phone_code: "+20",
+                }}
+                onSubmit={(values) =>
+                  mutate({
+                    ...values,
+                    phone: values?.phone.slice(2),
+                    start_at: selectedDate
+                      ? selectedDate.format("YYYY-MM-DD")
+                      : "",
+                  })
+                }
               >
-                Submit
-              </Button>
+                {({ setFieldValue, values }) => (
+                  <Form className="space-y-4">
+                    {/* Other form fields */}
+                    <Dropdown
+                      items={[]}
+                      selectedItem={DetailTour?.destination}
+                      onSelect={() => {}}
+                      placeholder="Where"
+                      isDropdownOpen={false}
+                      setIsDropdownOpen={() => {}}
+                    />
+
+                    <BaseInputField
+                      name="name"
+                      placeholder="Name"
+                      type="text"
+                    />
+                    <BaseInputField
+                      name="email"
+                      placeholder="Email"
+                      type="email"
+                    />
+
+                    <SelectNationality
+                      name="nationality_id"
+                      placeholder="Select Nationality"
+                    />
+
+                    <SelectMonth name="month" placeholder="Select Month" />
+
+                    <div className="relative">
+                      <PhoneInput
+                        placeholder="Enter Your Number"
+                        value={values.phone}
+                        onChange={(value) => setFieldValue("phone", value)}
+                        defaultCountry="EG"
+                        className="w-full p-3 border border-gray-300 rounded-md"
+                      />
+                    </div>
+
+                    <div className="relative">
+                      <Input
+                        type="text"
+                        placeholder="Start Date"
+                        value={
+                          selectedDate
+                            ? `${selectedDate.format(
+                                "YYYY-MM-DD"
+                              )} to ${selectedDate
+                                .add(rangeDays - 1, "day")
+                                .format("YYYY-MM-DD")}`
+                            : "Select a date range"
+                        }
+                        onClick={() => setIsDatePickerModalOpen(true)}
+                        className="w-full p-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+
+                    <DatePickerModal
+                      open={isDatePickerModalOpen}
+                      onClose={() => setIsDatePickerModalOpen(false)}
+                      onDateChange={handleDateChange}
+                      setFieldValue={setFieldValue}
+                    />
+
+                    {["Adults", "Children", "Infants"].map((type) => (
+                      <div
+                        key={type}
+                        className="flex justify-between items-center"
+                      >
+                        <span>{`Number of ${type}`}</span>
+                        <div className="flex items-center space-x-2">
+                          <IconButton
+                            onClick={() =>
+                              setFieldValue(
+                                `num_of_${type.toLowerCase()}`,
+                                Math.max(
+                                  0,
+                                  values[`num_of_${type.toLowerCase()}`] - 1
+                                )
+                              )
+                            }
+                          >
+                            <Minus size={16} />
+                          </IconButton>
+                          <span>{values[`num_of_${type.toLowerCase()}`]}</span>
+                          <IconButton
+                            onClick={() =>
+                              setFieldValue(
+                                `num_of_${type.toLowerCase()}`,
+                                values[`num_of_${type.toLowerCase()}`] + 1
+                              )
+                            }
+                          >
+                            <Plus size={16} />
+                          </IconButton>
+                        </div>
+                      </div>
+                    ))}
+
+                    <textarea
+                      placeholder="Tell us More Details"
+                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                      rows={4}
+                    ></textarea>
+
+                    {/* Fixed Submit Button */}
+                    <div className="fixed bottom-0 left-0 right-0 p-4 bg-white z-50">
+                      <Button
+                        type="submit"
+                        className="w-full p-3 bg-green-950 text-white rounded-md hover:bg-green-700 transition duration-150"
+                      >
+                        {isPending ? <Spinner /> : "Submit"}
+                      </Button>
+                    </div>
+                  </Form>
+                )}
+              </Formik>
             </div>
           </div>
         </Slide>
       </Modal>
 
-      {/* Date Picker Modal */}
-      <DatePickerModal
-        open={isDatePickerModalOpen}
-        onClose={() => setIsDatePickerModalOpen(false)}
-        onDateChange={handleDateChange}
-      />
-
-      {/* Thanks Modal */}
       {showThanks && (
-        <Thanks
-          onClose={handleCloseThanks}
-          message="Your booking has been successfully submitted."
-        />
+        <Modal
+          open={showThanks}
+          onClose={() => setShowThanks(false)}
+          className="flex items-center justify-center"
+        >
+          <div className="bg-white p-4 rounded-lg">
+            <Thanks
+              onClose={() => setShowThanks(false)}
+              message="Thank you for your submission!"
+            />
+          </div>
+        </Modal>
       )}
     </>
   );
