@@ -1,96 +1,54 @@
-import React from "react";
-import Outline from "../../../public/assets/ic_outline-photo.png"; // Import your image
-import ExpertGuidesCard from "../molecules/WhyUs";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// components/FeatureSection.tsx
+import { FC } from "react";
 
-const WhyUsSection: React.FC = () => {
-  const guides = [
-    {
-      id: 1,
-      title: "Expert Guide 1",
-      description: "Explore the pyramids with expert knowledge.",
-      image: Outline,
-    },
-    {
-      id: 2,
-      title: "Expert Guide 2",
-      description: "Discover the treasures of ancient Egypt.",
-      image: Outline,
-    },
-    {
-      id: 3,
-      title: "Expert Guide 3",
-      description: "Experience the Nile like never before.",
-      image: Outline,
-    },
-    {
-      id: 4,
-      title: "Expert Guide 4",
-      description: "Uncover the mysteries of the Sphinx.",
-      image: Outline,
-    },
-  ];
-
-  const settings = {
-    dots: false,
-    infinite: false,
-    speed: 300,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2.5,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1.2,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-
+const FeatureSection: FC = () => {
   return (
-    <div className="py-8">
-      <h2 className="text-left text-black font-segoe sm:font-semi-bold font-medium text-2xl md:text-special-offer md:p-10 p-5">
-        Why Choose Us
-      </h2>
-
-      {/* Mobile Slider */}
-      <div className="block md:hidden">
-        <Slider {...settings}>
-          {guides.map((guide) => (
-            <ExpertGuidesCard
-              key={guide.id}
-              title={guide.title}
-              description={guide.description}
-              image={guide.image}
-            />
-          ))}
-        </Slider>
-      </div>
-
-      {/* Desktop Flex Layout */}
-      <div className="hidden md:flex flex-wrap justify-center px-24">
-        {guides.map((guide) => (
-          <ExpertGuidesCard
-            key={guide.id}
-            title={guide.title}
-            description={guide.description}
-            image={guide.image}
+    <section className="flex justify-center space-x-12 py-10">
+      {/* Sustainable Travel */}
+      <div className="flex flex-col items-center text-center">
+        <div className="w-16 h-16 mb-4">
+          <img
+            src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='77' height='87' fill='none'%3E%3Ccircle cx='39.5' cy='31.5' r='31.5' fill='%230A7BBD' opacity='.3'/%3E%3Cg clip-path='url(%23clip0_2205:13708)'%3E%3Cpath fill='%23fff' d='M19.5 26.5h-10c-.17 2.5-.4 8.3 0 11.5.5 4 2.5 7.5 5.5 12.5 2.4 4 10.33 8.67 14 10.5 0-1.33-.1-4.6-.5-7-.4-2.4 1.5-6 2.5-7.5.67-.33 2.5-1.8 4.5-5s.5-6.67-.5-8c-1-1.17-3.3-3.8-4.5-5-1.2-1.2-4.17-1.83-5.5-2h-5.5zM53 11h8.5l4.5 6c1.5 2 2.5 5.5 3.5 10.5.8 4 0 9-.5 11h-5.5c-1.6 0-3.33-2-4-3-1.17-1.67-3.6-5.2-4-6-.5-1-2.5-4.5-5-6a7.69 7.69 0 00-5-1c-1.83.17-5.5-.7-5.5-5.5s3.67-6 5.5-6H53z'/%3E%3Cpath fill='%232C3E50' d='M39.35 63.9A31.8 31.8 0 019.9 44.16a32.02 32.02 0 016.9-34.81 31.84 31.84 0 0154.4 22.59c0 8.47-3.36 16.6-9.33 22.59a31.82 31.82 0 01-22.53 9.35zm0-61.24a29.15 29.15 0 00-26.98 18.08 29.36 29.36 0 006.33 31.91 29.18 29.18 0 0049.86-20.7c0-7.77-3.08-15.22-8.56-20.71a29.17 29.17 0 00-20.65-8.58z'/%3E%3Cpath fill='%232C3E50' d='M28.73 62a1.33 1.33 0 01-1.33-1.33v-8.39c0-2.27.83-4.47 2.34-6.17l3.6-4.1a6.67 6.67 0 00-.26-9.13l-2.97-2.98a6.61 6.61 0 00-4.7-1.95H9.27a1.33 1.33 0 01-1.33-1.33 1.33 1.33 0 011.33-1.33H25.4a9.14 9.14 0 016.58 2.66l2.98 2.98a9.33 9.33 0 01.37 12.78l-3.48 4.16a6.64 6.64 0 00-1.67 4.41v8.39A1.36 1.36 0 0128.73 62zm37.44-22.07a9.22 9.22 0 01-7.73-4.15l-5.9-8.87a6.64 6.64 0 00-5.52-2.95h-1.14a7.3 7.3 0 01-7.3-7.32 7.33 7.33 0 017.3-7.32h15.4a1.33 1.33 0 011.33 1.33 1.33 1.33 0 01-1.33 1.33h-15.4a4.64 4.64 0 00-4.64 4.66 4.66 4.66 0 004.64 4.66h1.14a9.2 9.2 0 017.73 4.15l5.9 8.86a6.72 6.72 0 005.52 2.96h3a1.33 1.33 0 011.33 1.33 1.33 1.33 0 01-1.33 1.33h-3zM9.3 87a1.27 1.27 0 01-1.04-.5l-5.31-6.7a13.33 13.33 0 01-2.92-8.33V57.7a5.33 5.33 0 015.3-5.32 5.3 5.3 0 015.32 5.33v9.98a1.33 1.33 0 01-1.33 1.33 1.33 1.33 0 01-1.33-1.33v-9.98a2.67 2.67 0 00-2.65-2.67 2.65 2.65 0 00-2.66 2.67v13.76c0 2.42.83 4.77 2.34 6.65l5.3 6.71A1.33 1.33 0 019.3 87z'/%3E%3Cpath fill='%232C3E50' d='M22.57 86.73a1.33 1.33 0 01-1.33-1.33v-7.98c0-2.1-.61-4.16-1.78-5.91-.55-.56-1.2-1.23-1.78-1.87-3.87-4.15-4.48-4.52-6-3.51a2.37 2.37 0 00-.8 3.06l3.54 5.91a1.34 1.34 0 01-1.46 2c-.35-.1-.64-.31-.83-.62l-3.58-6.01a5.07 5.07 0 011.67-6.55c3.53-2.37 5.76 0 9.4 3.91l1.89 2.03a13.34 13.34 0 012.39 7.56v7.98a1.33 1.33 0 01-1.33 1.33zM67.7 87c-.3 0-.58-.1-.82-.3a1.33 1.33 0 01-.2-1.86l5.3-6.7a10.67 10.67 0 002.34-6.63V57.7a2.67 2.67 0 00-2.66-2.66 2.65 2.65 0 00-2.65 2.67v9.98a1.33 1.33 0 01-1.33 1.33 1.33 1.33 0 01-1.33-1.33v-9.98a5.33 5.33 0 015.31-5.33 5.3 5.3 0 015.31 5.33V71.5a13.5 13.5 0 01-2.9 8.3l-5.3 6.68a1.28 1.28 0 01-1.06.5z'/%3E%3Cpath fill='%232C3E50' d='M54.43 86.73a1.33 1.33 0 01-1.33-1.33v-7.98c0-2.63.78-5.2 2.23-7.38l2.05-2.2c3.66-3.92 5.87-6.3 9.4-3.92a5.03 5.03 0 011.72 6.47l-3.63 6.1a1.33 1.33 0 11-2.29-1.39l3.59-5.99a2.37 2.37 0 00-.85-2.98c-1.52-.99-2.13-.64-6 3.51L57.4 71.7a10.67 10.67 0 00-1.64 5.73v7.98a1.33 1.33 0 01-1.33 1.33z'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_2205:13708'%3E%3Cpath fill='%23fff' d='M0 0h77v87H0z'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E"
+            alt="Sustainable Travel"
+            className="w-full h-full"
           />
-        ))}
+        </div>
+        <h3 className="text-lg font-semibold">Sustainable Travel</h3>
+        <p className="text-gray-500 max-w-xs">
+          Adventure sustainably with TourRadar. We are committed to conscious
+          travel, from responsible operators to our Climate Action Plan and
+          carbon measurements.
+          <a href="#" className="text-blue-500">
+            {" "}
+            View our pledge
+          </a>
+          .
+        </p>
       </div>
-    </div>
+
+      {/* Trust and Confidence */}
+      <div className="flex flex-col items-center text-center">
+        <div className="w-16 h-16 mb-4">
+          <img
+            src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='73' height='104' fill='none'%3E%3Cg clip-path='url(%23clip0_2205:13720)'%3E%3Cpath fill='%230A7BBD' d='M46 59l-9 9.5-.5.5-7.5-8c-3.33-2-9.3-7.5-6.5-13.5 2.8-6 8.17-4.83 10.5-3.5l3.5 3 4-3c1.67-1 5.9-1.9 9.5 2.5 3.6 4.4-1.17 10.17-4 12.5z' opacity='.3'/%3E%3Cpath fill='%232C3E50' fill-rule='evenodd' d='M43.86 44.29a5.89 5.89 0 00-4.18 1.74l-2.07 2.08c-.6.6-1.56.6-2.16 0l-2.08-2.08a5.7 5.7 0 00-1.5-1.11 5.95 5.95 0 00-6.86 9.5l.03.04L36.5 66.6h.03l11.49-12.15.03-.04a5.89 5.89 0 001.11-6.82v-.03a5.4 5.4 0 00-1.1-1.52l-.02-.02a5.9 5.9 0 00-4.18-1.74zm-3.43-2.36a8.93 8.93 0 0111.46 4.3 8.95 8.95 0 01-1.68 10.34L38.7 68.75a3.07 3.07 0 01-4.37 0L22.85 56.56a8.94 8.94 0 01-1.67-10.35 9.01 9.01 0 0112.04-4.03c.87.44 1.65 1 2.32 1.7l.99.99.99-1a8.95 8.95 0 012.9-1.95z' clip-rule='evenodd'/%3E%3Cpath fill='%232C3E50' fill-rule='evenodd' d='M6.82 27.09a78.69 78.69 0 0159.36 0h.02a6.15 6.15 0 013.76 5.68v23.3a39.1 39.1 0 01-26.01 36.38l-3.39 1.24c-2.62.99-5.5.99-8.12 0l-3.39-1.24a38.97 38.97 0 01-26-36.38V32.76A6.17 6.17 0 016.8 27.1l.02-.01zm-.74 5.68v23.28a36.05 36.05 0 0023.99 33.53h.02l3.42 1.26c1.93.72 4.05.72 5.99 0l3.43-1.26a35.93 35.93 0 0023.99-33.53V32.77a3.11 3.11 0 00-1.9-2.86 75.65 75.65 0 00-57.05 0 3.1 3.1 0 00-1.89 2.86z' clip-rule='evenodd'/%3E%3Cpath fill='%232C3E50' d='M13.69 15.6H1.52A1.52 1.52 0 01.45 13c.28-.28.67-.45 1.07-.45H13.7a1.52 1.52 0 011.07 2.6c-.28.3-.67.45-1.07.45z'/%3E%3Cpath fill='%232C3E50' d='M7.6 21.7a1.52 1.52 0 01-1.52-1.52V7.98a1.53 1.53 0 012.6-1.07c.28.28.44.67.44 1.07v12.2A1.53 1.53 0 017.6 21.7zm63.88 76.2H59.31a1.52 1.52 0 01-1.07-2.6c.28-.28.67-.44 1.07-.44h12.17a1.52 1.52 0 011.07 2.6c-.28.28-.67.44-1.07.44z'/%3E%3Cpath fill='%232C3E50' d='M65.4 104a1.52 1.52 0 01-1.53-1.53V90.28a1.53 1.53 0 012.6-1.08c.29.29.45.68.45 1.08v12.2A1.53 1.53 0 0165.4 104zM28.96 7.62h-9.13a1.52 1.52 0 01-1.07-2.6c.28-.29.67-.45 1.07-.45h9.13a1.52 1.52 0 011.07 2.6c-.28.3-.67.45-1.07.45z'/%3E%3Cpath fill='%232C3E50' d='M24.33 12.2a1.52 1.52 0 01-1.52-1.53V1.52a1.53 1.53 0 012.6-1.07c.28.28.44.67.44 1.07v9.15a1.53 1.53 0 01-1.52 1.52z'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_2205:13720'%3E%3Cpath fill='%23fff' d='M0 0h73v104H0z'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E"
+            alt="Trust and Confidence"
+            className="w-full h-full"
+          />
+        </div>
+        <h3 className="text-lg font-semibold">Trust and Confidence</h3>
+        <p className="text-gray-500 max-w-xs">
+          Shop and book thousands of operators in one place with direct
+          messaging, secure and flexible payment options, booking protection,
+          24/7 customer support, and additional perks.
+          <a href="#" className="text-blue-500">
+            {" "}
+            We’ve got your back
+          </a>
+          .
+        </p>
+      </div>
+    </section>
   );
 };
 
-export default WhyUsSection;
+export default FeatureSection;

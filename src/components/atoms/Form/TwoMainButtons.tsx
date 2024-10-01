@@ -36,7 +36,7 @@ const HeroOverlay: React.FC<Props> = () => {
     <div>
       <div className="absolute inset-0 flex flex-col justify-center items-center mt-20  p-4">
         <h1 className="text-4xl sm:text-5xl capitalize text-white font-bold lg:text-6xl font-segoe text-center mb-4 lg:mb-6">
-          Egypt Raisen Tours With The Best Locals Ever!
+          Feliz Tour Egypt With The Best Locals Ever!
         </h1>
         <p className="text-lg sm:text-xl capitalize text-white font-bold font-segoe lg:text-2xl text-center mb-8 lg:mb-10">
           Confused? Want to Egypt Raisen your dream package? Enquire here in 1

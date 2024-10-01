@@ -19,7 +19,7 @@ export default function ExcursionsCardTour({ toursData }: ExcursionsProps) {
             <div key={excursion.id} className="px-[5px] md:px-[5px] mb-3">
               <Link href={`/top-packages/${excursion.id}`}>
                 <div className="px-[4px] mb-3">
-                  <div className="flex flex-col max-w-lg mx-auto cursor-pointer border hover:border-green-600 border-gray-200 rounded-lg overflow-hidden shadow-lg bg-white h-[500px] transition-all duration-300 ease-in-out">
+                  <div className="flex flex-col max-w-lg mx-auto cursor-pointer hover:shadow-xl  rounded-2xl overflow-hidden  h-[450px] transition-all duration-300 ease-in-out">
                     <div className="relative h-72 overflow-hidden">
                       <Image
                         className="w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-105"
@@ -28,7 +28,7 @@ export default function ExcursionsCardTour({ toursData }: ExcursionsProps) {
                         width={100}
                         height={100}
                       />
-                      <div className="absolute top-2 left-2 bg-black text-white text-xs font-segoe font-medium px-2 py-1 rounded">
+                      <div className="absolute top-2 left-2 bg-green-800 text-white text-xs font-segoe font-medium px-2 py-1 rounded">
                         Top Rated
                       </div>
                       <Button className="absolute top-2 right-2 text-white hover:text-red-500">

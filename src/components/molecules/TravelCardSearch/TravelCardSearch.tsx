@@ -30,7 +30,7 @@ const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
       <div className="grid grid-cols-1 gap-6 mt-3 lg:mt-0">
         {currentTours.map((pkg) => (
           <Link href={`/top-packages/${pkg.id}`} key={pkg.id}>
-            <div className="w-full bg-white rounded-md border-gray-300 border overflow-hidden  transition-shadow duration-300 hover:shadow-xl cursor-pointer">
+            <div className="w-full hover:border-green-500 bg-white rounded-md border-gray-300 border overflow-hidden  transition-shadow duration-300 hover:shadow-xl cursor-pointer">
               <div className="flex flex-col md:flex-row">
                 <div className="w-full md:w-2/6 p-3 h-64 md:h-auto relative">
                   <Image
