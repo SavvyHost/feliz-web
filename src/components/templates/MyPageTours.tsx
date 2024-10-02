@@ -31,14 +31,20 @@ const MyPageTours: React.FC<MyPageProps> = ({ DetailTour }) => {
       <div className="p-4 lg:p-0">
         <Included DetailTour={DetailTour} />
         <hr />
-        {/* <TourItinerary DetailTour={DetailTour} /> */}
+        <TourItinerary
+          DetailTour={{ tour_itineraries: DetailTour.tour_itineraries }}
+        />
         <hr />
         <TravelDateOptions
           DetailTour={{ tour_prices: DetailTour.tour_prices }}
         />
         <hr />
         {/* <UserProfilePage /> */}
-        <FAQ DetailTour={DetailTour} />
+        <FAQ
+          DetailTour={{
+            tour_frequently_questions: DetailTour.tour_frequently_questions,
+          }}
+        />
         <hr />
         {/* <Reviews /> */}
         <RandomButtons DetailTour={{ tags: DetailTour.tags }} />

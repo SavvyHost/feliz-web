@@ -2,7 +2,13 @@ import { TourPackage } from "@/types/tour";
 import { Button } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import { BsClock, BsFillCircleFill, BsHeart, BsMap } from "react-icons/bs";
+import {
+  BsClock,
+  BsFillCircleFill,
+  BsHeart,
+  BsLuggage,
+  BsMap,
+} from "react-icons/bs";
 
 interface ExcursionsProps {
   toursData: TourPackage[];
@@ -48,6 +54,10 @@ export default function ExcursionsCardTour({ toursData }: ExcursionsProps) {
                       <div className="flex items-center text-gray-600 text-sm mb-4">
                         <BsClock size={16} className="mr-1" />
                         <span>{excursion.duration} days</span>
+                      </div>
+                      <div className="flex items-center text-gray-600 text-sm mb-4">
+                        <BsLuggage size={16} className="mr-3" />
+                        <span>Age Range : {excursion.age_range} </span>
                       </div>
                       <div className="flex items-center mb-4">
                         {/* <div className="flex-1">

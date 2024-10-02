@@ -153,3 +153,16 @@ export type Column_TP<AccessorTP> = {
 };
 
 export type KaratValues_TP = "24" | "22" | "21" | "18";
+
+export type Attraction = {
+  id: number;
+  name: string;
+  city_id: number;
+  longitude: string;
+  latitude: string;
+  images: string[]; // Assuming the API returns an array of image URLs
+  paner_image: {
+    url: string;
+  } | null;
+  toursCount?: number; // Optional field if available in the API
+};

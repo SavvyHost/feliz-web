@@ -17,7 +17,7 @@ export default function Home({ toursData }: HomeProps) {
       </div>
 
       {/* Laptop view */}
-      <div className="hidden lg:block">
+      <div className="hidden lg:block ">
         <Laptop toursData={toursData} />
       </div>
     </div>

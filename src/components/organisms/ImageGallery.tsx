@@ -15,7 +15,7 @@ interface ImageGalleryProps {
 const ImageGallery: React.FC<ImageGalleryProps> = ({
   title,
   breadcrumb,
-  images,
+  images = [], // Default to an empty array if images are not provided
 }) => {
   const [mainImage, setMainImage] = useState<number>(0);
   const [showSeeMore, setShowSeeMore] = useState<boolean>(false);
@@ -73,6 +73,10 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
       slider.slickPrev();
     }
   };
+
+  if (!images || images.length === 0) {
+    return <p>No images available</p>; // Handle case when there are no images
+  }
 
   return (
     <div className="flex flex-col">

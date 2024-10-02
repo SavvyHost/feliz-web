@@ -25,8 +25,8 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ DetailTour }) => {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row md:pt-5 md:px-16">
-        <div className="w-full md:w-1/3 p-2 pt-2 md:pt-44 order-2">
+      <div className="flex flex-col md:flex-row  md:pt-5 md:px-16">
+        <div className="w-full md:w-1/3 p-2 pt-2 md:pt-[180px] order-2">
           <BookingFormDesktop DetailTour={DetailTour} />
         </div>
 
@@ -36,7 +36,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ DetailTour }) => {
       </div>
 
       {/* Third Div for Centered Text, placed after the flex container */}
-      <div className="lg:w-2/3 w-full p-0 lg:p-6 overflow-hidden">
+      <div className="lg:w-2/3 w-full p-0 lg:px-16 overflow-hidden">
         <MyPage DetailTour={DetailTour} />
       </div>
 

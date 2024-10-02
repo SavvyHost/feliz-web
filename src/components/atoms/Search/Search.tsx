@@ -27,11 +27,13 @@ const SearchInput = () => {
   const options = ["Packages", "Nile Cruise", "Excursions"];
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       {/* Search Input for Larger Screens */}
-      <div className="hidden md:flex flex-col md:flex-row items-center bg-white rounded-md mt-5 border border-gray-100 p-5 space-y-2 md:space-y-0 md:space-x-2 mx-auto max-w-2xl w-full">
+      <div className="hidden md:flex flex-col md:flex-row items-center bg-white rounded-md mt-5 border border-gray-100 p-5 space-y-2 md:space-y-0 md:space-x-2 mx-auto max-w-4xl w-full">
         {/* Location Dropdown */}
-        <div className="relative flex-1">
+        <div className="relative flex-1 min-w-[200px]">
+          {" "}
+          {/* Increased min-width */}
           <input
             type="text"
             value={location}
@@ -66,7 +68,9 @@ const SearchInput = () => {
         <div className="w-px bg-gray-300 h-8 hidden md:block"></div>
 
         {/* Month Input with Dropdown */}
-        <div className="relative flex-1">
+        <div className="relative flex-1 min-w-[200px]">
+          {" "}
+          {/* Increased min-width */}
           <input
             type="text"
             value={month}
@@ -114,7 +118,9 @@ const SearchInput = () => {
         </div>
 
         {/* Tailwind Dropdown for Options */}
-        <div className="relative flex-1">
+        <div className="relative flex-1 min-w-[200px]">
+          {" "}
+          {/* Increased min-width */}
           <select
             value={option}
             onChange={(e) => setOption(e.target.value)}
@@ -132,12 +138,13 @@ const SearchInput = () => {
         </div>
 
         {/* Search Button */}
-        <button className="bg-[#232323] text-white font-segoe rounded-md px-4 py-2 flex items-center text-center justify-center w-full md:w-auto">
+        <button className="bg-[#232323]  text-white font-segoe rounded-md px-6 py-2 flex items-center text-center justify-center w-full md:w-auto">
           <Search className="mr-2 w-5 h-5" />
           Search
         </button>
       </div>
 
+      {/* Mobile Search Input */}
       <div className="relative md:hidden w-full">
         <input
           type="text"

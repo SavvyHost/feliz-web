@@ -97,11 +97,13 @@ const SearchModal: React.FC<SearchModalProps> = ({
           <DatePickerInput
             selectedDate={selectedDate}
             onDateChange={handleDateChange}
-            width="100%" // You can adjust this width as needed
+            mobileWidth="100%" // Full width on mobile
+            laptopWidth="100%" // Fixed width on laptop
+            height="40px"
             labelProps={{
               fontSize: "14px",
               color: "rgba(0, 0, 0, 0.6)",
-              transform: "translate(14px, 20px) scale(1)",
+              transform: "translate(14px, 12px) scale(1)",
             }}
           />
           <Button

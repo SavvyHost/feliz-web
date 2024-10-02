@@ -34,11 +34,11 @@ const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
               <div className="flex flex-col md:flex-row">
                 <div className="w-full md:w-2/6 p-3 h-64 md:h-auto relative">
                   <Image
-                    src={pkg.main_image.url || defaultImage} // Use default image if main_image is not available
+                    src={pkg?.main_image?.url || defaultImage} // Check if main_image and its url exist, otherwise use the default image
                     alt={pkg.title}
                     width={100}
                     height={100}
-                    className="rounded-md  w-full h-full"
+                    className="rounded-md w-full h-full"
                   />
                   <div className="absolute top-5 left-5 bg-green-500 text-white px-3 py-1 text-sm font-segoe rounded-sm shadow-md">
                     Special Offer 20%

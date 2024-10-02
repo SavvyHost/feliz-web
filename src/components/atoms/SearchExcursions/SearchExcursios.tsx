@@ -45,7 +45,8 @@ const SearchExcursions: React.FC = () => {
         <DatePickerInput
           selectedDate={selectedDate}
           onDateChange={handleDateChange}
-          width="200px"
+          mobileWidth="100%" // Full width on mobile
+          laptopWidth="40%" // Fixed width on laptop
           height="40px"
           labelProps={{
             fontSize: "14px",
