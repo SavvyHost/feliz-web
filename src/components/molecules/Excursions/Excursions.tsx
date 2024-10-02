@@ -53,7 +53,7 @@ export default function ExcursionsCardTour({ toursData }: ExcursionsProps) {
                       </h2>
                       <div className="flex items-center text-gray-600 text-sm mb-4">
                         <BsClock size={16} className="mr-1" />
-                        <span>{excursion.duration} days</span>
+                        <span>{excursion.duration} Hours</span>
                       </div>
                       <div className="flex items-center text-gray-600 text-sm mb-4">
                         <BsLuggage size={16} className="mr-3" />
