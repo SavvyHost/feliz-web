@@ -159,7 +159,7 @@ function MainDataBookingForm({ DetailTour, setIsThanksVisible }) {
             <div className="pt-4">
               <button
                 type="submit"
-                className="w-full p-3 bg-green-950 text-white rounded-md hover:bg-green-700 transition duration-150"
+                className="w-full p-3 bg-green-600 text-white rounded-md hover:bg-green-800 transition duration-150"
               >
                 {isPending ? <Spinner /> : "Submit"}
               </button>

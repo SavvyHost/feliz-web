@@ -1,71 +1,64 @@
-import React from "react";
+// components/TourDetails.tsx
+import { FC } from "react";
 import {
-  FaClock,
-  FaGlobeAmericas,
-  FaLock,
-  FaCalendarAlt,
+  FaRegClock,
+  FaMoneyCheckAlt,
+  FaTag,
+  FaDoorOpen,
+  FaUser,
 } from "react-icons/fa";
-import { TourDetail } from "@/types/tour"; // Import the TourDetail interface
 
-interface TripInfoProps {
-  DetailTour: TourDetail; // Use the TourDetail interface for typing
-}
-
-const TripInfo: React.FC<TripInfoProps> = ({ DetailTour }) => {
-  const items = [
-    {
-      icon: FaClock,
-      title: "Duration",
-      value: `${DetailTour.duration} Days`,
-      subvalue: `${DetailTour.duration - 1} Nights`,
-    },
-    {
-      icon: FaGlobeAmericas,
-      title: "Destination",
-      value: `${DetailTour.num_of_cities ?? "N/A"} cities`, // Handle optional property
-      subvalue: `${DetailTour.num_of_places ?? "N/A"} places`, // Handle optional property
-    },
-    {
-      icon: FaLock,
-      title: "Type",
-      value: DetailTour.category?.name ?? "N/A", // Handle optional property
-      subvalue: "English Speaking Guide",
-    },
-    {
-      icon: FaCalendarAlt,
-      title: "Run",
-      value: DetailTour.run ?? "N/A", // Handle optional property
-      // subvalue: "Sunday - Thursday",
-    },
-  ];
-
+const TourDetails: FC = () => {
   return (
-    <div className="">
-      <h2 className="text-3xl font-segoe text-start mt-3 lg:mt-4 ">
-        Trip Information
-      </h2>
-      <div className="grid lg:grid-cols-4 grid-cols-2 gap-6 mt-3 lg:mt-4">
-        {items.map((item, index) => (
-          <div
-            key={index}
-            className="flex flex-col items-center text-center bg-white p-4 border border-gray-200 rounded-lg shadow-sm"
-          >
-            <item.icon className="text-3xl text-[#6ece49] mb-2" />
-            <h3 className="font-semibold text-[#377020]">{item.title}</h3>
-            <p className="text-gray-800">{item.value}</p>
-            <p className="text-sm text-gray-500">{item.subvalue}</p>
+    <div className="w-full mx-auto mt-2 px-4 py-2 border  bg-white mb-3  border-green-200 rounded-lg shadow-md">
+      <h2 className="text-2xl font-semibold mb-4">About this tour</h2>
+      <ul className="space-y-4 text-lg">
+        <li className="flex items-start">
+          <FaTag className="w-6 h-6 mr-3 text-green-600" />
+          <div>
+            <p className="font-semibold">Free cancellation</p>
+            <p className="text-gray-600">
+              Cancel up to 24 hours in advance for a full refund
+            </p>
           </div>
-        ))}
-      </div>
-
-      <div
-        className="font-segoe mt-5 text-xl"
-        dangerouslySetInnerHTML={{
-          __html: DetailTour.description ?? "No description available.",
-        }}
-      />
+        </li>
+        <li className="flex items-start">
+          <FaMoneyCheckAlt className="w-6 h-6 mr-3 text-green-600" />
+          <div>
+            <p className="font-semibold">Reserve now & pay later</p>
+            <p className="text-gray-600">
+              Keep your travel plans flexible — book your spot and pay nothing
+              today.
+            </p>
+          </div>
+        </li>
+        <li className="flex items-start">
+          <FaRegClock className="w-6 h-6 mr-3 text-green-600" />
+          <div>
+            <p className="font-semibold">Duration 3.5 hours</p>
+            <p className="text-gray-600">
+              Check availability to see starting times.
+            </p>
+          </div>
+        </li>
+        <li className="flex items-start">
+          <FaDoorOpen className="w-6 h-6 mr-3 text-green-600" />
+          <div>
+            <p className="font-semibold">
+              Skip the line through a separate entrance
+            </p>
+          </div>
+        </li>
+        <li className="flex items-start">
+          <FaUser className="w-6 h-6 mr-3 text-green-600" />
+          <div>
+            <p className="font-semibold">Live tour guide</p>
+            <p className="text-gray-600">English</p>
+          </div>
+        </li>
+      </ul>
     </div>
   );
 };
 
-export default TripInfo;
+export default TourDetails;

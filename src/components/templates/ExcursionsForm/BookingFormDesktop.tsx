@@ -10,7 +10,7 @@ export default function BookingFormDesktop({ DetailTour }) {
   };
 
   return (
-    <div className="hidden md:block p-6 bg-white border border-green-200 rounded-lg shadow-md">
+    <div className="block p-6 bg-white rounded-lg border shadow-md">
       <h2 className="text-sm text-gray-500 mb-2">
         From ${DetailTour?.min_price}
       </h2>

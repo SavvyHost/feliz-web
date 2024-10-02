@@ -17,7 +17,7 @@ export default function ExcursionsCardTour({ toursData }: ExcursionsProps) {
         {dataToDisplay?.length ? (
           dataToDisplay.map((excursion: TourPackage) => (
             <div key={excursion.id} className="px-[5px] md:px-[5px] mb-3">
-              <Link href={`/top-packages/${excursion.id}`}>
+              <Link href={`/top-excursions/${excursion.id}`}>
                 <div className="px-[4px] mb-3">
                   <div className="flex flex-col max-w-lg mx-auto cursor-pointer hover:shadow-xl  rounded-2xl overflow-hidden  h-[450px] transition-all duration-300 ease-in-out">
                     <div className="relative h-72 overflow-hidden">

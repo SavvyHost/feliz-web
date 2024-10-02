@@ -4,11 +4,13 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TextField } from "@mui/material";
+import { useMediaQuery, Theme } from "@mui/material";
 
 interface DatePickerInputProps {
   selectedDate: dayjs.Dayjs | null;
   onDateChange: (date: dayjs.Dayjs | null) => void;
-  width?: string;
+  mobileWidth?: string;
+  laptopWidth?: string;
   height?: string;
   labelProps?: {
     fontSize?: string;
@@ -20,15 +22,19 @@ interface DatePickerInputProps {
 const DatePickerInput: React.FC<DatePickerInputProps> = ({
   selectedDate,
   onDateChange,
-  width = "200px",
+  mobileWidth = "100%",
+  laptopWidth = "400px",
   height = "56px",
   labelProps = {
-    fontSize: "14px",
+    fontSize: "19px",
     color: "rgba(0, 0, 0, 0.6)",
     transform: "translate(14px, 16px) scale(1)",
   },
 }) => {
   const [isDatePickerOpen, setIsDatePickerOpen] = useState<boolean>(false);
+
+  // Use media query to determine if it's mobile or laptop
+  const isLaptop = useMediaQuery((theme: Theme) => theme.breakpoints.up("md"));
 
   const handleDateChange = (newValue: dayjs.Dayjs | null) => {
     onDateChange(newValue);
@@ -57,7 +63,7 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
               }
             },
             sx: {
-              width,
+              width: isLaptop ? laptopWidth : mobileWidth, // Set width based on screen size
               height,
               "& .MuiInputBase-root": {
                 height: "100%",

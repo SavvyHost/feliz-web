@@ -5,6 +5,7 @@ import BookingFormDesktop from "@/components/atoms/BookForm/BookingFormDesktop";
 import fetchData from "@/helper/FetchData";
 import { GetServerSidePropsContext } from "next";
 import { TourDetail } from "@/types/tour";
+import MyPageTours from "@/components/templates/MyPageTours";
 
 interface ImageGalleryProps {
   DetailTour: TourDetail;
@@ -21,7 +22,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ DetailTour }) => {
         </div>
 
         <div className="w-full md:w-2/3 mt-3 p-0 md:pl-0 md:mt-24 order-2 md:order-1">
-          <MyPage DetailTour={DetailTour} />
+          <MyPageTours DetailTour={DetailTour} />
         </div>
       </div>
 
