@@ -87,7 +87,7 @@ const Mobile: React.FC<MobileProps> = ({ toursData }) => {
           </div>
         </div>
       </div>
-      <div className="flex-1 overflow-y-auto mt-[calc(40px+4rem)]">
+      <div className="flex-1 overflow-y-auto mt-[calc(45px+4rem)]">
         <div className="py-6 px-3">
           <div className="flex flex-col md:flex-row gap-8">
             <div className="w-full md:w-3/4">

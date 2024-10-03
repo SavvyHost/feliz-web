@@ -19,8 +19,8 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
   content,
 }) => {
   return (
-    <div className="relative md:max-w-3xl  md:mx-auto mx-3 overflow-hidden">
-      <div className="p-4">
+    <div className="relative mr-3 overflow-hidden">
+      <div className="">
         <div className="flex items-start mb-4">
           <Image
             src={User}

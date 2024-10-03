@@ -49,7 +49,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
       ))}
       <Button
         onClick={onClose}
-        className="bg-custom-gradient p-3 px-6 text-white fixed bottom-0 left-0 right-0 rounded-t-md"
+        className="bg-green-700 p-3 px-6 text-white fixed bottom-0 left-0 right-0 rounded-t-md"
       >
         Apply
       </Button>

@@ -21,7 +21,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ DetailTour }) => {
           <BookingFormDesktop DetailTour={DetailTour} />
         </div>
 
-        <div className="w-full md:w-2/3 mt-3 p-0 md:pl-0 md:mt-24 order-2 md:order-1">
+        <div className="w-full md:w-2/3 mt-3 mr-3 md:mt-24 order-2 md:order-1">
           <MyPageTours DetailTour={DetailTour} />
         </div>
       </div>

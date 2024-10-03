@@ -126,7 +126,7 @@ const ProfileCardsContainer: React.FC = () => {
       {/* Slick Slider */}
       <Slider ref={sliderRef} {...settings}>
         {reviews.map((review, index) => (
-          <div key={index} className="w-full lg:ml-4 ml-0">
+          <div key={index} className="w-full">
             <ProfileCard
               name={review.name}
               username={review.username}

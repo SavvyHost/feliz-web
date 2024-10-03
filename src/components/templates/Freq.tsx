@@ -51,7 +51,7 @@ const FAQ: FC<FAQProps> = ({ DetailTour }) => {
 
   return (
     <div className="w-full mx-auto border px-4 py-2 mt-2 bg-white border-green-200 rounded-lg shadow-md">
-      <h3 className="lg:text-2xl text-xl font-semibold mb-6">
+      <h3 className="lg:text-2xl text-xl font-semibold mb-1">
         Frequently Asked Questions
       </h3>
       {tour_frequently_questions.map((item, index) => (

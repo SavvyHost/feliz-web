@@ -70,7 +70,7 @@ export default function BluerForm() {
             </div>
 
             <div className="relative flex-1">
-              <FaBus className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
+              <FaBus className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-500" />
               <input
                 type="text"
                 placeholder="Excursions"

@@ -97,7 +97,7 @@ const Attractions: React.FC<Props> = ({ attractions }) => {
       ) : (
         <div className="grid grid-cols-3 gap-4 mb-3">
           {attractions.map((attraction) => (
-            <div className="flex justify-center" key={attraction.id}>
+            <div className="flex justify-start" key={attraction.id}>
               <AttractionCard
                 name={attraction.name}
                 imageSrc={attraction.paner_image?.url || defaultImage}

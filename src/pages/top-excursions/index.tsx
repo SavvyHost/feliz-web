@@ -19,7 +19,7 @@ const Home: React.FC<HomeProps> = ({ toursData }) => {
       <div className="">
         <Explore />
       </div>
-      <div>
+      <div className="lg:my-6 my-0">
         <Drops />
       </div>
       <div>

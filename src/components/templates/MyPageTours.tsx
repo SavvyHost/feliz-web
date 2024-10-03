@@ -11,6 +11,7 @@ import PricePlans from "@/components/templates/PriceSection";
 import { TourDetail } from "@/types/tour"; // Correct import for TourDetail
 import TravelDateOptions from "./PriceTour";
 import PriceTour from "./PriceTour";
+import DefaultDetails from "../organisms/DefaultDetails";
 
 interface MyPageProps {
   DetailTour: TourDetail;
@@ -45,6 +46,7 @@ const MyPageTours: React.FC<MyPageProps> = ({ DetailTour }) => {
           }}
         />
         <hr />
+        <DefaultDetails />
         {/* <Reviews /> */}
         <RandomButtons DetailTour={{ tags: DetailTour.tags }} />
       </div>

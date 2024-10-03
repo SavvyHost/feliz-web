@@ -6,7 +6,7 @@ import { FiChevronRight, FiChevronLeft } from "react-icons/fi"; // Importing ico
 
 const NextArrow = ({ onClick }) => (
   <div
-    className="absolute top-0 lg:block hidden right-4 transform -translate-y-1/2 cursor-pointer  rounded-full p-2"
+    className="absolute -top-5 lg:block hidden right-4 transform -translate-y-1/2 cursor-pointer  rounded-full p-2"
     onClick={onClick}
   >
     <FiChevronRight size={24} /> {/* Right arrow icon */}
@@ -15,7 +15,7 @@ const NextArrow = ({ onClick }) => (
 
 const PrevArrow = ({ onClick }) => (
   <div
-    className="absolute top-0 right-20 lg:block hidden transform -translate-y-1/2 cursor-pointer rounded-full p-2"
+    className="absolute -top-5 right-20 lg:block hidden transform -translate-y-1/2 cursor-pointer rounded-full p-2"
     onClick={onClick}
   >
     <FiChevronLeft size={24} /> {/* Left arrow icon */}
@@ -53,17 +53,17 @@ export default function Adventures() {
   };
 
   return (
-    <div className="lg:p-10 p-0 relative">
+    <div className="relative">
       {/* Custom Arrows */}
       <PrevArrow onClick={() => sliderRef.current?.slickPrev()} />
       <NextArrow onClick={() => sliderRef.current?.slickNext()} />
 
       <Slider ref={sliderRef} {...settings} className="flex justify-start">
         {cardData.map((card) => (
-          <div key={card.id} className="flex justify-start px-2">
-            <div className="flex flex-col items-start hover:rounded-lg relative group">
+          <div key={card.id} className="flex justify-start ">
+            <div className="flex flex-col  items-start hover:rounded-lg relative group">
               {/* Card Container */}
-              <div className="flex flex-col items-start group relative">
+              <div className="flex pr-2 flex-col items-start group relative">
                 <div className="relative bg-white shadow-md overflow-hidden transition-all duration-500 rounded-md group-hover:rounded-lg">
                   {/* Image Container */}
                   <div className="relative">
