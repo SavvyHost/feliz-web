@@ -7,6 +7,7 @@ import { TourDetail } from "@/types/tour";
 
 import GallaryExcusrions from "@/components/templates/Gallaryexcursions";
 import BookingFormDesktop from "@/components/templates/ExcursionsForm/BookingFormDesktop";
+import DefaultDetails from "@/components/organisms/DefaultDetails";
 
 interface ImageGalleryProps {
   DetailTour: TourDetail;
@@ -26,7 +27,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ DetailTour }) => {
   return (
     <>
       <div className="flex flex-col md:flex-row  md:pt-5 md:px-16">
-        <div className="w-full md:w-1/3 p-2 pt-2 md:pt-[180px] order-2">
+        <div className="w-full md:w-1/3 p-2 lg:px-0  pt-2 md:pt-[180px] order-2">
           <BookingFormDesktop DetailTour={DetailTour} />
         </div>
 

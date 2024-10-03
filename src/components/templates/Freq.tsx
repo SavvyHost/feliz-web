@@ -1,5 +1,4 @@
-// components/FAQ.tsx
-import { FC, useState } from "react";
+import React, { FC, useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 interface FAQItemProps {
@@ -17,9 +16,23 @@ const FAQItem: FC<FAQItemProps> = ({ question, answer }) => {
         onClick={() => setIsOpen(!isOpen)}
       >
         <h4 className="text-lg font-semibold">{question}</h4>
-        {isOpen ? <FaChevronUp /> : <FaChevronDown />}
+        {isOpen ? (
+          <div>
+            <FaChevronUp />
+          </div>
+        ) : (
+          <div>
+            <FaChevronDown />
+          </div>
+        )}
       </div>
-      {isOpen && <p className="mt-2 text-gray-600">{answer}</p>}
+      <div
+        className={`overflow-hidden transition-[max-height] duration-300 ease-in-out ${
+          isOpen ? "max-h-96" : "max-h-0"
+        }`}
+      >
+        <p className="mt-2 text-gray-600">{answer}</p>
+      </div>
     </div>
   );
 };
@@ -38,7 +51,7 @@ const FAQ: FC<FAQProps> = ({ DetailTour }) => {
 
   return (
     <div className="w-full mx-auto border px-4 py-2 mt-2 bg-white border-green-200 rounded-lg shadow-md">
-      <h3 className="text-2xl font-semibold mb-6">
+      <h3 className="lg:text-2xl text-xl font-semibold mb-6">
         Frequently Asked Questions
       </h3>
       {tour_frequently_questions.map((item, index) => (

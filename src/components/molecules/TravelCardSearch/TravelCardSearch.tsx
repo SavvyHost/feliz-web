@@ -60,7 +60,9 @@ const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
                       <div className="flex items-center space-x-2">
                         <MapPin className="w-5 h-5 text-gray-500" />
                         <div>
-                          <p className="text-sm text-gray-600">Destination</p>
+                          <p className="text-sm text-gray-600">
+                            Destination :{" "}
+                          </p>
                           <p className="font-segoe text-gray-800">
                             {pkg.destination}
                           </p>
@@ -69,7 +71,7 @@ const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
                       <div className="flex items-center space-x-2">
                         <Calendar className="w-5 h-5 text-gray-500" />
                         <div>
-                          <p className="text-sm text-gray-600">Duration</p>
+                          <p className="text-sm text-gray-600">Duration : </p>
                           <p className="font-segoe text-gray-800">
                             {pkg.duration} Days
                           </p>
@@ -78,7 +80,7 @@ const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
                       <div className="flex items-center space-x-2">
                         <Users className="w-5 h-5 text-gray-500" />
                         <div>
-                          <p className="text-sm text-gray-600">Age range</p>
+                          <p className="text-sm text-gray-600">Age range : </p>
                           <p className="font-segoe text-gray-800">
                             {pkg.age_range}
                           </p>
@@ -87,10 +89,8 @@ const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
                       <div className="flex items-center space-x-2">
                         <Globe className="w-5 h-5 text-gray-500" />
                         <div>
-                          <p className="text-sm text-gray-600">Operated in</p>
-                          <p className="font-segoe text-gray-800">
-                            {pkg.language}
-                          </p>
+                          <p className="text-sm text-gray-600">Run : </p>
+                          <p className="font-segoe text-gray-800">{pkg.run}</p>
                         </div>
                       </div>
                     </div>

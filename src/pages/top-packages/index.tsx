@@ -10,14 +10,14 @@ interface HomeProps {
 
 export default function Home({ toursData }: HomeProps) {
   return (
-    <div className="md:p-6 p-0 bg-[#FAFAFA]">
+    <div className="md:p-6 p-0 bg-[#FAFAFA] lg:px-16 ">
       {/* Mobile view */}
       <div className="block lg:hidden">
         <Mobile toursData={toursData} />
       </div>
 
       {/* Laptop view */}
-      <div className="hidden lg:block ">
+      <div className="hidden lg:block  ">
         <Laptop toursData={toursData} />
       </div>
     </div>

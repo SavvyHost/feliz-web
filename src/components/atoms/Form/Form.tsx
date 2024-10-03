@@ -52,12 +52,12 @@ export default function BluerForm() {
         <form className="space-y-3 relative">
           <div className="flex flex-row space-x-2 mb-3">
             <div className="relative flex-1">
-              <BsLuggageFill className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500" />
+              <BsLuggageFill className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-500" />
               <input
                 type="text"
                 placeholder="Tour Package"
                 className={`w-full pl-10 pr-3 py-2 ${
-                  activeInput === "tour" ? "bg-[#FFF3C5]" : "bg-white"
+                  activeInput === "tour" ? "bg-[#ebffc5]" : "bg-white"
                 } border border-[#FFF3C5] rounded-md focus:outline-none focus:ring-2 text-sm`}
                 onClick={() => handleInputClick("tour")}
                 readOnly
@@ -75,7 +75,7 @@ export default function BluerForm() {
                 type="text"
                 placeholder="Excursions"
                 className={`w-full pl-10 pr-3 py-2 ${
-                  activeInput === "excursion" ? "bg-[#FFF3C5]" : "bg-white"
+                  activeInput === "excursion" ? "bg-[#ccffc5]" : "bg-white"
                 } border border-[#FFF3C5] rounded-md focus:outline-none focus:ring-2 text-sm`}
                 onClick={() => handleInputClick("excursion")}
                 readOnly
@@ -105,7 +105,7 @@ export default function BluerForm() {
           )}
 
           <div className="relative mb-3">
-            <select className="w-full px-3 py-2 border border-[#FFF3C5] rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm">
+            <select className="w-full px-3 py-2 border border-[#FFF3C5] rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-sm">
               <option value="Luxor">Luxor</option>
               <option value="Hurghada">Hurghada</option>
               <option value="Sharm">Sharm</option>
@@ -118,12 +118,12 @@ export default function BluerForm() {
               <input
                 type="text"
                 placeholder="Enter Date"
-                className="w-full px-3 py-2 border border-[#FFF3C5] rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm"
+                className="w-full px-3 py-2 border border-[#FFF3C5] rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-sm"
                 value={selectedDate ? selectedDate.toDateString() : ""}
                 readOnly
               />
             </div>
-            <Button className="w-full capitalize sm:w-auto py-2 text-white px-3 bg-custom-gradient font-segoe rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 text-sm">
+            <Button className="w-full capitalize sm:w-auto py-2 text-white px-3 bg-green-600 font-segoe rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 text-sm">
               Search
             </Button>
           </div>

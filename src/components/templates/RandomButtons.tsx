@@ -14,7 +14,7 @@ const RandomButtons: React.FC<RandomButtonsProps> = ({ DetailTour }) => {
         {DetailTour?.tags?.map((place, index) => (
           <div
             key={index}
-            className="bg-white border border-gray-200 rounded p-1 text-center inline-block"
+            className="bg-white border px-4 capitalize border-gray-200 rounded p-1 text-center inline-block"
           >
             <span className="text-sm text-black font-segoe font-semibold">
               {place}

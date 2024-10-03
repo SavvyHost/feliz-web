@@ -43,8 +43,8 @@ const sliderSettings = {
 
 const Explore: React.FC = () => {
   return (
-    <div className="mr-2 py-8">
-      <h2 className="md:text-3xl text-xl font-segoe ml-3 mb-6 text-start">
+    <div className="py-8">
+      <h2 className="md:text-3xl text-xl font-segoe  mb-6 text-start">
         Explore Excursions
       </h2>
 

@@ -21,12 +21,11 @@ const OriginalExperience: FC<OriginalExperienceProps> = ({ DetailTour }) => {
 
   return (
     <div className="w-full mx-auto mb-3 mt-2 px-4 py-2 border bg-white border-green-200 rounded-lg shadow-md">
-      <h2 className="text-2xl font-semibold mb-4">The Original experience</h2>
+      <h2 className="text-2xl font-semibold mb-4">Includes</h2>
 
       {/* Includes Section */}
       <section className="mb-6">
-        <h3 className="text-lg font-semibold">Includes</h3>
-        <ul className="ml-6 mt-2">
+        <ul className="ml-2 lg:ml-6 mt-2">
           {DetailTour.tour_includes.map((item) => (
             <li key={item.id} className="flex items-center text-gray-600">
               <div>

@@ -10,6 +10,7 @@ import UserProfilePage from "@/components/templates/Travelers";
 import PricePlans from "@/components/templates/PriceSection";
 import { TourDetail } from "@/types/tour"; // Correct import for TourDetail
 import TravelDateOptions from "./PriceTour";
+import PriceTour from "./PriceTour";
 
 interface MyPageProps {
   DetailTour: TourDetail;
@@ -35,9 +36,7 @@ const MyPageTours: React.FC<MyPageProps> = ({ DetailTour }) => {
           DetailTour={{ tour_itineraries: DetailTour.tour_itineraries }}
         />
         <hr />
-        <TravelDateOptions
-          DetailTour={{ tour_prices: DetailTour.tour_prices }}
-        />
+        <PriceTour DetailTour={{ tour_prices: DetailTour.tour_prices }} />
         <hr />
         {/* <UserProfilePage /> */}
         <FAQ

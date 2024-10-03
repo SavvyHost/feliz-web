@@ -50,7 +50,7 @@ const Laptop: React.FC<LaptopProps> = ({ toursData }) => {
   };
 
   return (
-    <div className="p-6  bg-[#FAFAFA]">
+    <div className=" bg-[#FAFAFA]">
       {/* Search Bar */}
       <div className="mt-20">
         <SearchInput />

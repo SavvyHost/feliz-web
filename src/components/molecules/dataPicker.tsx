@@ -3,7 +3,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import {
-  TextField,
   Box,
   Typography,
   Button,
@@ -13,27 +12,46 @@ import {
   DialogActions,
 } from "@mui/material";
 import dayjs, { Dayjs } from "dayjs";
+import { useFormikContext } from "formik";
 
 interface DatePickerModalProps {
   open: boolean;
   onClose: () => void;
-  onDateChange: (date: Dayjs | null, rangeDays: number) => void;
+  onDateChange: (formattedDate: string, rangeDays: number) => void;
 }
 
 const DatePickerModal: React.FC<DatePickerModalProps> = ({
   open,
   onClose,
   onDateChange,
+  setFieldValue,
 }) => {
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
-  const [rangeDays, setRangeDays] = useState<number>(1);
+  const [rangeDays, setRangeDays] = useState<number>(1); // Total days
+  const [isDatePickerOpen, setIsDatePickerOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    if (selectedDate) {
-      const endDate = selectedDate.add(rangeDays - 1, "day");
-      onDateChange(selectedDate, rangeDays);
+    if (selectedDate && dayjs.isDayjs(selectedDate)) {
+      const formattedDate = selectedDate.format("YYYY-MM-DD");
+      onDateChange(formattedDate, rangeDays); // Pass formatted date
     }
   }, [selectedDate, rangeDays, onDateChange]);
+
+  const handleDateChange = (newValue: Dayjs | null) => {
+    if (newValue && dayjs.isDayjs(newValue)) {
+      const formattedDate = newValue.format("YYYY-MM-DD"); // Ensure formatted date
+      setSelectedDate(dayjs(formattedDate)); // Update state with formatted date
+    }
+    setIsDatePickerOpen(false);
+  };
+
+  const incrementDays = () => {
+    setRangeDays((prevDays) => prevDays + 1);
+  };
+
+  const decrementDays = () => {
+    setRangeDays((prevDays) => Math.max(1, prevDays - 1));
+  };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -45,30 +63,50 @@ const DatePickerModal: React.FC<DatePickerModalProps> = ({
             <DatePicker
               label="Select Date"
               value={selectedDate}
-              onChange={(newValue) => setSelectedDate(newValue)}
-              renderInput={(params) => <TextField {...params} />}
+              onChange={handleDateChange}
+              open={isDatePickerOpen}
+              onOpen={() => setIsDatePickerOpen(true)}
+              onClose={() => setIsDatePickerOpen(false)}
+              slotProps={{
+                textField: {
+                  onClick: () => setIsDatePickerOpen(true),
+                  onKeyDown: (e) => {
+                    if (e.key === "Enter") {
+                      setIsDatePickerOpen(true);
+                    }
+                  },
+                  fullWidth: true,
+                },
+              }}
             />
-            <Box sx={{ mt: 2 }}>
-              <Typography variant="h6" className="mb-5">
-                Select Number of Days
+            <Box sx={{ mt: 2, display: "flex", alignItems: "center" }}>
+              <Typography variant="h6" className="" sx={{ mr: 2 }}>
+                Total Days: {rangeDays}
               </Typography>
-              <TextField
-                type="number"
-                label="Number of Days"
-                value={rangeDays}
-                onChange={(e) => setRangeDays(Number(e.target.value))}
-                inputProps={{ min: 1 }}
-                fullWidth
-              />
+              <Button
+                className="bg-green-600 text-white hover:bg-green-500 border border-green-500 hover:border-green-700"
+                variant="outlined"
+                onClick={decrementDays}
+                disabled={rangeDays <= 1}
+              >
+                -
+              </Button>
+              <Button
+                variant="outlined"
+                className="bg-green-600 text-white hover:bg-green-500 border border-green-500 hover:border-green-700"
+                onClick={incrementDays}
+                sx={{ ml: 1 }}
+              >
+                +
+              </Button>
             </Box>
             <Typography variant="body1" sx={{ mt: 2 }}>
-              Selected date:{" "}
-              {selectedDate ? selectedDate.format("YYYY-MM-DD") : "None"}
+              (Nights: {rangeDays - 1})
               <br />
               Selected range:{" "}
-              {selectedDate
-                ? `${selectedDate.format("YYYY-MM-DD")} to ${selectedDate
-                    .add(rangeDays - 1, "day")
+              {selectedDate && dayjs.isDayjs(selectedDate)
+                ? `${selectedDate?.format("YYYY-MM-DD")} to ${selectedDate
+                    ?.add(rangeDays - 1, "day")
                     .format("YYYY-MM-DD")}`
                 : "None"}
             </Typography>
@@ -77,14 +115,15 @@ const DatePickerModal: React.FC<DatePickerModalProps> = ({
         <DialogActions>
           <Button
             onClick={() => {
-              if (selectedDate) {
-                const endDate = selectedDate.add(rangeDays - 1, "day");
-                onDateChange(selectedDate, rangeDays);
+              if (selectedDate && dayjs.isDayjs(selectedDate)) {
+                const formattedDate = selectedDate?.format("YYYY-MM-DD"); // Format date before applying
+                onDateChange(formattedDate, rangeDays); // Pass formatted date
                 onClose();
               }
+              setFieldValue("duration", rangeDays);
             }}
             variant="contained"
-            className="bg-custom-gradient"
+            className="bg-green-900 hover:bg-green-600"
           >
             Apply
           </Button>

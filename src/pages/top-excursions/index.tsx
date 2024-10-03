@@ -12,21 +12,21 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = ({ toursData }) => {
   return (
-    <div>
+    <div className="lg:px-16 p-4">
       <div className="mt-28">
         <SearchExcursions />
       </div>
-      <div className="lg:px-5">
+      <div className="">
         <Explore />
       </div>
       <div>
         <Drops />
       </div>
       <div>
-        <h2 className="md:text-3xl text-xl font-segoe mx-5 my-6 text-start">
+        <h2 className="md:text-3xl text-xl font-segoe mb-4 text-start">
           Tours and Tickets to Experience Giza Pyramids
         </h2>
-        <div className="lg:px-5 px-2">
+        <div className="">
           <Excursions toursData={toursData} />
         </div>
       </div>

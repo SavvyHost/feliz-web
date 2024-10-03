@@ -36,7 +36,7 @@ const MainDataBookingForm: React.FC<MainDataBookingFormProps> = ({
   const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | null>(null);
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [passengerModalOpen, setPassengerModalOpen] = useState(false);
+  const [openPassengers, setOpenPassengers] = useState(false);
 
   const handleDateChange = (newDate: dayjs.Dayjs | null) => {
     setSelectedDate(newDate);
@@ -83,32 +83,23 @@ const MainDataBookingForm: React.FC<MainDataBookingFormProps> = ({
             <div className="mt-4">
               <Button
                 variant="outlined"
+                className="bg-green-600 text-white border-green-950 hover:bg-green-800 "
                 fullWidth
-                onClick={() => setPassengerModalOpen(true)}
+                onClick={() => setOpenPassengers(!openPassengers)}
               >
                 {`Adults: ${values.num_of_adults}, Children: ${values.num_of_children}, Infants: ${values.num_of_infants}`}
               </Button>
-            </div>
 
-            {/* Passenger Selection Modal */}
-            <Modal
-              open={passengerModalOpen}
-              onClose={() => setPassengerModalOpen(false)}
-            >
-              <div className="flex items-center justify-center h-full">
-                <div className="bg-white p-6 rounded-md shadow-md w-80">
-                  <h2 className="text-lg font-medium mb-4">
-                    Select Passengers
-                  </h2>
-
+              {/* Display Passenger Inputs Below Button */}
+              {openPassengers && (
+                <div className="bg-white p-4 rounded-md mt-4 shadow-md">
                   {[
                     { label: "Adults", name: "num_of_adults" },
                     { label: "Children", name: "num_of_children" },
-                    { label: "Infants", name: "num_of_infants" },
                   ].map(({ label, name }) => (
                     <div
                       key={label}
-                      className="flex justify-between items-center mb-4"
+                      className="flex justify-between items-center"
                     >
                       <span>{label}</span>
                       <div className="flex items-center space-x-2">
@@ -132,18 +123,9 @@ const MainDataBookingForm: React.FC<MainDataBookingFormProps> = ({
                       </div>
                     </div>
                   ))}
-
-                  <div className="mt-4 flex justify-end">
-                    <Button
-                      variant="outlined"
-                      onClick={() => setPassengerModalOpen(false)}
-                    >
-                      Close
-                    </Button>
-                  </div>
                 </div>
-              </div>
-            </Modal>
+              )}
+            </div>
 
             <div className="pt-4">
               <button
@@ -154,7 +136,7 @@ const MainDataBookingForm: React.FC<MainDataBookingFormProps> = ({
               </button>
             </div>
 
-            {/* Confirmation Modal */}
+            {/* Confirmation Modal After Submit */}
             <Modal
               open={isModalOpen}
               onClose={() => setIsModalOpen(false)}

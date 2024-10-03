@@ -50,7 +50,7 @@ const FeatureSection: FC = () => {
   ];
 
   const FeatureItem = ({ icon: Icon, title, description, link, href }) => (
-    <div className="flex flex-col items-center text-center px-4">
+    <div className="flex flex-col items-center text-center">
       <div className="w-16 h-16 mb-4 text-green-600 flex items-center justify-center">
         <Icon className="w-12 h-12" />
       </div>

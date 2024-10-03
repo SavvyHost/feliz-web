@@ -4,7 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Attraction } from "@/types/attraction";
-
+import defaultImage from "../../../../public/assets/Secondimage.jpeg";
 type AttractionCardProps = {
   name: string;
   imageSrc: string; // Updated to string for dynamic image URLs
@@ -17,10 +17,10 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
   toursCount,
 }) => {
   return (
-    <div className="flex items-center cursor-pointer rounded-lg overflow-hidden md:w-80 w-72 md:mx-0 ml-28 h-24 transition-transform duration-300 ease-in-out hover:border border-gray-200 hover:bg-white">
+    <div className="flex items-center cursor-pointer rounded-lg overflow-hidden md:w-80 w-72 md:mx-0  h-24 transition-transform duration-300 ease-in-out hover:border border-gray-200 hover:bg-white">
       <div className="w-24 h-24 relative flex-shrink-0 overflow-hidden">
         <Image
-          src={imageSrc || "/defaultImage.jpg"} // Provide a default image if no image is available
+          src={imageSrc || defaultImage}
           alt={name}
           layout="fill"
           objectFit="cover"
@@ -88,7 +88,7 @@ const Attractions: React.FC<Props> = ({ attractions }) => {
             <div className="flex justify-center" key={attraction.id}>
               <AttractionCard
                 name={attraction.name}
-                imageSrc={attraction.paner_image?.url || "/defaultImage.jpg"} // Use the dynamic image
+                imageSrc={attraction.paner_image?.url || defaultImage} // Use the dynamic image
                 toursCount={attraction.toursCount || 0} // Assuming the API has toursCount or related field
               />
             </div>
@@ -100,7 +100,7 @@ const Attractions: React.FC<Props> = ({ attractions }) => {
             <div className="flex justify-center" key={attraction.id}>
               <AttractionCard
                 name={attraction.name}
-                imageSrc={attraction.paner_image?.url || "/defaultImage.jpg"}
+                imageSrc={attraction.paner_image?.url || defaultImage}
                 toursCount={attraction.toursCount || 0}
               />
             </div>

@@ -58,12 +58,12 @@ export default function Adventures() {
       <PrevArrow onClick={() => sliderRef.current?.slickPrev()} />
       <NextArrow onClick={() => sliderRef.current?.slickNext()} />
 
-      <Slider ref={sliderRef} {...settings} className="flex justify-center">
+      <Slider ref={sliderRef} {...settings} className="flex justify-start">
         {cardData.map((card) => (
-          <div key={card.id} className="flex justify-center px-2">
-            <div className="flex flex-col items-center mx-auto hover:rounded-lg relative group">
+          <div key={card.id} className="flex justify-start px-2">
+            <div className="flex flex-col items-start hover:rounded-lg relative group">
               {/* Card Container */}
-              <div className="flex flex-col items-center mx-auto group relative">
+              <div className="flex flex-col items-start group relative">
                 <div className="relative bg-white shadow-md overflow-hidden transition-all duration-500 rounded-md group-hover:rounded-lg">
                   {/* Image Container */}
                   <div className="relative">

@@ -59,23 +59,7 @@ export default function ExcursionsCardTour({ toursData }: ExcursionsProps) {
                         <BsLuggage size={16} className="mr-3" />
                         <span>Age Range : {excursion.age_range} </span>
                       </div>
-                      <div className="flex items-center mb-4">
-                        {/* <div className="flex-1">
-                          <div className="flex items-center">
-                            {[...Array(excursion.starRating)].map(
-                              (_, index) => (
-                                <BsFillCircleFill
-                                  key={index}
-                                  className="text-green-500 w-4 h-4 ml-1"
-                                />
-                              )
-                            )}
-                            <span className="m-2 text-gray-600 text-sm">
-                              {excursion.starRating} stars
-                            </span>
-                          </div>
-                        </div> */}
-                      </div>
+
                       <div className="text-sm">
                         <span className="line-through text-gray-500">
                           From ${excursion.min_price}

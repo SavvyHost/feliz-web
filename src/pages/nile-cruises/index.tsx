@@ -23,7 +23,7 @@ const PyramidsSection: React.FC<PyramidsSectionProps> = ({
   const [activeTab, setActiveTab] = useState<string>("Overview");
 
   return (
-    <div className="relative h-auto w-full lg:mt-28">
+    <div className="relative h-auto w-full lg:mt-28 lg:px-16 ">
       {/* <div className="relative h-96">
         <div className="absolute inset-0">
           <Image

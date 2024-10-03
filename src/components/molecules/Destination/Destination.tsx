@@ -19,7 +19,7 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
   name,
   imageUrl,
 }) => (
-  <div className="relative rounded-lg overflow-hidden group md:w-[310px] w-[310px] h-60 mx-auto md:mx-2 my-2">
+  <div className="relative rounded-lg overflow-hidden group md:w-[23.6%] w-[310px] h-52 md:mx-2 my-2">
     <Image
       src={imageUrl || defaultImage} // Use default image if imageUrl is empty
       alt={name}
@@ -69,7 +69,7 @@ const DestinationRow: React.FC<DestinationRowProps> = ({ Destinations }) => {
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 1.1,
           slidesToScroll: 1,
           centerMode: true, // Center the single item on mobile
           centerPadding: "0px", // Adjust padding for centered card
@@ -93,7 +93,7 @@ const DestinationRow: React.FC<DestinationRowProps> = ({ Destinations }) => {
         </Slider>
       </div>
       {/* Desktop Grid */}
-      <div className="hidden md:flex flex-wrap justify-center p-1">
+      <div className="hidden md:flex flex-wrap justify-start p-1">
         {Destinations.map((dest, index) => (
           <DestinationCard
             key={`${dest.name}-${index}`}

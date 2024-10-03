@@ -41,20 +41,39 @@ export default function Home({
   attractionsData, // New: Destructure attractionsData
 }: HomeProps) {
   const limitedDestinations = Destinations.slice(0, 8);
+  const limitedAttractions = attractionsData.slice(0, 9);
 
   return (
     <>
       <HeroSection />
-      <OffersSection />
-      <WhyUsSection />
-      <ToursSection toursData={toursData} />
+      <div className="lg:px-16 p-4 ">
+        <OffersSection />
+      </div>
+      <div className="lg:px-16 p-4 ">
+        <WhyUsSection />
+      </div>
+      <div className="lg:px-16 p-4 bg-[#FAFAFA] ">
+        <ToursSection toursData={toursData} />
+      </div>
       {/* <ExcursionsSection toursData={excursionData} /> */}
-      <DestinationSection Destinations={limitedDestinations} />
-      <AttractionsSection attractions={attractionsData} />{" "}
+      <div className="lg:px-16 p-4 bg-[#FAFAFA] ">
+        <DestinationSection Destinations={limitedDestinations} />
+      </div>
+      <div className="lg:px-16 p-4 bg-[#FAFAFA] ">
+        <AttractionsSection attractions={limitedAttractions} />
+      </div>
+      <div className="lg:px-16 p-4 bg-[#FAFAFA] ">
+        <AdventuresSection />
+      </div>
+      <div className="lg:px-16 p-4 bg-[#FAFAFA] ">
+        <CallToActionSection />
+      </div>
+      <div className="lg:px-16 p-4  ">
+        <PeaopleSaySection />
+      </div>
+
       {/* Pass attractions data */}
-      <AdventuresSection />
-      <CallToActionSection />
-      <PeaopleSaySection />
+
       {/* Add Blog Section */}
       {/* <BlogSection blogData={blogData} /> */}
     </>
@@ -62,7 +81,7 @@ export default function Home({
 }
 
 export async function getServerSideProps() {
-  const toursData: ToursData = await fetchData("tours");
+  const toursData: ToursData = await fetchData("tours?type=tour_package");
   const excursionData = await fetchData("tours?type=excursion"); // Excursion tours data
   const Destinations = await fetchData("cities");
   const blogData = await fetchData("blogs");

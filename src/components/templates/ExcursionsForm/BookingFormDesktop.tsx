@@ -2,6 +2,7 @@ import Thanks from "@/components/molecules/Thanks";
 import { useState } from "react";
 import "react-phone-number-input/style.css";
 import MainDataBookingForm from "./MainDataBookingForm";
+import DefaultDetails from "@/components/organisms/DefaultDetails";
 
 export default function BookingFormDesktop({ DetailTour }) {
   const [isThanksVisible, setIsThanksVisible] = useState<boolean>(false);

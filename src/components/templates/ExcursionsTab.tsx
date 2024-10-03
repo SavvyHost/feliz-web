@@ -44,7 +44,7 @@ const ExcursionsTab: React.FC<ExcursionsTabProps> = ({ toursData }) => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row gap-8 mt-8 px-6">
+    <div className="flex flex-col md:flex-row gap-8 mt-8 ">
       {isLargeScreen ? (
         <div className="w-full md:w-1/4">
           <LargeScreenSidebar

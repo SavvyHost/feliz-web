@@ -54,7 +54,7 @@ export const Header = ({ header, className }: any) => {
       >
         <div className="flex items-center justify-between py-4">
           {/* Logo aligned to the left */}
-          <div className="flex-shrink-0 lg:w-3/12">
+          <div className="flex-shrink-0 lg:w-2/12">
             <Link href="/">
               <span className="text-xl font-bold">Feliz Tour Egypt</span>
             </Link>
