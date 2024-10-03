@@ -17,7 +17,7 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
   toursCount,
 }) => {
   return (
-    <div className="flex items-center cursor-pointer rounded-lg overflow-hidden md:w-80 w-72 md:mx-0  h-24 transition-transform duration-300 ease-in-out hover:border border-gray-200 hover:bg-white">
+    <div className="flex items-center cursor-pointer rounded-lg overflow-hidden md:w-80 w-64 md:mx-0  h-24 transition-transform duration-300 ease-in-out hover:border border-gray-200 hover:bg-white">
       <div className="w-24 h-24 relative flex-shrink-0 overflow-hidden">
         <Image
           src={imageSrc || defaultImage}

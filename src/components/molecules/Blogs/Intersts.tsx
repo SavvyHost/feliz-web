@@ -74,7 +74,7 @@ const InterestsSection: React.FC = () => {
   return (
     <section className="py-8 bg-[#FAFAFA]">
       <div className="container mx-auto text-left px-4">
-        <h2 className="text-black font-segoe sm:font-semibold font-medium text-2xl md:text-3xl mb-4">
+        <h2 className="text-black ml-0 lg:ml-3 font-segoe sm:font-semibold font-medium text-2xl md:text-3xl mb-4">
           Interests
         </h2>
         {/* Mobile carousel */}

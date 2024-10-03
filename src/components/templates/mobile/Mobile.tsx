@@ -55,7 +55,7 @@ const Mobile: React.FC<MobileProps> = ({ toursData }) => {
   };
 
   return (
-    <div className="bg-[#FAFAFA] h-screen flex flex-col">
+    <div className="bg-[#FAFAFA]  flex flex-col">
       <div className="fixed top-0 left-0 right-0 bg-[#FAFAFA] p-2 z-10">
         <div className="mt-[70px] flex justify-center items-center gap-3 w-full">
           <div className="">
@@ -87,7 +87,7 @@ const Mobile: React.FC<MobileProps> = ({ toursData }) => {
           </div>
         </div>
       </div>
-      <div className="flex-1 overflow-y-auto mt-[calc(45px+4rem)]">
+      <div className="flex-1  mt-[calc(45px+4rem)]">
         <div className="py-6 px-3">
           <div className="flex flex-col md:flex-row gap-8">
             <div className="w-full md:w-3/4">
