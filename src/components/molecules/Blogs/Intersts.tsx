@@ -73,7 +73,7 @@ const InterestsSection: React.FC = () => {
 
   return (
     <section className="py-8 bg-[#FAFAFA]">
-      <div className="container mx-auto text-center px-4">
+      <div className="container mx-auto text-left px-4">
         <h2 className="text-black font-segoe sm:font-semibold font-medium text-2xl md:text-3xl md:p-5 p-5">
           Interests
         </h2>

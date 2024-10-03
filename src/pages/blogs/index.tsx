@@ -33,8 +33,12 @@ const BLogs: React.FC<Props> = ({ blogData, Destinations }) => {
     <div>
       <HeroBlog />
       <InterestsSection />
-      <DestinationSection Destinations={limitedDestinations} />
-      <BlogSection blogData={blogData} />
+      <div className="lg:px-16 p-4 bg-[#FAFAFA] ">
+        <DestinationSection Destinations={limitedDestinations} />
+      </div>
+      <div className="lg:px-16 p-4 bg-[#FAFAFA] ">
+        <BlogSection blogData={blogData} />
+      </div>
     </div>
   );
 };

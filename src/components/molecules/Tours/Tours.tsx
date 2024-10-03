@@ -4,7 +4,7 @@ import AttractionCard from "@/components/templates/AttractionCard";
 import { ToursData } from "@/types/tour";
 
 interface ToursProps {
-  toursData: ToursData; // Correctly define the expected type here
+  toursData: ToursData;
 }
 
 const Tours: React.FC<ToursProps> = ({ toursData }) => {
@@ -14,13 +14,20 @@ const Tours: React.FC<ToursProps> = ({ toursData }) => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
-    arrows: false,
+    arrows: true,
     responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToScroll: 1,
         },
       },
       {
@@ -28,31 +35,30 @@ const Tours: React.FC<ToursProps> = ({ toursData }) => {
         settings: {
           slidesToShow: 1.1,
           slidesToScroll: 1,
-          centerMode: true,
-          centerPadding: "0px",
+          arrows: false,
         },
       },
     ],
   };
 
   return (
-    <div className="relative m-0 md:p-2">
-      <Slider {...settings} className="w-full">
+    <div className="tours-container">
+      <Slider {...settings} className="tours-slider">
         {toursData.data.map(
           (attraction) =>
             attraction.is_best_deal === 1 && (
-              <AttractionCard
-                key={attraction.id} // Use a unique key
-                id={attraction.id} // Pass the id prop
-                title={attraction.title}
-                location={attraction.location}
-                price={attraction.min_price}
-                image={attraction.main_image.url}
-                rating={2} // Pass the rating prop
-                duration={attraction.duration} // Pass duration prop
-                ageRange={attraction.age_range} // Pass age range prop
-                // Pass description prop
-              />
+              <div key={attraction.id} className="tour-card-wrapper">
+                <AttractionCard
+                  id={attraction.id}
+                  title={attraction.title}
+                  location={attraction.location}
+                  price={attraction.min_price}
+                  image={attraction.main_image.url}
+                  rating={2}
+                  duration={attraction.duration}
+                  ageRange={attraction.age_range}
+                />
+              </div>
             )
         )}
       </Slider>

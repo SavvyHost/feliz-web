@@ -26,7 +26,7 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
   ageRange,
 }) => {
   return (
-    <Link href={`/${id}`}>
+    <Link href={`/top-packages/${id}`}>
       <div className="flex transition-all ease-in-out flex-col cursor-pointer overflow-hidden bg-transparent md:max-w-xs max-w-sm sm:mx-2 mx-3 my-2 sm:my-4 lg:my-6">
         <div className="relative h-60 w-full ">
           <Image
