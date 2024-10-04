@@ -87,7 +87,7 @@ const InterestsSection: React.FC = () => {
               >
                 <div className="w-24 h-24 flex items-center justify-center rounded-full border border-green-600 bg-white">
                   {interest.icon}
-                </div>
+                </div>hero
                 <p className="text-sm font-segoe text-center">
                   {interest.name}
                 </p>

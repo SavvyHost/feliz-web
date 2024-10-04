@@ -18,9 +18,9 @@ const HeroSection = () => {
       </div>
 
       {/* Form Above Video */}
-      <BluerForm />
+      {/* <BluerForm /> */}
 
-      {/* <TwoMainButtons /> */}
+      <TwoMainButtons />
     </section>
   );
 };
