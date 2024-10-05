@@ -8,12 +8,12 @@ import Esas from "../../../../public/assets/esas.png";
 
 const DesktopHeroOverlay: React.FC = () => {
   return (
-    <div className="absolute bg-green-900 top-[55%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 lg:w-7/12 w-11/12 rounded-lg shadow-lg">
+    <div className="absolute bg-green-900 top-[55%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 lg:w-6/12 w-11/12 rounded-lg shadow-lg">
       {/* Main content container */}
       <div className="px-3 py-5">
         {/* Title and description */}
         <div className="text-center mb-6">
-          <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2">
+          <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2 mt-3">
             Welcome to Feliz Tour Egypt
           </h1>
           <p className="text-md sm:text-lg text-gray-200">
