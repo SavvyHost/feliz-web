@@ -6,7 +6,7 @@ import { FiChevronRight, FiChevronLeft } from "react-icons/fi"; // Importing ico
 
 const NextArrow = ({ onClick }) => (
   <div
-    className="absolute -top-5 lg:block hidden right-4 transform -translate-y-1/2 cursor-pointer  rounded-full p-2"
+    className="absolute -top-8 lg:block hidden right-4 transform -translate-y-1/2 cursor-pointer rounded-full p-2 bg-white shadow-md hover:shadow-lg hover:bg-gray-200 transition-all duration-300 ease-in-out"
     onClick={onClick}
   >
     <FiChevronRight size={24} /> {/* Right arrow icon */}
@@ -15,13 +15,12 @@ const NextArrow = ({ onClick }) => (
 
 const PrevArrow = ({ onClick }) => (
   <div
-    className="absolute -top-5 right-20 lg:block hidden transform -translate-y-1/2 cursor-pointer rounded-full p-2"
+    className="absolute -top-8 right-20 lg:block hidden transform -translate-y-1/2 cursor-pointer rounded-full p-2 bg-white shadow-md hover:shadow-lg hover:bg-gray-200 transition-all duration-300 ease-in-out"
     onClick={onClick}
   >
     <FiChevronLeft size={24} /> {/* Left arrow icon */}
   </div>
 );
-
 export default function Adventures() {
   const sliderRef = useRef<Slider>(null);
 

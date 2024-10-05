@@ -92,7 +92,7 @@ const MainDataBookingForm: React.FC<MainDataBookingFormProps> = ({
             <div className="mt-4 relative">
               <Button
                 variant="outlined"
-                className="bg-green-600 text-white border-green-950 hover:bg-green-800 w-full"
+                className="bg-white text-black border-gray-400 hover:border-green-400 hover:bg-gray-200 w-full"
                 onClick={() => setOpenPassengers(!openPassengers)}
               >
                 {`Adults: ${values.num_of_adults}, Children: ${values.num_of_children}, Infants: ${values.num_of_infants}`}

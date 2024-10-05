@@ -23,13 +23,13 @@ const DesktopHeroOverlay: React.FC = () => {
 
         {/* Buttons section */}
         <div className="flex flex-col sm:flex-row justify-center items-center space-y-3 sm:space-y-0 sm:space-x-4 mb-6">
-          <Link href="/">
+          <Link href="/top-packages">
             <button className="bg-gradient-to-r from-green-600 to-green-700 text-white font-bold py-2 px-7 rounded-md shadow-md transition-all hover:from-green-700 hover:to-green-800 flex items-center justify-center space-x-2 text-xl">
               <BsLuggageFill className="text-lg" />
               <span>Tour Packages</span>
             </button>
           </Link>
-          <Link href="/">
+          <Link href="/top-excursions">
             <button className="bg-gradient-to-r from-green-800 to-green-600 text-white font-bold py-2 px-7 rounded-md shadow-md transition-all hover:from-green-500 hover:to-green-600 flex items-center justify-center space-x-2 text-xl">
               <FaBus className="text-lg" />
               <span>Excursions</span>
