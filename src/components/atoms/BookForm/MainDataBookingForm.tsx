@@ -158,7 +158,7 @@ function MainDataBookingForm({ DetailTour, setIsThanksVisible }) {
                     </span>
                   ) : (
                     <span className="flex gap-x-4 text-gray-500">
-                      <CalendarClock /> Select Date
+                      <CalendarClock /> select date
                     </span>
                   )}
                 </button>
