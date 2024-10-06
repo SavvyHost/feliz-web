@@ -64,7 +64,7 @@ export const selectTheme = (theme: Theme) => ({
 
 export const selectClassNames = (touched: boolean, error: boolean) => ({
   control: ({ menuIsOpen }: { menuIsOpen: boolean }) =>
-    `border-style !rounded-md !shadow-none !shadow-md !border-1 date-range-lib h-[41px] ${
+    `border-style pl-7 !rounded-md !shadow-none !shadow-md bg-[#f0f1f2] focus:bg-transparent text-black w-full text-sm border outline-[#007bff] rounded transition-all !border-1 date-range-lib h-[41px] ${
       touched && error ? " !border-mainRed" : ""
     } ${menuIsOpen && "!border-[rgba(0, 29, 110, 0.4)]"}`,
   dropdownIndicator: () => `!text-main`,

@@ -1,5 +1,6 @@
 import React from "react";
 import { ChevronDown } from "lucide-react";
+import { FaCity } from "react-icons/fa";
 
 interface DropdownProps {
   items: string[];
@@ -25,9 +26,9 @@ const Dropdown: React.FC<DropdownProps> = ({
       onFocus={() => setIsDropdownOpen(true)}
       onBlur={() => setTimeout(() => setIsDropdownOpen(false), 200)}
       placeholder={placeholder}
-      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+      className="w-full p-3 bg-[#f0f1f2] focus:bg-transparent text-black  text-sm border outline-[#007bff] rounded transition-all"
     />
-    <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+    <FaCity className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
     {isDropdownOpen && (
       <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg">
         <div className="p-2 max-h-60 overflow-y-auto">

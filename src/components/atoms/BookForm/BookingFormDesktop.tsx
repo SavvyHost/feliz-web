@@ -10,7 +10,7 @@ export default function BookingFormDesktop({ DetailTour }) {
   };
 
   return (
-    <div className="hidden md:block p-6 bg-white border border-green-200 rounded-lg shadow-md">
+    <div className="hidden md:block">
       <h2 className="text-sm text-gray-500 mb-2">
         From ${DetailTour?.min_price}
       </h2>
@@ -18,17 +18,19 @@ export default function BookingFormDesktop({ DetailTour }) {
         US ${DetailTour?.min_price} / Per person
       </h1>
 
-      <MainDataBookingForm
-        DetailTour={DetailTour}
-        setIsThanksVisible={setIsThanksVisible}
-      />
-
-      {isThanksVisible && (
-        <Thanks
-          onClose={handleCloseThanks}
-          message="Thank you for your submission!"
+      <div className="">
+        <MainDataBookingForm
+          DetailTour={DetailTour}
+          setIsThanksVisible={setIsThanksVisible}
         />
-      )}
+
+        {isThanksVisible && (
+          <Thanks
+            onClose={handleCloseThanks}
+            message="Thank you for your submission!"
+          />
+        )}
+      </div>
     </div>
   );
 }

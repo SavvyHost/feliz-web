@@ -134,3 +134,13 @@ body {
     pointer-events: auto;
     /* Allow clicking on the "See More" button */
 }
+
+input:focus {
+    outline: none;
+    box-shadow: none;
+    /* To remove any additional shadow that might appear on focus */
+}
+
+input {
+    background-color: transparent;
+}
