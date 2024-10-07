@@ -17,7 +17,7 @@ const DesktopHeroOverlay: React.FC = () => {
             Welcome to Feliz Tour Egypt
           </h1>
           <p className="text-md sm:text-lg text-gray-200">
-            We Are Ready For Services
+            We Are Ready For Service
           </p>
         </div>
 
