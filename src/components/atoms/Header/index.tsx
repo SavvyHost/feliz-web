@@ -67,11 +67,7 @@ export const Header = ({ header, className }: any) => {
 
           {/* Right side - Social Icons, Language Change, and Book Tour Button */}
           <div className="flex items-center lg:w-1/3 justify-end space-x-4">
-            <div className="hidden sm:flex space-x-2">
-              <Facebook className="w-5 h-5 text-green-700 cursor-pointer" />
-              <Instagram className="w-5 h-5 text-green-700 cursor-pointer" />
-              <Twitter className="w-5 h-5 text-green-700 cursor-pointer" />
-            </div>
+         
             <button
               className="hidden lg:block focus:outline-none"
               onClick={handleLanguageChange}
