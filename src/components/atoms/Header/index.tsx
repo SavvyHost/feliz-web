@@ -56,7 +56,7 @@ export const Header = ({ header, className }: any) => {
           {/* Logo aligned to the left */}
           <div className="flex-shrink-0 lg:w-2/12">
             <Link href="/">
-              <span className="text-xl font-bold">Feliz Toursssss</span>
+              <span className="text-xl font-bold">Feliz Tours</span>
             </Link>
           </div>
 
