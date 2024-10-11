@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Facebook, Instagram, Twitter, Globe, Menu } from "lucide-react";
+import { Facebook, Instagram, Twitter, Globe, Menu, Heart } from "lucide-react";
 import MobileMenu from "./MobileMenu";
 import DesktopMenu from "./DesktopMenu";
 
@@ -56,7 +56,7 @@ export const Header = ({ header, className }: any) => {
           {/* Logo aligned to the left */}
           <div className="flex-shrink-0 lg:w-2/12">
             <Link href="/">
-              <span className="text-xl font-bold">Feliz Tours</span>
+              <span className="text-xl font-bold">Felize Tours</span>
             </Link>
           </div>
 
@@ -67,17 +67,22 @@ export const Header = ({ header, className }: any) => {
 
           {/* Right side - Social Icons, Language Change, and Book Tour Button */}
           <div className="flex items-center lg:w-1/3 justify-end space-x-4">
-         
             <button
               className="hidden lg:block focus:outline-none"
               onClick={handleLanguageChange}
               title="Change Language"
             >
-              <Globe className="w-6 h-6 text-[#132f4e]" />
+              <Globe className="w-6 h-6 text-black" />
             </button>
-            <button className="bg-green-700 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-[#45ca34]">
-              Book Tour Now
+            <button className="hidden lg:block focus:outline-none">
+              <Heart className="w-6 h-6 text-black" />
             </button>
+            <Link
+              href="/inquire"
+              className="bg-green-700 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-[#45ca34]"
+            >
+              Tailored made
+            </Link>
           </div>
 
           {/* Mobile Menu Toggle (visible on small screens) */}

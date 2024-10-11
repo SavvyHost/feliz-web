@@ -4,7 +4,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Attraction } from "@/types/attraction";
-import defaultImage from "../../../../public/assets/Secondimage.jpeg";
+import defaultImage from "../../../../public/assets/trail.jpeg";
+import Link from "next/link";
 type AttractionCardProps = {
   name: string;
   imageSrc: string; // Updated to string for dynamic image URLs
@@ -17,25 +18,31 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
   toursCount,
 }) => {
   return (
-    <div className="flex items-center cursor-pointer rounded-lg overflow-hidden md:w-80 w-64 md:mx-0  h-24 transition-transform duration-300 ease-in-out hover:border border-gray-200 hover:bg-white">
-      <div className="w-24 h-24 relative flex-shrink-0 overflow-hidden">
-        <Image
-          src={imageSrc || defaultImage}
-          alt={name}
-          layout="fill"
-          objectFit="cover"
-          className="transform transition-transform duration-300 ease-in-out hover:scale-110"
-        />
+    <Link
+      href="distanation"
+      className="flex flex-col items-center cursor-pointer rounded-lg overflow-hidden transition-transform duration-300 ease-in-out border border-transparent hover:border-gray-200 hover:bg-white hover:shadow-xl"
+    >
+      <div className="flex flex-col items-center cursor-pointer rounded-lg overflow-hidden w-64 md:w-80 h-96 md:h-80 transition-transform duration-300 ease-in-out hover:border border-gray-200 hover:bg-white hover:shadow-xl">
+        <div className="relative w-full h-2/3 overflow-hidden">
+          <Image
+            src={imageSrc || defaultImage}
+            alt={name}
+            layout="fill"
+            objectFit="cover"
+            className="transform transition-transform duration-300 ease-in-out hover:scale-105"
+          />
+        </div>
+        <div className="w-full flex-grow p-4 flex flex-col justify-center items-center text-center">
+          {/* Apply Tailwind truncate to limit text and add "..." */}
+          <h2 className="text-lg font-semibold text-gray-800 truncate w-full max-w-full font-segoe">
+            {name}
+          </h2>
+          <p className="text-sm text-gray-600 truncate font-segoe">
+            {toursCount} Tours and Activities
+          </p>
+        </div>
       </div>
-      <div className="flex-grow p-4 flex flex-col justify-center">
-        <h2 className="text-sm font-semibold text-gray-800 truncate font-segoe">
-          {name}
-        </h2>
-        <p className="text-xs text-gray-600 truncate font-segoe">
-          {toursCount} Tours and Activities
-        </p>
-      </div>
-    </div>
+    </Link>
   );
 };
 
@@ -95,7 +102,7 @@ const Attractions: React.FC<Props> = ({ attractions }) => {
           ))}
         </Slider>
       ) : (
-        <div className="grid grid-cols-3 gap-4 mb-3">
+        <div className="grid grid-cols-4 gap-4 mb-3">
           {attractions.map((attraction) => (
             <div className="flex justify-start" key={attraction.id}>
               <AttractionCard

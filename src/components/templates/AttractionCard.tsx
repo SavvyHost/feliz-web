@@ -27,8 +27,8 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
 }) => {
   return (
     <Link href={`/top-packages/${id}`}>
-      <div className="flex transition-all ease-in-out flex-col cursor-pointer overflow-hidden bg-transparent md:max-w-xs max-w-sm sm:mx-2 mx-3 my-2 sm:my-4 lg:my-6">
-        <div className="relative h-60 w-full ">
+      <div className="flex group transition-all ease-in-out flex-col cursor-pointer overflow-hidden bg-transparent md:max-w-xs max-w-sm sm:mx-2 mx-3 my-2 sm:my-4 lg:my-6">
+        <div className="relative h-60 w-full">
           <Image
             src={image || defaultImage}
             width={0}
@@ -38,7 +38,7 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
           />
         </div>
         <div className="flex-1 pt-3 flex flex-col h-72">
-          <h3 className="font-semibold text-lg font-segoe text-black mb-1 truncate">
+          <h3 className="font-semibold text-lg font-segoe text-black mb-1 truncate group-hover:underline">
             {title}
           </h3>
           <p className="text-gray-600 text-sm mb-2 font-segoe">{location}</p>

@@ -7,7 +7,7 @@ type Props = {};
 const CallToActionSection = (props: Props) => {
   return (
     <div className="bg-[#FAFAFA]">
-      <div className="text-left text-black font-segoe sm:font-semi-bold font-medium text-2xl md:text-special-offer mb-4">
+      <div className="text-left text-black font-segoe sm:font-semi-bold font-medium text-2xl md:text-special-offer lg:my-8 my-4">
         CTA Section
       </div>
       <div>

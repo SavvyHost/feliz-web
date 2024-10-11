@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BLogData from "@/components/molecules/BlogDetails/BLogData";
 import HeroSectionBlogs from "@/components/molecules/BlogDetails/HeroBlogDetails";
 import RelatedTours from "@/components/molecules/BlogDetails/RelatedTours";
 import Blog from "@/components/molecules/Blogs/Blog";
 import fetchData from "@/helper/FetchData";
 import { GetServerSidePropsContext } from "next";
+import HorizontalCard from "@/components/molecules/BlogDetails/RelatedTours";
+import { ArrowUpToLine } from "lucide-react";
 
 type BlogData = {
   id: number;
@@ -18,29 +20,71 @@ type Props = {
   blogData: {
     data: BlogData[];
   };
-  DetailBlogs: BlogData; // Adjusted to match the data structure
+  DetailBlogs: BlogData;
 };
 
 const BlogDetails: React.FC<Props> = ({ blogData, DetailBlogs }) => {
   console.log("🚀 ~ blogData:", blogData);
   console.log("🚀 ~ DetailBlogs:", DetailBlogs);
 
+  const [isVisible, setIsVisible] = useState(false);
+
+  const toggleVisibility = () => {
+    if (window.scrollY > 300) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Smooth scrolling animation
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", toggleVisibility);
+    return () => {
+      window.removeEventListener("scroll", toggleVisibility);
+    };
+  }, []);
+
   return (
     <div className="mt-16 bg-[#FAFAFA]">
       <HeroSectionBlogs DetailBlogs={DetailBlogs} />
 
-      <div className="flex flex-col lg:flex-row w-full mt-11 px-0">
-        <div className="w-full lg:w-2/3 mb-8 lg:mb-0">
+      <div className="flex flex-col lg:flex-row w-full mt-11 px-4">
+        <div className="w-full lg:w-2/3 mb-0 lg:mb-8">
           <BLogData DetailBlogs={DetailBlogs} />
         </div>
         <div className="w-full lg:w-1/3">
-          <RelatedTours />
+          <HorizontalCard
+            imageSrc={DetailBlogs.image}
+            title={DetailBlogs.title}
+            date={DetailBlogs.created_at}
+            link={`/blog/${DetailBlogs.id}`} // Assuming this is the correct link format
+          />
         </div>
       </div>
-      <h3 className="font-segoe text-3xl ml-5 md:mb-6 mb-6">
-        Related Articles
-      </h3>
-      <Blog blogData={blogData} />
+      <div className="lg:px-16 p-2">
+        <h3 className="font-segoe text-3xl md:mb-6 mb-6 lg:mt-0 my-5">
+          Related Articles
+        </h3>
+        <Blog blogData={blogData} />
+      </div>
+
+      {/* Scroll to Top Button */}
+      {isVisible && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-4 right-4 bg-green-500 text-white p-3 rounded-none shadow-lg transition-opacity duration-300 hover:bg-green-600"
+          aria-label="Scroll to top"
+        >
+          <ArrowUpToLine />
+        </button>
+      )}
     </div>
   );
 };
@@ -48,27 +92,22 @@ const BlogDetails: React.FC<Props> = ({ blogData, DetailBlogs }) => {
 export default BlogDetails;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  // Ensure context.params is defined
   const params = context.params || {};
-  const id = params.id as string | undefined; // Type casting for safety
+  const id = params.id as string | undefined;
 
   if (!id) {
-    // Handle cases where id is not present
     return {
-      notFound: true, // Optionally return a 404 page if id is missing
+      notFound: true,
     };
   }
 
-  // Fetch DetailBlogs using the id
   const DetailBlogs = await fetchData(`blogs/${id}`);
-
-  // Fetch blogData for the blog section
-  const blogData = await fetchData("blogs"); // Adjust the endpoint if needed
+  const blogData = await fetchData("blogs");
 
   return {
     props: {
-      DetailBlogs: DetailBlogs.data, // Ensure this matches the expected structure
-      blogData: blogData.data, // Ensure this matches the expected structure
+      DetailBlogs: DetailBlogs.data,
+      blogData: blogData.data,
     },
   };
 }

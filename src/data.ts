@@ -1,6 +1,6 @@
 import First from "../public/assets/firstImage.jpeg"
-import Second from "../public/assets/Secondimage.jpeg";
-import Third from "../public/assets/roud.jpeg";
+import Second from "../public/assets/bgblogs.png";
+import Third from "../public/assets/trail.jpeg";
 import Egy from "../public/assets/firstImage.jpeg";
 import ImageCard from "../public/assets/Secondimage.jpeg";
 import Try from "../public/assets/Secondimage.jpeg";
@@ -60,13 +60,13 @@ export const cardData = [
   },
   {
     id: 4,
-    image: Third,
+    image: First,
     title: "Explore",
     hoverText: "Uncover Secrets",
   },
   {
     id: 5,
-    image: Third,
+    image: Second,
     title: "Explore",
     hoverText: "Uncover Secrets",
   },

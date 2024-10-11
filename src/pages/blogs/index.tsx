@@ -4,6 +4,8 @@ import DestinationSection from "@/components/organisms/DestinationSection";
 import BlogSection from "@/components/organisms/BlogSection";
 import fetchData from "@/helper/FetchData";
 import InterestsSection from "@/components/molecules/Blogs/Intersts";
+import RecentBlog from "@/components/organisms/RecentBlog";
+import { ToursData } from "@/types/tour";
 
 type Blog = {
   id: number;
@@ -30,13 +32,20 @@ type Props = {
 const BLogs: React.FC<Props> = ({ blogData, Destinations }) => {
   const limitedDestinations = Destinations.slice(0, 8);
   return (
-    <div>
-      <HeroBlog />
-      <InterestsSection />
-      <div className="lg:px-16 p-4 bg-[#FAFAFA] ">
+    <div className="bg-[#FAFAFA] lg:px-16 mt-16 pt-3 px-4 py-3">
+      {/* <HeroBlog /> */}
+      {/* <InterestsSection /> */}
+      {/* <div className="lg:px-16 p-4 bg-[#FAFAFA] ">
         <DestinationSection Destinations={limitedDestinations} />
+      </div> */}
+
+      <div className=" ">
+        <div className="text-left text-black font-segoe sm:font-semi-bold font-medium text-2xl md:text-special-offer mb-4">
+          Recent Blogs
+        </div>
+        <RecentBlog />
       </div>
-      <div className="lg:px-16 p-4 bg-[#FAFAFA] ">
+      <div className="mt-4">
         <BlogSection blogData={blogData} />
       </div>
     </div>

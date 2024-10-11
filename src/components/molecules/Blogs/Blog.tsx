@@ -10,12 +10,11 @@ const sliderSettings = {
   dots: false,
   infinite: false,
   speed: 500,
-  slidesToShow: 1.1,
+  slidesToShow: 1.2,
   slidesToScroll: 1,
   arrows: false,
   autoplay: false,
   autoplaySpeed: 3000,
-  centerMode: true,
 };
 
 // Define static fallback data
@@ -83,7 +82,9 @@ const Blog: React.FC<Props> = ({ blogData }) => {
       <div className="block md:hidden">
         <Slider {...sliderSettings}>
           {dataToShow.map((blog) => (
-            <div key={blog.id} className="px-0">
+            <div key={blog.id} className="">
+              {" "}
+              {/* Added padding for mobile */}
               <Card
                 imageSrc={blog.image}
                 title={blog.title}

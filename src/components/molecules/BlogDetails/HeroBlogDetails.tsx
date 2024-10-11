@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import backgroundImage from "../../../../public/assets/pyr.jpeg"; // Replace with your actual image path
-import User from "../../../../public/assets/userbg.jpeg"; // Replace with your card image path
+
 
 // Define the type for DetailBlogs
 type DetailBlogsType = {
@@ -34,7 +34,7 @@ const HeroSectionBlogs: React.FC<HeroSectionBlogsProps> = ({ DetailBlogs }) => {
       </div>
 
       {/* Blurred Card */}
-      <div className="absolute inset-x-4 transform translate-y-16 md:inset-x-8 bottom-8 md:bottom-12 mx-auto p-4 md:p-6 bg-white bg-opacity-40 backdrop-blur-md rounded-lg shadow-lg max-w-xs md:max-w-3xl h-auto flex flex-col items-center justify-between">
+      <div className="absolute inset-x-4 transform translate-y-1 md:inset-x-8 bottom-8 md:bottom-40 mx-auto p-4 md:p-6 bg-white bg-opacity-40 backdrop-blur-md shadow-lg max-w-xs md:max-w-3xl h-auto flex flex-col items-center justify-between">
         <div className="flex flex-col items-center text-center">
           <h1 className="text-xl md:text-2xl font-semibold text-gray-800 mb-2 md:mb-4">
             {DetailBlogs?.title}
@@ -49,7 +49,7 @@ const HeroSectionBlogs: React.FC<HeroSectionBlogsProps> = ({ DetailBlogs }) => {
         {/* Author Section */}
         <div className="flex items-center justify-center gap-3 md:gap-4 mt-4">
           <Image
-            src={User}
+            src={DetailBlogs?.image || backgroundImage}
             alt="Author Image"
             className="rounded-full w-12 h-12"
             width={56}

@@ -13,7 +13,7 @@ import CallToActionSection from "@/components/organisms/CTAsection";
 import fetchData from "@/helper/FetchData";
 import { TourPackage, ToursData } from "@/types/tour";
 import { Destination } from "./blogs";
-import { Attraction } from "@/types/attraction"; // Create a type for attraction
+import { Attraction } from "@/types/tour"; // Create a type for attraction
 
 type Blog = {
   id: number;
@@ -41,14 +41,12 @@ export default function Home({
   attractionsData, // New: Destructure attractionsData
 }: HomeProps) {
   const limitedDestinations = Destinations.slice(0, 8);
-  const limitedAttractions = attractionsData.slice(0, 9);
+  const limitedAttractions = attractionsData.slice(0, 8);
 
   return (
     <>
       <HeroSection />
-      <div className="lg:px-16 p-4 ">
-        <OffersSection />
-      </div>
+      <div className="lg:px-16 p-4 ">{/* <OffersSection /> */}</div>
       <div className="lg:px-16 p-4 ">
         <WhyUsSection />
       </div>

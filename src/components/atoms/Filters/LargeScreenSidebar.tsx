@@ -32,7 +32,7 @@ const LargeScreenSidebar: React.FC<LargeScreenSidebarProps> = ({
   setSelectedAccommodationType,
 }) => {
   return (
-    <div className="rounded-md shadow-sm">
+    <div className="">
       {/* Filters Header */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-segoe">Applied filters</h2>

@@ -1,47 +1,39 @@
 import Image from "next/image";
-import React from "react";
-import CTA from "../../../../public/assets/5-TOP-10-amazing-places-to-visit-in-Egypt-jintravel.com 1.png";
 import Link from "next/link";
+import React from "react";
 
 type Props = {};
 
 const CtaSection = (props: Props) => {
   return (
-    <div className=" font-segoe">
-      <div className="w-full mx-auto grid md:grid-cols-2 gap-6 items-start">
-        {/* Image Section */}
-        <div className="md:order-2 order-1 text-left">
-          <Image
-            src={CTA}
-            alt="Amazing places to visit in Egypt"
-            className="w-full h-72"
-            width={500}
-            height={500}
-            priority
-          />
-        </div>
-
-        {/* Text Section */}
-        <div className="md:order-1 order-2 text-left">
-          <h2 className="text-2xl lg:text-3xl font-semibold text-gray-900 mb-3">
-            Spread your wings with Egypt Raisen Tours!
-          </h2>
-          <h5 className="text-2xl font-normal mb-4 lg:text-3xl text-gray-950">
-            Book travel services from around the world. Anytime. Anywhere.
-          </h5>
-          <p className="text-lg lg:text-xl text-black">
-            Technology and travel agents' expertise come together to create a
-            supercharged product that increases your revenue and efficiency.
-            Check availability in real-time, book services, and receive booking
-            confirmations immediately.
-          </p>
-          <Link
-            href=""
-            className="lg:mt-8 mt-6 mb-3 bg-green-800 hover:bg-opacity-80 text-white py-3 px-6 rounded-lg text-lg lg:text-xl transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl inline-block"
-          >
-            Book Now
-          </Link>
-        </div>
+    <div className="text-center max-w-3xl max-md:max-w-md mx-auto">
+      <p className="text-sm font-bold text-green-600 mb-4">
+        <span className="rotate-90 inline-block mr-2">|</span> ALL IN ONE IN
+        FELIZ TOURS
+      </p>
+      <h2 className="text-gray-800 md:text-5xl text-3xl font-extrabold md:!leading-[55px]">
+        Call To Action Section, Elevate Your Experience
+      </h2>
+      <div className="mt-8">
+        <p className="text-base text-gray-500 leading-relaxed">
+          Upgrade to our premium tour package and unlock a world of
+          unforgettable experiences. Enjoy exclusive destinations, enhanced
+          itineraries, and a seamless travel journey that brings your adventure
+          to life.
+        </p>
+      </div>
+      <div className="bg-white mt-12 flex px-1 py-1.5 rounded-full shadow-[0_5px_22px_-8px_rgba(93,96,127,0.2)] md:w-4/5 mx-auto overflow-hidden">
+        <input
+          type="email"
+          placeholder="Enter your email"
+          className="w-full outline-none bg-white pl-4 text-gray-800 text-sm"
+        />
+        <Link
+          href="/inquire"
+          className="bg-green-600 hover:bg-green-700 transition-all text-white text-sm rounded-full px-4 py-2.5"
+        >
+          Subscribe
+        </Link>
       </div>
     </div>
   );

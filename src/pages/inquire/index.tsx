@@ -1,167 +1,127 @@
-import { Button } from "@mui/material";
-import Image from "next/image";
 import React, { useState } from "react";
-import InquireImage from "../../../public/assets/firstImage.jpeg";
-type Props = {};
+import { Stepper, Step, StepLabel, Button } from "@mui/material";
+import { useRouter } from "next/router";
+import CitySelection from "@/components/molecules/inquiredetails/CitySelection";
+import TimeDetails from "@/components/molecules/inquiredetails/TimeDetails";
+import TravelDetails from "@/components/molecules/inquiredetails/TravelDetails";
 
-const Inquire = (props: Props) => {
-  const [adults, setAdults] = useState(2);
-  const [children, setChildren] = useState(0);
-  const [infants, setInfants] = useState(0);
+import ThanksInquire from "@/components/molecules/ThanksInquire";
+
+const TravelStepper: React.FC = () => {
+  const [activeStep, setActiveStep] = useState(0);
+  const [isDone, setIsDone] = useState(false);
+  const router = useRouter(); // Initialize useRouter for navigation
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    nationality: "",
+    phone: "",
+    adults: 2,
+    children: 0,
+    infants: 0,
+    budget: "",
+    flightOffer: false,
+    additionalInfo: "",
+    city: "",
+    cityDetails: {},
+    travelDetails: {},
+  });
+
+  const steps = ["Choose City", "City Details", "Travel Details"];
+
+  const handleNext = () => {
+    if (activeStep < steps.length - 1) {
+      setActiveStep((prevStep) => prevStep + 1);
+    } else {
+      setIsDone(true);
+    }
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevStep) => prevStep - 1);
+  };
+
+  const handleFormChange = (stepData: any) => {
+    setFormData((prevData) => ({ ...prevData, ...stepData }));
+  };
+
+  const getStepContent = (step: number) => {
+    switch (step) {
+      case 0:
+        return (
+          <CitySelection formData={formData} onChange={handleFormChange} />
+        );
+      case 1:
+        return <TimeDetails formData={formData} onChange={handleFormChange} />;
+      case 2:
+        return (
+          <TravelDetails formData={formData} onChange={handleFormChange} />
+        );
+      default:
+        return <SuccessComponent />;
+    }
+  };
+
+  const handleCloseThanks = () => {
+    setIsDone(false);
+    router.push("/"); // Navigate to home page after closing the "Thanks" message
+  };
+
+  const handleFinish = () => {
+    setIsDone(true);
+    setTimeout(() => {
+      router.push("/"); // Redirect to home after showing success message
+    }, 2000);
+  };
+
+  // Component to show after finishing the stepper
+  const SuccessComponent = () => (
+    <div className="">
+      <ThanksInquire
+        onClose={handleCloseThanks}
+        message="Thank you for your submission!"
+      />
+    </div>
+  );
 
   return (
-    <>
-      <div className="font-sans max-w-6xl mx-auto bg-white shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-xl overflow-hidden mt-28 mb-6 p-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Left Section: Image */}
-          <div className="flex items-center justify-center">
-            <Image
-              src={InquireImage}
-              className="w-full h-full max-w-xs md:max-w-3xl object-cover"
-              alt="Contact Us"
-              width={400} // Set suitable width
-              height={400}
-            />
-          </div>
+    <div className="container mx-auto lg:px-24 mt-24">
+      <Stepper activeStep={activeStep}>
+        {steps.map((label) => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
 
-          {/* Right Section: Form */}
-          <div className="flex flex-col justify-center">
-            <h2 className="text-3xl text-yellow-600  text-center mb-8 capitalize font-segoe">
-              Tell us about the travelers
-            </h2>
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <input
-                  type="text"
-                  placeholder="Name *"
-                  className="w-full bg-gray-100 rounded-lg py-3 px-4 text-sm outline-yellow-600 focus:bg-white"
-                />
-                <input
-                  type="email"
-                  placeholder="Email *"
-                  className="w-full bg-gray-100 rounded-lg py-3 px-4 text-sm outline-yellow-600 focus:bg-white"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <select className="w-full bg-gray-100 rounded-lg py-3 px-4 text-sm outline-yellow-600 focus:bg-white">
-                  <option value="" disabled selected>
-                    Select your Nationality *
-                  </option>
-                  {/* Add options here */}
-                </select>
-                <div className="flex gap-6">
-                  <select className="w-1/3 bg-gray-100 rounded-lg py-3 px-4 text-sm outline-yellow-600 focus:bg-white">
-                    <option value="" disabled selected>
-                      Code
-                    </option>
-                    {/* Add options here */}
-                  </select>
-                  <input
-                    type="tel"
-                    placeholder="Mobile *"
-                    className="w-2/3 bg-gray-100 rounded-lg py-3 px-4 text-sm outline-yellow-600 focus:bg-white"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="flex items-center justify-between  p-1">
-                  <label className="text-xs">Adults (+12)</label>
-                  <div className="flex items-center">
-                    <button
-                      type="button"
-                      onClick={() => setAdults(Math.max(adults - 1, 0))}
-                      className="bg-gray-200 rounded w-8 h-8 flex items-center justify-center text-lg"
-                    >
-                      -
-                    </button>
-                    <span className="mx-3 text-xs font-medium">{adults}</span>
-                    <button
-                      type="button"
-                      onClick={() => setAdults(adults + 1)}
-                      className="bg-gray-200 rounded w-8 h-8 flex items-center justify-center text-lg"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between  p-1">
-                  <label className="text-xs">Children (2 to 11)</label>
-                  <div className="flex items-center">
-                    <button
-                      type="button"
-                      onClick={() => setChildren(Math.max(children - 1, 0))}
-                      className="bg-gray-200 rounded w-8 h-8 flex items-center justify-center text-lg"
-                    >
-                      -
-                    </button>
-                    <span className="mx-3 text-xs font-medium">{children}</span>
-                    <button
-                      type="button"
-                      onClick={() => setChildren(children + 1)}
-                      className="bg-gray-200 rounded w-8 h-8 flex items-center justify-center text-lg"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between  p-1">
-                  <label className="text-xs">Infants (0 to 2)</label>
-                  <div className="flex items-center">
-                    <button
-                      type="button"
-                      onClick={() => setInfants(Math.max(infants - 1, 0))}
-                      className="bg-gray-200 rounded w-8 h-8 flex items-center justify-center text-lg"
-                    >
-                      -
-                    </button>
-                    <span className="mx-3 text-xs font-medium">{infants}</span>
-                    <button
-                      type="button"
-                      onClick={() => setInfants(infants + 1)}
-                      className="bg-gray-200 rounded w-8 h-8 flex items-center justify-center text-lg"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <select className="w-full bg-gray-100 rounded-lg py-3 px-4 text-xs outline-yellow-600 focus:bg-white">
-                  <option value="" disabled selected>
-                    Your average budget per person
-                  </option>
-                  {/* Add options here */}
-                </select>
-                <small className="block text-sm mt-2 text-gray-500">
-                  Per person (international flights NOT included)
-                </small>
-              </div>
-
-              <div className="flex items-center">
-                <input type="checkbox" id="flightOffer" className="mr-2" />
-                <label htmlFor="flightOffer" className="text-sm">
-                  Add flight offer to your vacation package
-                </label>
-              </div>
-
-              <textarea
-                placeholder="Additional Info"
-                rows={4}
-                className="w-full bg-gray-100 rounded-lg px-4 text-sm pt-3 outline-yellow-600 focus:bg-white"
-              />
-
-              <Button className="text-white capitalize font-segoe w-full bg-custom-gradient hover:bg-yellow-700 rounded-lg text-sm px-6 py-3 mt-6">
-                Send Message
-              </Button>
-            </form>
-          </div>
-        </div>
+      <div className="mt-8 p-4">
+        {isDone ? (
+          <SuccessComponent />
+        ) : (
+          // Show success message when done
+          getStepContent(activeStep)
+        )}
       </div>
-    </>
+
+      {/* Sticky footer buttons */}
+      {!isDone && (
+        <div className="sticky bottom-0 left-0 w-full bg-green-100 shadow-lg flex justify-between p-4">
+          <Button disabled={activeStep === 0} onClick={handleBack}>
+            Back
+          </Button>
+          <Button
+            className="bg-green-600 hover:bg-green-400"
+            variant="contained"
+            onClick={
+              activeStep === steps.length - 1 ? handleFinish : handleNext
+            }
+          >
+            {activeStep === steps.length - 1 ? "Finish" : "Next"}
+          </Button>
+        </div>
+      )}
+    </div>
   );
 };
 
-export default Inquire;
+export default TravelStepper;

@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import { Calendar, Globe, Heart, MapPin, Users } from "lucide-react";
-import defaultImage from "../../../../public/assets/Secondimage.jpeg"; // Import your default image
+import { Calendar, Globe, MapPin, Users } from "lucide-react";
+import defaultImage from "../../../../public/assets/Secondimage.jpeg";
 import Link from "next/link";
 import { Button } from "@mui/material";
-import { ToursData } from "@/types/tour"; // Import from your types file
-import Pagination from "../Pagination"; // Import the Pagination component
+import { ToursData } from "@/types/tour";
+import Pagination from "../Pagination";
 import Image from "next/image";
 import { FaWhatsapp } from "react-icons/fa";
+
 interface TravelPackagePageProps {
   toursData: ToursData;
 }
 
 const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
-  console.log("🚀 ~ toursData:", toursData);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const toursPerPage = 6;
 
@@ -30,96 +30,91 @@ const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
       <div className="grid grid-cols-1 gap-6 mt-3 lg:mt-0">
         {currentTours.map((pkg) => (
           <Link href={`/top-packages/${pkg.id}`} key={pkg.id}>
-            <div className="w-full hover:border-green-500 bg-white rounded-md border-gray-300 border overflow-hidden  transition-shadow duration-300 hover:shadow-xl cursor-pointer">
+            <div className="w-full hover:border-green-500 group bg-white border-gray-300 border overflow-hidden transition-shadow duration-300 hover:shadow-xl cursor-pointer">
               <div className="flex flex-col md:flex-row">
-                <div className="w-full md:w-2/6 p-3 h-64 md:h-auto relative">
+                <div className="w-full md:w-2/5 p-3 h-64 md:h-auto relative  overflow-hidden">
                   <Image
-                    src={pkg?.main_image?.url || defaultImage} // Check if main_image and its url exist, otherwise use the default image
+                    src={pkg?.main_image?.url || defaultImage}
                     alt={pkg.title}
-                    width={100}
-                    height={100}
-                    className="rounded-md w-full h-full"
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-none transition-transform duration-700 group-hover:scale-110" // Add the scaling effect here
                   />
                   <div className="absolute top-5 left-5 bg-green-500 text-white px-3 py-1 text-sm font-segoe rounded-sm shadow-md">
                     Special Offer 20%
                   </div>
-                  <button className="absolute top-5 right-5 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-200 group">
-                    <Heart className="w-5 h-5 text-gray-600 group-hover:text-red-500" />
-                  </button>
-                  {/* <button className="absolute bottom-3 left-3 bg-white text-gray-700 px-4 py-2 text-sm font-segoe rounded-sm shadow-md hover:bg-gray-100 transition-colors duration-200 flex items-center space-x-1">
-                    <MapPin className="w-4 h-4" />
-                    <span>View on map</span>
-                  </button> */}
                 </div>
-                <div className="w-full md:w-4/6 p-6 flex flex-col justify-between">
+                <div className="w-full md:w-3/5 p-6 flex flex-col justify-between">
                   <div>
-                    <h2 className="text-2xl font-segoe mb-4 text-gray-800">
-                      {pkg.title}
-                    </h2>
-                    <div className="grid grid-cols-2 gap-4 mb-6">
-                      <div className="flex items-center space-x-2">
-                        <MapPin className="w-5 h-5 text-gray-500" />
-                        <div>
-                          <p className="text-sm text-gray-600">
-                            Destination :{" "}
-                          </p>
-                          <p className="font-segoe text-gray-800">
-                            {pkg.destination}
-                          </p>
-                        </div>
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <h2 className="lg:text-2xl text-xl font-bold text-gray-800">
+                          {pkg.title}
+                        </h2>
+                        {/* <div className="flex items-center mt-1">
+                          {[1, 2, 3, 4, 5].map((star) => (
+                            <svg
+                              key={star}
+                              className="w-4 h-4 text-yellow-400 fill-current"
+                              viewBox="0 0 20 20"
+                            >
+                              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                            </svg>
+                          ))}
+                          <span className="ml-2 text-sm text-gray-600">
+                            {pkg.reviews_count || 0} reviews
+                          </span>
+                        </div> */}
                       </div>
+                      <div className="text-right">
+                        <p className="text-sm text-gray-600">From</p>
+                        <p className="text-3xl font-bold text-green-600">
+                          ${pkg.min_price}
+                        </p>
+                        <p className="text-center text-xs text-nowrap text-gray-600">
+                          Free Cancelation
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap gap-4 mb-4">
                       <div className="flex items-center space-x-2">
                         <Calendar className="w-5 h-5 text-gray-500" />
-                        <div>
-                          <p className="text-sm text-gray-600">Duration : </p>
-                          <p className="font-segoe text-gray-800">
-                            {pkg.duration} Days
-                          </p>
-                        </div>
+                        <span className="text-sm text-gray-600">
+                          {pkg.duration} hours
+                        </span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <MapPin className="w-5 h-5 text-gray-500" />
+                        <span className="text-sm text-gray-600">
+                          {pkg.destination}
+                        </span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <Users className="w-5 h-5 text-gray-500" />
-                        <div>
-                          <p className="text-sm text-gray-600">Age range : </p>
-                          <p className="font-segoe text-gray-800">
-                            {pkg.age_range}
-                          </p>
-                        </div>
+                        <span className="text-sm text-gray-600">
+                          {pkg.age_range}
+                        </span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <Globe className="w-5 h-5 text-gray-500" />
-                        <div>
-                          <p className="text-sm text-gray-600">Run : </p>
-                          <p className="font-segoe text-gray-800">{pkg.run}</p>
-                        </div>
+                        <span className="text-sm text-gray-600">{pkg.run}</span>
                       </div>
                     </div>
+                    <div
+                      className="text-gray-700 line-clamp-3 mb-4"
+                      dangerouslySetInnerHTML={{
+                        __html: pkg.description,
+                      }}
+                    />
                   </div>
-                  <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
-                    <div className="text-center sm:text-left">
-                      {/* <p className="text-sm text-gray-600">From ${pkg.price}</p> */}
-                      <p className="text-black font-segoe text-3xl">
-                        ${pkg.min_price}
-                      </p>
-                      <p className="text-sm text-gray-600">Per Person</p>
-                    </div>
-                    <div className="flex sm:flex-row sm:space-y-0 sm:space-x-2">
-                      <Button className="bg-black capitalize mr-3 md:mr-0 text-white font-segoe sm:py-2 px-3 sm:px-6 rounded-sm transition duration-300 ease-in-out transform hover:bg-gray-700 hover:scale-105 w-full sm:w-auto">
-                        View tour
-                      </Button>
-
-                      <Button className="border bg-green-300 md:mx-0  px-5 md:px-2 text-nowrap border-green-600 text-green-900 hover:bg-green-50 font-segoe sm:py-2 sm:px-6 rounded-sm transition duration-300 ease-in-out transform hover:scale-105 w-full sm:w-auto">
-                        Whats App{" "}
-                        <div>
-                          <span>
-                            <FaWhatsapp
-                              className="text-green-900 ml-3"
-                              size={20}
-                            />
-                          </span>
-                        </div>
-                      </Button>
-                    </div>
+                  <div className="flex justify-end space-x-2">
+                    <Button className="bg-black text-white font-semibold py-2 px-4 rounded transition duration-300 ease-in-out hover:bg-gray-800">
+                      View Details
+                    </Button>
+                    <Button className="bg-green-500 text-white font-semibold py-2 px-4 rounded transition duration-300 ease-in-out hover:bg-green-600 flex items-center">
+                      <FaWhatsapp className="mr-2" />
+                      WhatsApp
+                    </Button>
                   </div>
                 </div>
               </div>

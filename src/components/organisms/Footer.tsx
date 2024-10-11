@@ -13,7 +13,7 @@ const Footer = (props: Props) => {
   });
 
   return (
-    <footer className="bg-gray-900 p-5 font-[sans-serif] tracking-wide">
+    <footer className="bg-gray-900 p-5 font-[sans-serif] mt-3 tracking-wide">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         <div className="lg:flex lg:items-center text-white">
           <Link href="/" className="inline-block">

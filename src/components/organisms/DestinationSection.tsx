@@ -23,7 +23,7 @@ const DestinationSection: React.FC<Props> = ({ Destinations }) => {
 
   return (
     <div className="">
-      <div className="text-left mb-4 text-black font-segoe sm:font-semi-bold font-medium text-2xl md:text-special-offer">
+      <div className="text-left lg:my-8 my-4 text-black font-segoe sm:font-semi-bold font-medium text-2xl md:text-special-offer">
         Destination
       </div>
       <div>
