@@ -86,8 +86,8 @@ function IntegratedBookingForm({ DetailTour, setIsThanksVisible }) {
                   .format("YYYY-MM-DD")}`}
               </span>
             ) : (
-              <span className="flex gap-x-4 text-gray-500">
-                <CalendarClock /> select date
+              <span className="flex gap-2 text-gray-500">
+                <CalendarClock /> <span className="mt-1">Select Date</span>
               </span>
             )}
           </button>
@@ -201,7 +201,7 @@ function IntegratedBookingForm({ DetailTour, setIsThanksVisible }) {
 
   return (
     <div className="bg-white shadow-md rounded-lg p-4 border border-gray-300">
-      <Stepper activeStep={step} alternativeLabel>
+      <Stepper activeStep={step} alternativeLabel className="mb-3">
         <Step>
           <StepLabel>Choose Dates</StepLabel>
         </Step>
@@ -230,7 +230,7 @@ function IntegratedBookingForm({ DetailTour, setIsThanksVisible }) {
             {step === 0
               ? renderStep1(values, setFieldValue)
               : renderStep2(values, setFieldValue)}
-            <div className="flex justify-between mt-6">
+            <div className="flex justify-end mt-6 space-x-4">
               {step > 0 && (
                 <Button
                   className="bg-green-500 text-white hover:bg-green-800"
