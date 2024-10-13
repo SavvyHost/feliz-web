@@ -1,19 +1,26 @@
 import React, { useState } from "react";
-import { SelectChangeEvent, useMediaQuery, useTheme } from "@mui/material";
+import {
+  SelectChangeEvent,
+  useMediaQuery,
+  useTheme,
+  Button,
+  ThemeProvider,
+  createTheme,
+} from "@mui/material";
 import MobileFilter from "./MobileFilter";
 import DropdownMenu from "./DropdownMenu";
 import FilterModal from "./FilterModal";
+import CustomSvgIcon from "./CustomSvgIcon";
 
 const filterOptions = [
-  { label: "Popular filter", options: ["Option 1", "Option 2", "Option 3"] },
-  // { label: "Facilities", options: ["Wifi", "Parking", "Restaurant"] },
-  // { label: "High Rated", options: ["4+ stars", "3+ stars", "2+ stars"] },
-  // { label: "Tour Date", options: ["Today", "Tomorrow", "This week"] },
+  { label: "Popular", options: ["Option 1", "Option 2", "Option 3"] },
   { label: "Price", options: ["$0-$50", "$50-$100", "$100+"] },
-  { label: "Adventure Type", options: ["Hiking", "Water sports", "City tour"] },
-  { label: "Age Range", options: ["All ages", "18+", "21+"] },
-  { label: "Max Group Size", options: ["1-5", "6-10", "11+"] },
+  { label: "Adventure", options: ["Hiking", "Water sports", "City tour"] },
+  { label: "Age ", options: ["All ages", "18+", "21+"] },
+  { label: "Max Size", options: ["1-5", "6-10", "11+"] },
 ];
+
+// Create a custom theme with green border
 
 const Drops: React.FC = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -36,7 +43,6 @@ const Drops: React.FC = () => {
     }));
   };
 
-  // Updated handler for dropdown changes
   const handleSelectChange =
     (label: string) => (event: SelectChangeEvent<string>) => {
       const value = event.target.value;
@@ -46,43 +52,67 @@ const Drops: React.FC = () => {
       }));
     };
 
-  // Wrapper function to handle select changes for MobileFilter
   const handleMobileSelectChange = (event: SelectChangeEvent<string>) => {
-    // Extract the label or handle change based on your logic
-    const label = "Your Logic to Determine the Label"; // Adjust as needed
+    const label = event.target.name; // Assuming the name attribute is set to the filter label
     setSelectedOptions((prev) => ({
       ...prev,
       [label]: event.target.value,
     }));
   };
 
+  const handleApplyFilters = (filters: any) => {
+    console.log("Applied Filters:", filters);
+    // Implement your filter application logic here
+  };
+
   return (
-    <div className="flex sm:flex-row flex-wrap items-center justify-center gap-3 p-3 px-5">
+    <div className="flex sm:flex-row flex-wrap items-start justify-start gap-3">
       {isMobile ? (
         <MobileFilter
           options={filterOptions}
-          onSelectChange={handleMobileSelectChange} // Use the updated handler
+          onSelectChange={handleMobileSelectChange}
           onOpenModal={handleOpenModal}
         />
       ) : (
-        filterOptions.map((filter) => (
-          <DropdownMenu
-            key={filter.label}
-            label={filter.label}
-            options={filter.options}
-            selectedOption={selectedOptions[filter.label] || ""}
-            openDropdown={openDropdowns[filter.label] || false}
-            onClick={() => toggleDropdown(filter.label)}
-            onSelectChange={handleSelectChange(filter.label)} // Ensure this is a function
-          />
-        ))
+        <>
+          {filterOptions.slice(0, 4).map((filter) => (
+            <DropdownMenu
+              key={filter.label}
+              label={filter.label}
+              options={filter.options}
+              selectedOption={selectedOptions[filter.label] || ""}
+              openDropdown={openDropdowns[filter.label] || false}
+              onClick={() => toggleDropdown(filter.label)}
+              onSelectChange={handleSelectChange(filter.label)}
+            />
+          ))}
+          <div className="flex-grow" />{" "}
+          {/* This div will take up the available space */}
+          <div
+            className="flex justify-center gap-x-2 cursor-pointer hover:bg-green-200 bg-white border border-green-400 p-2 rounded-[4px] px-3"
+            onClick={handleOpenModal}
+          >
+            <div className="">Filters</div>
+
+            <span>
+              <CustomSvgIcon />
+            </span>
+          </div>
+        </>
       )}
 
       <FilterModal
         open={openModal}
         onClose={handleCloseModal}
-        options={filterOptions}
-        onOptionClick={(option) => console.log("Selected option:", option)}
+        filterGroups={filterOptions.map((option) => ({
+          label: option.label,
+          options: option.options.map((opt) => ({
+            label: opt,
+            value: opt,
+            checked: selectedOptions[option.label] === opt,
+          })),
+        }))}
+        onApplyFilters={handleApplyFilters}
       />
     </div>
   );

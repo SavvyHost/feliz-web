@@ -19,6 +19,7 @@ const DestinationSection: React.FC<Props> = ({ Destinations }) => {
   const mappedDestinations = Destinations.map((dest) => ({
     name: dest.name,
     panar_image: dest.panar_image, // Ensure the correct property name
+    id: dest.id, // Ensure the correct property name
   }));
 
   return (

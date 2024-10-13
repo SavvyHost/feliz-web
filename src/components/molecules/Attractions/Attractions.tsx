@@ -3,7 +3,7 @@ import Image from "next/image";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Attraction } from "@/types/attraction";
+import { Attraction } from "@/types/tour";
 import defaultImage from "../../../../public/assets/trail.jpeg";
 import Link from "next/link";
 type AttractionCardProps = {
@@ -19,10 +19,10 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
 }) => {
   return (
     <Link
-      href="distanation"
+      href=""
       className="flex flex-col items-center cursor-pointer rounded-lg overflow-hidden transition-transform duration-300 ease-in-out border border-transparent hover:border-gray-200 hover:bg-white hover:shadow-xl"
     >
-      <div className="flex flex-col items-center cursor-pointer rounded-lg overflow-hidden w-64 md:w-80 h-96 md:h-80 transition-transform duration-300 ease-in-out hover:border border-gray-200 hover:bg-white hover:shadow-xl">
+      <div className="flex flex-col items-center cursor-pointer rounded-lg overflow-hidden  w-80 h-52 md:h-60 ">
         <div className="relative w-full h-2/3 overflow-hidden">
           <Image
             src={imageSrc || defaultImage}
@@ -34,7 +34,7 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
         </div>
         <div className="w-full flex-grow p-4 flex flex-col justify-center items-center text-center">
           {/* Apply Tailwind truncate to limit text and add "..." */}
-          <h2 className="text-lg font-semibold text-gray-800 truncate w-full max-w-full font-segoe">
+          <h2 className="lg:text-lg text-base font-normal lg:font-semibold text-gray-800 truncate w-full max-w-4/12 font-segoe">
             {name}
           </h2>
           <p className="text-sm text-gray-600 truncate font-segoe">
@@ -92,7 +92,7 @@ const Attractions: React.FC<Props> = ({ attractions }) => {
       {isMobile ? (
         <Slider {...sliderSettings}>
           {attractions.map((attraction) => (
-            <div className="flex justify-center" key={attraction.id}>
+            <div className="flex justify-start pr-3 pb-2" key={attraction.id}>
               <AttractionCard
                 name={attraction.name}
                 imageSrc={attraction.paner_image?.url || defaultImage} // Use the dynamic image

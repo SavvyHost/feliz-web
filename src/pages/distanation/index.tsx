@@ -20,7 +20,7 @@ const PyramidsSection: React.FC<PyramidsSectionProps> = ({
   toursData,
   excursionsData,
 }) => {
-  const [activeTab, setActiveTab] = useState<string>("Overview");
+  const [activeTab, setActiveTab] = useState<string>("Tours & Tickets");
 
   return (
     <div className="relative h-auto w-full lg:mt-16 mt-3">

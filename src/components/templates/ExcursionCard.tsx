@@ -4,30 +4,47 @@ import React from "react";
 type ExcursionCardProps = {
   imageSrc: StaticImageData;
   recommendation: string;
+  isSelected: boolean;
+  onSelect: () => void;
 };
 
 const ExcursionCard: React.FC<ExcursionCardProps> = ({
   imageSrc,
   recommendation,
-}) => (
-  <div
-    className="rounded-lg ml-3 cursor-pointer overflow-hidden shadow-md border border-transparent hover:border-green-500 transition-border duration-300 ease-in-out"
-    style={{ width: "90%" }} // Reduce card width
-  >
-    <div className="relative w-full" style={{ height: "100px" }}>
-      {" "}
-      {/* Set a fixed height */}
-      <Image
-        src={imageSrc}
-        alt="Excursion"
-        layout="fill" // This will make the image fill the parent div
-        objectFit="cover" // Ensures the image covers the container without distortion
-        className="transition-transform duration-300 ease-in-out hover:scale-105"
+  isSelected,
+  onSelect,
+}) => {
+  return (
+    <div
+      onClick={onSelect}
+      className={`rounded-md cursor-pointer overflow-hidden transition-all duration-300 ease-in-out ${
+        isSelected ? "translate-y-[-10px]" : ""
+      }`}
+      style={{ width: "100%" }}
+    >
+      <div className="relative w-full" style={{ height: "150px" }}>
+        <Image
+          src={imageSrc}
+          alt="Excursion"
+          layout="fill"
+          objectFit="cover"
+          className="transition-transform duration-300 ease-in-out hover:scale-105"
+        />
+        {!isSelected && (
+          <div className="absolute inset-0 bg-blue-200 bg-opacity-30"></div>
+        )}
+      </div>
+      <p className="p-2 text-left text-xs md:text-sm font-bold">
+        {recommendation}
+      </p>
+
+      <div
+        className={`h-2 rounded-xl bg-green-500 mx-auto transition-all duration-500 ease-in-out ${
+          isSelected ? "w-[98%]" : "w-0"
+        }`}
       />
     </div>
-    <p className="p-2 text-xs md:text-sm font-medium">{recommendation}</p>{" "}
-    {/* Adjust padding and font size */}
-  </div>
-);
+  );
+};
 
 export default ExcursionCard;

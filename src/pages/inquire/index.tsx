@@ -4,13 +4,12 @@ import { useRouter } from "next/router";
 import CitySelection from "@/components/molecules/inquiredetails/CitySelection";
 import TimeDetails from "@/components/molecules/inquiredetails/TimeDetails";
 import TravelDetails from "@/components/molecules/inquiredetails/TravelDetails";
-
 import ThanksInquire from "@/components/molecules/ThanksInquire";
 
 const TravelStepper: React.FC = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [isDone, setIsDone] = useState(false);
-  const router = useRouter(); // Initialize useRouter for navigation
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -22,14 +21,19 @@ const TravelStepper: React.FC = () => {
     budget: "",
     flightOffer: false,
     additionalInfo: "",
-    city: "",
-    cityDetails: {},
+    selectedCities: [], // Ensure this is the correct state property
     travelDetails: {},
   });
 
   const steps = ["Choose City", "City Details", "Travel Details"];
 
   const handleNext = () => {
+    // Check if we are on the "Choose City" step
+    if (activeStep === 0 && formData.selectedCities.length === 0) {
+      alert("Please select at least one city to continue.");
+      return; // Prevent moving to the next step
+    }
+
     if (activeStep < steps.length - 1) {
       setActiveStep((prevStep) => prevStep + 1);
     } else {
@@ -64,17 +68,16 @@ const TravelStepper: React.FC = () => {
 
   const handleCloseThanks = () => {
     setIsDone(false);
-    router.push("/"); // Navigate to home page after closing the "Thanks" message
+    router.push("/");
   };
 
   const handleFinish = () => {
     setIsDone(true);
     setTimeout(() => {
-      router.push("/"); // Redirect to home after showing success message
+      router.push("/");
     }, 2000);
   };
 
-  // Component to show after finishing the stepper
   const SuccessComponent = () => (
     <div className="">
       <ThanksInquire
@@ -94,19 +97,16 @@ const TravelStepper: React.FC = () => {
         ))}
       </Stepper>
 
-      <div className="mt-8 p-4">
-        {isDone ? (
-          <SuccessComponent />
-        ) : (
-          // Show success message when done
-          getStepContent(activeStep)
-        )}
+      <div className=" p-4">
+        {isDone ? <SuccessComponent /> : getStepContent(activeStep)}
       </div>
 
-      {/* Sticky footer buttons */}
       {!isDone && (
         <div className="sticky bottom-0 left-0 w-full bg-green-100 shadow-lg flex justify-between p-4">
-          <Button disabled={activeStep === 0} onClick={handleBack}>
+          <Button
+            disabled={activeStep === 0 || activeStep === 2}
+            onClick={handleBack}
+          >
             Back
           </Button>
           <Button

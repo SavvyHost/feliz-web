@@ -24,7 +24,7 @@ const TourCard = ({ itinerary, index, isLast }) => {
             onClick={toggleCollapse}
           >
             <span>
-              Day {index + 1}: {itinerary.title}
+              Step {index + 1}: {itinerary.title}
             </span>
             {isOpen ? (
               <div>

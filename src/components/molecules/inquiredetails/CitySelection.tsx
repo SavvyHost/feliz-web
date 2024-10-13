@@ -45,9 +45,7 @@ const CitySelection: React.FC<CitySelectionProps> = ({
   ];
 
   const handleCitySelect = (cityName: string) => {
-    const updatedCities = formData.selectedCities
-      ? [...formData.selectedCities]
-      : [];
+    const updatedCities = formData.selectedCities || [];
     const cityIndex = updatedCities.indexOf(cityName);
 
     if (cityIndex > -1) {
@@ -134,9 +132,7 @@ const CitySelection: React.FC<CitySelectionProps> = ({
             ))}
           </ul>
         ) : (
-          <p className="text-green-500 text-lg">
-            No destinations selected yet.
-          </p>
+          <p className="text-green-600">No cities selected yet.</p>
         )}
       </div>
     </div>

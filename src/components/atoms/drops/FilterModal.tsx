@@ -1,60 +1,172 @@
-import React from "react";
-import { Modal, Box, Button } from "@mui/material";
+import React, { useState, useRef, useEffect } from "react";
+import {
+  Modal,
+  Box,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import {
+  Close as CloseIcon,
+  FilterList as FilterIcon,
+} from "@mui/icons-material";
+
+interface FilterOption {
+  label: string;
+  value: string;
+  checked: boolean;
+}
+
+interface FilterGroup {
+  label: string;
+  options: FilterOption[];
+}
 
 interface FilterModalProps {
   open: boolean;
   onClose: () => void;
-  options: { label: string; options: string[] }[];
-  onOptionClick: (option: string) => void;
+  filterGroups: FilterGroup[];
+  onApplyFilters: (filters: FilterGroup[]) => void;
 }
 
 const FilterModal: React.FC<FilterModalProps> = ({
   open,
   onClose,
-  options,
-  onOptionClick,
-}) => (
-  <Modal
-    open={open}
-    onClose={onClose}
-    className="flex items-end justify-center"
-  >
-    <Box
-      sx={{
-        position: "relative",
-        width: "100%",
-        maxWidth: 600,
-        bgcolor: "background.paper",
-        border: "1px solid #000",
-        boxShadow: 24,
-        p: 4,
-        borderRadius: 2,
-        maxHeight: "80%",
-        overflowY: "auto",
-      }}
+  filterGroups: initialFilterGroups,
+  onApplyFilters,
+}) => {
+  const [filterGroups, setFilterGroups] = useState<FilterGroup[]>(
+    initialFilterGroups || []
+  );
+  const modalContentRef = useRef<HTMLDivElement>(null);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  useEffect(() => {
+    setFilterGroups(initialFilterGroups || []);
+  }, [initialFilterGroups]);
+
+  const handleOptionChange = (groupIndex: number, optionIndex: number) => {
+    const newFilterGroups = [...filterGroups];
+    newFilterGroups[groupIndex].options[optionIndex].checked =
+      !newFilterGroups[groupIndex].options[optionIndex].checked;
+    setFilterGroups(newFilterGroups);
+  };
+
+  const handleApplyFilters = () => {
+    onApplyFilters(filterGroups);
+    onClose();
+  };
+
+  const handleClearFilters = () => {
+    const clearedFilters = filterGroups.map((group) => ({
+      ...group,
+      options: group.options.map((option) => ({ ...option, checked: false })),
+    }));
+    setFilterGroups(clearedFilters);
+  };
+
+  return (
+    <Modal
+      open={open}
+      onClose={onClose}
+      className="flex items-center justify-center p-4"
     >
-      {options.map((filter) => (
-        <div key={filter.label} className="mb-4">
-          <h3 className="font-semibold mb-2">{filter.label}</h3>
-          {filter.options.map((option) => (
-            <Button
-              key={option}
-              onClick={() => onOptionClick(option)}
-              className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-200"
-            >
-              {option}
-            </Button>
-          ))}
-        </div>
-      ))}
-      <Button
-        onClick={onClose}
-        className="bg-green-700 p-3 px-6 text-white fixed bottom-0 left-0 right-0 rounded-t-md"
+      <Box
+        sx={{
+          position: "relative",
+          width: "100%",
+          maxWidth: 600,
+          bgcolor: "background.paper",
+          boxShadow: 24,
+          borderRadius: 2,
+          maxHeight: "90vh",
+          display: "flex",
+          flexDirection: "column",
+        }}
       >
-        Apply
-      </Button>
-    </Box>
-  </Modal>
-);
+        <Box
+          sx={{
+            p: 2,
+            borderBottom: 1,
+            borderColor: "divider",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="h6" component="h2">
+            <FilterIcon sx={{ mr: 1, verticalAlign: "bottom" }} />
+            Filters
+          </Typography>
+          <Button onClick={onClose} sx={{ minWidth: "auto", p: 0.5 }}>
+            <CloseIcon />
+          </Button>
+        </Box>
+
+        <Box
+          ref={modalContentRef}
+          sx={{ flexGrow: 1, overflowY: "auto", p: 2 }}
+        >
+          {filterGroups.map((group, groupIndex) => (
+            <Box key={group.label} sx={{ mb: 3 }}>
+              <Typography
+                variant="subtitle1"
+                sx={{ mb: 1, fontWeight: "bold" }}
+              >
+                {group.label}
+              </Typography>
+              {group.options.map((option, optionIndex) => (
+                <FormControlLabel
+                  key={option.value}
+                  control={
+                    <Checkbox
+                      checked={option.checked}
+                      onChange={() =>
+                        handleOptionChange(groupIndex, optionIndex)
+                      }
+                      color="primary"
+                    />
+                  }
+                  label={option.label}
+                  sx={{ display: "block", mb: 0.5 }}
+                />
+              ))}
+            </Box>
+          ))}
+        </Box>
+
+        <Box
+          sx={{
+            p: 2,
+            borderTop: 1,
+            borderColor: "divider",
+            display: "flex",
+            justifyContent: "space-between",
+            position: "sticky",
+            bottom: 0,
+            bgcolor: "background.paper",
+            zIndex: 1,
+          }}
+        >
+          <Button onClick={handleClearFilters} variant="outlined" color="info">
+            Clear All
+          </Button>
+          <Button
+            onClick={handleApplyFilters}
+            variant="contained"
+            className="bg-green-700 hover:bg-green-400 hover:text-black text-white"
+            color="primary"
+          >
+            Apply Filters
+          </Button>
+        </Box>
+      </Box>
+    </Modal>
+  );
+};
 
 export default FilterModal;
