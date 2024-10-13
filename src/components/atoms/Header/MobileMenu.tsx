@@ -15,22 +15,23 @@ const MobileMenu = ({ isOpen, onClose, navLinks, onLanguageChange }) => {
 
   return (
     <>
-      {/* Right-Side Menu Drawer */}
+      {/* Left-Side Menu Drawer */}
       <div
-        className={`fixed inset-y-0 right-0 z-50 transform ${
-          isOpen ? "translate-x-0" : "translate-x-full"
+        className={`fixed inset-y-0 left-0 z-50 transform ${
+          isOpen ? "translate-x-0" : "-translate-x-full" // Slide in from the left
         } transition-transform duration-300 ease-in-out w-64 bg-white lg:hidden`}
       >
         <nav className="relative z-10 px-8 py-4 h-full">
           {/* Close Button and Menu Title */}
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-xl font-bold">Menu</h2>
             <button
               onClick={onClose}
               className="text-gray-500 hover:text-gray-700"
             >
               <X className="w-6 h-6" />
             </button>
+
+            <h2 className="text-xl font-bold">Menu</h2>
           </div>
 
           {/* Navigation Links */}

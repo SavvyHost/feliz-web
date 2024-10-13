@@ -8,9 +8,9 @@ type Props = {
 
 const AttractionsSection: React.FC<Props> = ({ attractions }) => {
   return (
-    <div className="bg-[#FAFAFA]">
+    <div className="">
       <div className="text-left text-black font-segoe sm:font-semi-bold font-medium text-2xl md:text-special-offer lg:my-8 my-4">
-        Attractions in Egypt
+        Top Attractions
       </div>
       <div>
         <Attractions attractions={attractions} />{" "}

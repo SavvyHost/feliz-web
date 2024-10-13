@@ -57,7 +57,7 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
 
       // If the mouse has moved less than a certain threshold, consider it a click
       if (deltaX < 5 && deltaY < 5) {
-        router.push(`/attraction/${id}/`);
+        router.push(`/destinations/${id}/`);
       }
     }
     setClickStartX(null);

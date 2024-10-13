@@ -3,6 +3,8 @@ import React from "react";
 import Drops from "@/components/atoms/drops";
 import Excursions from "../molecules/Excursions/Excursions";
 import { TourPackage } from "@/types/tour";
+import Explore from "../molecules/ExploreExcursios";
+import SearchExcursions from "../atoms/SearchExcursions/SearchExcursios";
 
 interface OverViewProps {
   toursData: TourPackage[];
@@ -11,14 +13,24 @@ interface OverViewProps {
 const OverView: React.FC<OverViewProps> = ({ toursData }) => {
   console.log(toursData);
   return (
-    <div>
-      <h2 className="text-3xl font-segoe text-start mt-2 ml-6">
-        What’s Included
-      </h2>
-      <div className="mb-3">
+    <div className="p-4">
+      {/* <div className="">
+        <SearchExcursions />
+      </div> */}
+      <div className="">
+        <Explore />
+      </div>
+      <div className="lg:my-6 my-0">
         <Drops />
       </div>
-      <Excursions toursData={toursData} />
+      <div>
+        <h2 className="md:text-3xl text-xl font-segoe mb-4 text-start">
+          Tours and Tickets to Experience Giza Pyramids
+        </h2>
+        <div className="">
+          <Excursions toursData={toursData} />
+        </div>
+      </div>
     </div>
   );
 };

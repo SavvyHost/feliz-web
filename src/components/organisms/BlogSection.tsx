@@ -16,8 +16,8 @@ type Props = {
 const BlogSection: React.FC<Props> = ({ blogData }) => {
   return (
     <div className="bg-[#FAFAFA]">
-      <div className="text-left text-black font-segoe sm:font-semi-bold font-medium text-2xl md:text-special-offer mb-4">
-        Blogs
+      <div className="text-left text-black font-segoe sm:font-semi-bold font-medium text-2xl md:text-special-offer lg:my-8 my-4">
+        Recent Blogs
       </div>
       <div>
         {/* Pass the array of blog data to the Blog component */}

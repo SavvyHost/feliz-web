@@ -1,3 +1,4 @@
+import Explore from "@/components/molecules/ExploreTours";
 import Laptop from "@/components/templates/laptop/Laptop";
 import Mobile from "@/components/templates/mobile/Mobile";
 
@@ -12,6 +13,7 @@ export default function Home({ toursData }: HomeProps) {
   return (
     <div className="md:p-6 p-0 bg-[#FAFAFA] lg:px-16 ">
       {/* Mobile view */}
+
       <div className="block lg:hidden">
         <Mobile toursData={toursData} />
       </div>

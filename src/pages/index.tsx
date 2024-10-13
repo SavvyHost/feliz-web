@@ -14,6 +14,7 @@ import fetchData from "@/helper/FetchData";
 import { TourPackage, ToursData } from "@/types/tour";
 import { Destination } from "./blogs";
 import { Attraction } from "@/types/tour"; // Create a type for attraction
+import BlogSection from "@/components/organisms/BlogSection";
 
 type Blog = {
   id: number;
@@ -69,11 +70,9 @@ export default function Home({
       <div className="lg:px-16 p-4  ">
         <PeaopleSaySection />
       </div>
-
-      {/* Pass attractions data */}
-
-      {/* Add Blog Section */}
-      {/* <BlogSection blogData={blogData} /> */}
+      <div className="lg:px-16 p-4 bg-[#FAFAFA] ">
+        <BlogSection blogData={blogData} />
+      </div>
     </>
   );
 }

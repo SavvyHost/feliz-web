@@ -4,6 +4,7 @@ import TravelPackagePage from "@/components/molecules/TravelCardSearch/TravelCar
 import SearchInput from "@/components/atoms/Search/Search";
 import { ToursData } from "@/types/tour";
 import PaginationExample from "@/components/molecules/Pagination";
+import Explore from "@/components/molecules/ExploreTours";
 
 interface LaptopProps {
   toursData: ToursData;
@@ -54,6 +55,9 @@ const Laptop: React.FC<LaptopProps> = ({ toursData }) => {
       {/* Search Bar */}
       <div className="mt-20">
         <SearchInput />
+      </div>
+      <div className="">
+        <Explore />
       </div>
 
       {/* Main Content Layout: Filters on the left, Cards on the right */}

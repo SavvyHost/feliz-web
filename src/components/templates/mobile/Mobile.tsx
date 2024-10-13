@@ -4,6 +4,8 @@ import MobileSearchModal from "@/components/atoms/Search/MobileSearchModal";
 import TravelPackagePage from "@/components/molecules/TravelCardSearch/TravelCardSearch";
 import { ToursData } from "@/types/tour";
 import MobileSidebar from "@/components/atoms/Filters/MobileSidebar";
+import Explore from "@/components/molecules/ExploreTours";
+import { Filter, SlidersHorizontal } from "lucide-react";
 
 interface MobileProps {
   toursData: ToursData;
@@ -56,17 +58,17 @@ const Mobile: React.FC<MobileProps> = ({ toursData }) => {
 
   return (
     <div className="bg-[#FAFAFA]  flex flex-col">
-      <div className="fixed top-0 left-0 right-0 bg-[#FAFAFA] p-2 z-10">
+      <div className="fixed top-0 left-0 right-0 bg-[#FAFAFA] p-2 z-10 ">
         <div className="mt-[70px] flex justify-center items-center gap-3 w-full">
-          <div className="">
+          <div className="w-full">
             <MobileSearchModal />
           </div>
           <div className="">
             <button
               onClick={() => setIsModalOpen(true)}
-              className="bg-[#4CAF50] text-nowrap mb-2 p-3 text-white rounded-md"
+              className="bg-[#4CAF50] text-nowrap py-4 px-6 text-white rounded-md"
             >
-              Open Filter
+              <SlidersHorizontal />
             </button>
             <MobileSidebar
               isModalOpen={isModalOpen}
@@ -87,8 +89,11 @@ const Mobile: React.FC<MobileProps> = ({ toursData }) => {
           </div>
         </div>
       </div>
-      <div className="flex-1  mt-[calc(45px+4rem)]">
-        <div className="py-6 px-3">
+      <div className="mt-36">
+        <Explore />
+      </div>
+      <div className="flex-1">
+        <div className="px-3">
           <div className="flex flex-col md:flex-row gap-8">
             <div className="w-full md:w-3/4">
               <TravelPackagePage toursData={toursData} />

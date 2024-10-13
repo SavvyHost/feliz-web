@@ -53,6 +53,14 @@ export const Header = ({ header, className }: any) => {
         }`}
       >
         <div className="flex items-center justify-between py-4">
+          {/* Mobile Menu Toggle (visible on small screens) */}
+          <button
+            className="lg:hidden text-[#191e61] focus:outline-none"
+            onClick={() => setIsMenuOpen(true)}
+          >
+            <Menu className="w-6 h-6" />
+          </button>
+
           {/* Logo aligned to the left */}
           <div className="flex-shrink-0 lg:w-2/12">
             <Link href="/">
@@ -68,13 +76,13 @@ export const Header = ({ header, className }: any) => {
           {/* Right side - Social Icons, Language Change, and Book Tour Button */}
           <div className="flex items-center lg:w-1/3 justify-end space-x-4">
             <button
-              className="hidden lg:block focus:outline-none"
+              className="lg:block hidden focus:outline-none"
               onClick={handleLanguageChange}
               title="Change Language"
             >
               <Globe className="w-6 h-6 text-black" />
             </button>
-            <button className="hidden lg:block focus:outline-none">
+            <button className="block focus:outline-none">
               <Heart className="w-6 h-6 text-black" />
             </button>
             <Link
@@ -84,14 +92,6 @@ export const Header = ({ header, className }: any) => {
               Tailored made
             </Link>
           </div>
-
-          {/* Mobile Menu Toggle (visible on small screens) */}
-          <button
-            className="lg:hidden text-[#191e61] focus:outline-none"
-            onClick={() => setIsMenuOpen(true)}
-          >
-            <Menu className="w-6 h-6" />
-          </button>
         </div>
       </header>
 

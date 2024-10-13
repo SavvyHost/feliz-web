@@ -3,7 +3,11 @@ import HeroBannerAttraction from "@/components/molecules/Attractions/HeroBannerA
 import AttractionImage from "../../../../public/assets/bgblogs.png";
 import Breadcrumb from "@/components/molecules/Attractions/BreadCrumb";
 import OverViewAttraction from "@/components/molecules/Attractions/OverViewAttraction";
-import { ToursSection, ExcursionsSection } from "@/components/organisms";
+import {
+  ToursSection,
+  ExcursionsSection,
+  AttractionsSection,
+} from "@/components/organisms";
 import fetchData from "@/helper/FetchData";
 import { TourPackage, ToursData } from "@/types/tour";
 import AttractionPageSection from "@/components/molecules/Attractions/AttractionsPageSection";
@@ -26,6 +30,7 @@ const AttractionsDetails: React.FC<Props> = ({
   city,
   toursData,
   excursionData,
+  attractionsData,
 }) => {
   // Handle case where city might be undefined
   if (!city) {
@@ -34,13 +39,13 @@ const AttractionsDetails: React.FC<Props> = ({
 
   // Dynamic breadcrumb items based on city data
   const breadcrumbItems = [
-    { label: "Destinations", href: "/destinations" },
+    { label: "Destinations", href: "/" },
     {
       label: city.name,
       href: `/destinations/${city.country_id}/${city.name.toLowerCase()}`,
     },
   ];
-
+  const limitedAttractions = attractionsData.slice(0, 16);
   return (
     <div className="">
       {/* Hero Banner with dynamic city name */}
@@ -55,13 +60,15 @@ const AttractionsDetails: React.FC<Props> = ({
 
       {/* Overview section with dynamic city name in description */}
       <OverViewAttraction
-        title="Attraction Overview"
+        title="Overview"
         description={`Discover the beauty and history of ${city.name}, one of the most renowned destinations. Explore its landmarks and enjoy cultural experiences.`}
       />
 
       {/* Sections for tours and excursions */}
-      <AttractionPageSection toursData={toursData} />
-      <ExcursionsSection toursData={excursionData} />
+      <div className="px-16">
+        <AttractionsSection attractions={limitedAttractions} />
+      </div>
+      {/* <ExcursionsSection toursData={excursionData} /> */}
     </div>
   );
 };
@@ -74,6 +81,7 @@ export async function getServerSideProps(context: any) {
   // Fetch city details
   const attractionsResponse = await fetchData("cities");
   const toursData: ToursData = await fetchData("tours");
+  const attractionsData = await fetchData("places");
   const excursionData = await fetchData("tours?type=excursion");
 
   // Find the city with the matching id
@@ -86,6 +94,7 @@ export async function getServerSideProps(context: any) {
     props: {
       city, // Pass the fetched city data (or null)
       toursData,
+      attractionsData: attractionsData.data,
       excursionData: excursionData.data as TourPackage[],
     },
   };

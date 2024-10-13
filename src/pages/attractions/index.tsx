@@ -75,7 +75,7 @@ const PyramidsSection: React.FC<PyramidsSectionProps> = ({
       </div>
       <div className="flex flex-wrap justify-center mt-28 lg:mt-20 px-4  sm:px-6 overflow-x-auto">
         <div className="flex space-x-2 sm:space-x-4">
-          {["Overview", "Tours & Tickets"].map((tab) => (
+          {["Overview", "Tours & Tickets", "Excursions"].map((tab) => (
             <button
               key={tab}
               className={`text-center font-segoe py-2 px-4 border-b border-b-green-400  whitespace-nowrap ${
@@ -93,7 +93,9 @@ const PyramidsSection: React.FC<PyramidsSectionProps> = ({
       <div className="mt-4 lg:px-16">
         <div className="rounded-md">
           {activeTab === "Overview" && <PackageDetails />}
-          {/* {activeTab === "Packages" && <ExcursionsTab toursData={toursData} />} */}
+          {activeTab === "Excursions" && (
+            <OverView toursData={excursionsData} />
+          )}
           {activeTab === "Tours & Tickets" && (
             <ExcursionsTab toursData={toursData} />
           )}
