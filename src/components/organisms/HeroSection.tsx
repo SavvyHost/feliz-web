@@ -10,6 +10,7 @@ const HeroSection = () => {
           src="assets/vd.mp4"
           autoPlay
           muted
+          loop
         />
       </div>
       <TwoMainButtons />
