@@ -46,9 +46,10 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
           PaperProps: {
             style: {
               maxHeight: 300, // Limit dropdown height
-              width: 250, // Adjust width if necessary
+              width: 400, // Adjust width if necessary
             },
           },
+          disableScrollLock: true, // Prevents scrollbar behavior on dropdown
         }}
       >
         {options.map((option) => (

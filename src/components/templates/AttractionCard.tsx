@@ -28,13 +28,15 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
   return (
     <Link href={`/top-packages/${id}`}>
       <div className="flex group transition-all ease-in-out flex-col cursor-pointer overflow-hidden bg-transparent md:max-w-xs max-w-sm sm:mx-2 mx-3 my-2 sm:my-4 lg:my-6">
-        <div className="relative h-60 w-full">
+        <div className="relative h-60 w-full transition-shadow duration-300 group-hover:shadow-xl">
+          {" "}
+          {/* Apply shadow on hover here */}
           <Image
             src={image || defaultImage}
             width={0}
             height={0}
             alt={title}
-            className="w-full rounded-md h-full object-cover hover:shadow-xl"
+            className="w-full rounded-md h-full object-cover"
           />
         </div>
         <div className="flex-1 pt-3 flex flex-col h-72">
