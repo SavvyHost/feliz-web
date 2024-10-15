@@ -39,12 +39,12 @@ const HeroSectionBlogs: React.FC<HeroSectionBlogsProps> = ({ DetailBlogs }) => {
           <h1 className="text-xl md:text-2xl font-semibold text-gray-800 mb-2 md:mb-4">
             {DetailBlogs?.title}
           </h1>
-          {/* <p
+          <p
             className="text-sm md:text-base text-gray-700 mb-4"
             dangerouslySetInnerHTML={{
               __html: DetailBlogs?.content.slice(0, 300),
             }}
-          /> */}
+          />
         </div>
         {/* Author Section */}
         <div className="flex items-center justify-center gap-3 md:gap-4 mt-4">

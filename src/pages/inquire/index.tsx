@@ -21,23 +21,22 @@ const TravelStepper: React.FC = () => {
     budget: "",
     flightOffer: false,
     additionalInfo: "",
-    selectedCities: [], // Ensure this is the correct state property
+    selectedCities: [],
     travelDetails: {},
   });
 
   const steps = ["Choose City", "City Details", "Travel Details"];
 
   const handleNext = () => {
-    // Check if we are on the "Choose City" step
     if (activeStep === 0 && formData.selectedCities.length === 0) {
       alert("Please select at least one city to continue.");
-      return; // Prevent moving to the next step
+      return;
     }
 
     if (activeStep < steps.length - 1) {
       setActiveStep((prevStep) => prevStep + 1);
     } else {
-      setIsDone(true);
+      handleFinish();
     }
   };
 
@@ -59,7 +58,11 @@ const TravelStepper: React.FC = () => {
         return <TimeDetails formData={formData} onChange={handleFormChange} />;
       case 2:
         return (
-          <TravelDetails formData={formData} onChange={handleFormChange} />
+          <TravelDetails
+            formData={formData}
+            onChange={handleFormChange}
+            onSubmit={handleFinish}
+          />
         );
       default:
         return <SuccessComponent />;
@@ -72,6 +75,21 @@ const TravelStepper: React.FC = () => {
   };
 
   const handleFinish = () => {
+    // Validate the form data
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.nationality ||
+      !formData.phone ||
+      !formData.budget
+    ) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
+    // Here you would typically send the form data to your backend
+    console.log("Submitting form data:", formData);
+
     setIsDone(true);
     setTimeout(() => {
       router.push("/");
@@ -97,7 +115,7 @@ const TravelStepper: React.FC = () => {
         ))}
       </Stepper>
 
-      <div className=" p-4">
+      <div className="p-4">
         {isDone ? <SuccessComponent /> : getStepContent(activeStep)}
       </div>
 
@@ -109,12 +127,11 @@ const TravelStepper: React.FC = () => {
           >
             Back
           </Button>
+
           <Button
             className="bg-green-600 hover:bg-green-400"
             variant="contained"
-            onClick={
-              activeStep === steps.length - 1 ? handleFinish : handleNext
-            }
+            onClick={handleNext}
           >
             {activeStep === steps.length - 1 ? "Finish" : "Next"}
           </Button>

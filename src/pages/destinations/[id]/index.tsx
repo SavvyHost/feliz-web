@@ -11,6 +11,7 @@ import {
 import fetchData from "@/helper/FetchData";
 import { TourPackage, ToursData } from "@/types/tour";
 import AttractionPageSection from "@/components/molecules/Attractions/AttractionsPageSection";
+import SuggestAttractionsSetion from "@/components/molecules/Attractions/SuggestAttractionsSection";
 
 // Define the Props for the component
 type City = {
@@ -65,8 +66,8 @@ const AttractionsDetails: React.FC<Props> = ({
       />
 
       {/* Sections for tours and excursions */}
-      <div className="px-16">
-        <AttractionsSection attractions={limitedAttractions} />
+      <div className="lg:px-16 p-4">
+        <SuggestAttractionsSetion attractions={limitedAttractions} />
       </div>
       {/* <ExcursionsSection toursData={excursionData} /> */}
     </div>
