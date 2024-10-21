@@ -10,16 +10,18 @@ type AttractionCardProps = {
   name: string;
   imageSrc: string; // Updated to string for dynamic image URLs
   toursCount: number;
+  id: number;
 };
 
 const AttractionCard: React.FC<AttractionCardProps> = ({
   name,
   imageSrc,
   toursCount,
+  id,
 }) => {
   return (
     <Link
-      href="/attractions"
+      href={`/attractions/${id}`}
       className="flex flex-col items-center cursor-pointer rounded-lg overflow-hidden transition-transform duration-300 ease-in-out border border-transparent hover:border-gray-200 hover:bg-white hover:shadow-xl"
     >
       <div className="flex flex-col items-center cursor-pointer rounded-lg overflow-hidden  w-80 h-52 md:h-60 ">
@@ -95,6 +97,7 @@ const Attractions: React.FC<Props> = ({ attractions }) => {
             <div className="flex justify-start pr-3 pb-2" key={attraction.id}>
               <AttractionCard
                 name={attraction.name}
+                id={attraction.id}
                 imageSrc={attraction.paner_image?.url || defaultImage} // Use the dynamic image
                 toursCount={attraction.toursCount || 0} // Assuming the API has toursCount or related field
               />
@@ -107,6 +110,7 @@ const Attractions: React.FC<Props> = ({ attractions }) => {
             <div className="flex justify-start" key={attraction.id}>
               <AttractionCard
                 name={attraction.name}
+                id={attraction.id}
                 imageSrc={attraction.paner_image?.url || defaultImage}
                 toursCount={attraction.toursCount || 0}
               />
