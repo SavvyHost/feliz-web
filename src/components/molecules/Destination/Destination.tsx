@@ -72,7 +72,7 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
       onMouseUp={handleMouseUp}
     >
       <Image
-        src={imageUrl || defaultImage}
+        src={imageUrl.url || defaultImage}
         alt={name}
         layout="fill"
         objectFit="cover"
