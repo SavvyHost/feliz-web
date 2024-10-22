@@ -53,7 +53,7 @@ const AttractionsDetails: React.FC<Props> = ({
       <HeroBannerAttraction
         title="Things to do in"
         subtitle={city.name} // Dynamic subtitle based on city
-        imageUrl={AttractionImage}
+        imageUrl={city.panar_image.url || AttractionImage}
       />
 
       {/* Breadcrumb with dynamic items */}

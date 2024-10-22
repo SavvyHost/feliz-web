@@ -3,23 +3,24 @@ import Image from "next/image";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Link from "next/link";
 import { Attraction } from "@/types/tour";
-import defaultImage from "../../../../public/assets/Secondimage.jpeg";
-
+import defaultImage from "../../../../public/assets/trail.jpeg";
+import Link from "next/link";
 type AttractionCardProps = {
   name: string;
-  imageSrc: string;
+  imageSrc: string; // Updated to string for dynamic image URLs
   toursCount: number;
+  id: number;
 };
 
 const AttractionCard: React.FC<AttractionCardProps> = ({
   name,
   imageSrc,
   toursCount,
+  id,
 }) => {
   return (
-    <Link href="/attractions" className="block h-full">
+    <Link href={`/attractions/${id}`} className="h-full block">
       <div className="group bg-white shadow-md hover:shadow-xl w-full h-full rounded-lg overflow-hidden font-sans">
         <div className="relative w-full h-64 overflow-hidden">
           <Image
@@ -44,10 +45,10 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
 };
 
 type Props = {
-  attractions: Attraction[];
+  attractions: Attraction[]; // Accept dynamic data for attractions
 };
 
-const SuggestAttraction: React.FC<Props> = ({ attractions }) => {
+const Attractions: React.FC<Props> = ({ attractions }) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
@@ -56,7 +57,7 @@ const SuggestAttraction: React.FC<Props> = ({ attractions }) => {
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize();
+    handleResize(); // Initial check
 
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -83,6 +84,7 @@ const SuggestAttraction: React.FC<Props> = ({ attractions }) => {
                 name={attraction.name}
                 imageSrc={attraction.paner_image?.url || defaultImage}
                 toursCount={attraction.toursCount || 0}
+                id={attraction.id}
               />
             </div>
           ))}
@@ -93,6 +95,7 @@ const SuggestAttraction: React.FC<Props> = ({ attractions }) => {
             <div key={attraction.id} className="h-96">
               <AttractionCard
                 name={attraction.name}
+                id={attraction.id}
                 imageSrc={attraction.paner_image?.url || defaultImage}
                 toursCount={attraction.toursCount || 0}
               />
@@ -104,4 +107,4 @@ const SuggestAttraction: React.FC<Props> = ({ attractions }) => {
   );
 };
 
-export default SuggestAttraction;
+export default Attractions;
