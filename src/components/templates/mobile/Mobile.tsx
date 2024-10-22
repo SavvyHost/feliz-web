@@ -89,12 +89,12 @@ const Mobile: React.FC<MobileProps> = ({ toursData }) => {
           </div>
         </div>
       </div>
-      <div className="mt-36">
+      {/* <div className="mt-36">
         <Explore />
-      </div>
+      </div> */}
       <div className="flex-1">
         <div className="px-3">
-          <div className="flex flex-col md:flex-row gap-8">
+          <div className="flex flex-col md:flex-row gap-8 mt-32">
             <div className="w-full md:w-3/4">
               <TravelPackagePage toursData={toursData} />
             </div>

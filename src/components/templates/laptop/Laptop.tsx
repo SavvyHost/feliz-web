@@ -56,9 +56,9 @@ const Laptop: React.FC<LaptopProps> = ({ toursData }) => {
       <div className="mt-20">
         <SearchInput />
       </div>
-      <div className="">
+      {/* <div className="">
         <Explore />
-      </div>
+      </div> */}
 
       {/* Main Content Layout: Filters on the left, Cards on the right */}
       <div className="flex flex-col md:flex-row gap-8 mt-8">
