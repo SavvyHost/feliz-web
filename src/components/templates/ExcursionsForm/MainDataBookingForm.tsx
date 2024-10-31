@@ -4,23 +4,16 @@ import { Minus, Plus } from "lucide-react";
 import PhoneInput from "react-phone-number-input";
 import dayjs from "dayjs";
 import { Modal, Button } from "@mui/material";
-
-import BaseInputField from "@/components/molecules/formik-fields/BaseInputField";
+import { ToastContainer } from "react-toastify";
+import { Spinner } from "@/components/atoms/UI/Spinner";
 import SelectNationality from "@/components/molecules/selects/SelectNationality";
-import { useMutate } from "@/hooks/UseMutate";
-import { Spinner } from "../../atoms/UI/Spinner";
-import { notify } from "@/utils/toast";
+import BaseInputField from "@/components/molecules/formik-fields/BaseInputField";
 import DatePickerInput from "@/components/atoms/SearchExcursions/DataPickerInput";
+import { notify } from "@/utils/toast";
+import { useMutate } from "@/hooks/UseMutate";
+import "react-toastify/dist/ReactToastify.css";
 
-interface MainDataBookingFormProps {
-  DetailTour: { id: number };
-  setIsThanksVisible: (visible: boolean) => void;
-}
-
-const MainDataBookingForm: React.FC<MainDataBookingFormProps> = ({
-  DetailTour,
-  setIsThanksVisible,
-}) => {
+const MainDataBookingForm = ({ DetailTour, setIsThanksVisible }) => {
   const { mutate, isPending } = useMutate({
     mutationKey: ["bookings"],
     endpoint: `bookings`,
@@ -36,9 +29,12 @@ const MainDataBookingForm: React.FC<MainDataBookingFormProps> = ({
   const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openPassengers, setOpenPassengers] = useState(false);
+  const [showValidationAlert, setShowValidationAlert] = useState(false);
 
   const handleDateChange = (newDate: dayjs.Dayjs | null) => {
+    setOpenPassengers(!openPassengers);
     setSelectedDate(newDate);
+    setShowValidationAlert(false);
   };
 
   const initialValues = {
@@ -47,7 +43,7 @@ const MainDataBookingForm: React.FC<MainDataBookingFormProps> = ({
     nationality_id: "",
     phone: "",
     start_at: "",
-    num_of_adults: 1,
+    num_of_adults: 2,
     num_of_children: 0,
     num_of_infants: 0,
     tour_id: DetailTour?.id,
@@ -55,9 +51,13 @@ const MainDataBookingForm: React.FC<MainDataBookingFormProps> = ({
     phone_code: "+20",
   };
 
-  const handleSubmit = (values, { setSubmitting }) => {
+  const handleOpenModal = (values) => {
+    if (!selectedDate) {
+      setShowValidationAlert(true);
+      notify("error", "Please select a date and Passengers before proceeding."); // Show notification
+      return;
+    }
     setIsModalOpen(true);
-    setSubmitting(false);
   };
 
   const handleConfirmBooking = (values) => {
@@ -73,9 +73,11 @@ const MainDataBookingForm: React.FC<MainDataBookingFormProps> = ({
 
   return (
     <div className="relative">
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        {({ values, setFieldValue, handleSubmit, isSubmitting }) => (
+      <Formik initialValues={initialValues} onSubmit={() => {}}>
+        {({ values, setFieldValue }) => (
           <Form>
+            {showValidationAlert && ""}
+
             <DatePickerInput
               selectedDate={selectedDate}
               onDateChange={handleDateChange}
@@ -83,51 +85,75 @@ const MainDataBookingForm: React.FC<MainDataBookingFormProps> = ({
               laptopWidth="100%"
               height="40px"
               labelProps={{
-                fontSize: "14px",
-                color: "rgba(0, 0, 0, 0.6)",
-                transform: "translate(14px, 12px) scale(1)",
+                fontSize: "19px",
+                color: "smoke",
+                transform: "translate(14px, 8px) scale(1)",
               }}
             />
 
             <div className="mt-4 relative">
-              <Button
-                variant="outlined"
-                className="bg-white text-black border-gray-400 hover:border-green-400 hover:bg-gray-200 w-full"
+              <div
+                className="hover:bg-gray-100 cursor-pointer bg-white border-2 border-gray-300 p-2 flex flex-wrap justify-around items-center text-base font-semibold rounded-lg text-gray-500"
                 onClick={() => setOpenPassengers(!openPassengers)}
               >
-                {`Adults: ${values.num_of_adults}, Children: ${values.num_of_children}, Infants: ${values.num_of_infants}`}
-              </Button>
+                <span className="break-words w-full">
+                  Adults: {values.num_of_adults}, Children:{" "}
+                  {values.num_of_children}, Infants: {values.num_of_infants}
+                </span>
+              </div>
 
               {openPassengers && (
-                <div
-                  className="absolute top-full left-0 right-0 z-10 bg-white p-4 rounded-md shadow-md mt-2"
-                  style={{ maxHeight: "300px", overflowY: "auto" }}
-                >
+                <div className="absolute top-full left-0 right-0 z-10 bg-white p-4 rounded-md shadow-md mt-2">
                   {[
-                    { label: "Adults", name: "num_of_adults" },
-                    { label: "Children", name: "num_of_children" },
-                    { label: "Infants", name: "num_of_infants" },
-                  ].map(({ label, name }) => (
+                    {
+                      label: "Adults (17-99)",
+                      name: "num_of_adults",
+                      min: 2,
+                      max: 15,
+                      initial: 2,
+                    },
+                    {
+                      label: "Children (3-16)",
+                      name: "num_of_children",
+                      min: 0,
+                      max: 15,
+                      initial: 0,
+                    },
+                    {
+                      label: "Infants (0-2)",
+                      name: "num_of_infants",
+                      min: 0,
+                      max: 15,
+                      initial: 0,
+                    },
+                  ].map(({ label, name, min, max, initial }) => (
                     <div
                       key={label}
                       className="flex justify-between items-center mb-4"
                     >
-                      <span>{label}</span>
+                      <div>
+                        <span>{label}</span>
+                        <div className="text-sm text-gray-500">
+                          Minimum: {min}, Maximum: {max}
+                        </div>
+                      </div>
                       <div className="flex items-center space-x-2">
                         <button
                           type="button"
                           onClick={() =>
-                            setFieldValue(name, Math.max(0, values[name] - 1))
+                            setFieldValue(name, Math.max(min, values[name] - 1))
                           }
-                          className="p-2 border border-gray-300 rounded-md hover:bg-gray-100 active:bg-gray-200 transition duration-150"
+                          className="p-2 bg-gray-100 text-green-600 rounded-full flex items-center justify-center focus:outline-none hover:bg-green-200 transition-colors"
                         >
                           <Minus size={16} />
                         </button>
-                        <span>{values[name]}</span>
+                        <span>{values[name] ?? initial}</span>
                         <button
                           type="button"
-                          onClick={() => setFieldValue(name, values[name] + 1)}
-                          className="p-2 border border-gray-300 rounded-md hover:bg-gray-100 active:bg-gray-200 transition duration-150"
+                          onClick={() =>
+                            setFieldValue(name, Math.min(max, values[name] + 1))
+                          }
+                          className="p-2 bg-gray-100 text-green-600 rounded-full flex items-center justify-center focus:outline-none hover:bg-green-200 transition-colors"
                         >
                           <Plus size={16} />
                         </button>
@@ -150,8 +176,7 @@ const MainDataBookingForm: React.FC<MainDataBookingFormProps> = ({
 
             <Button
               variant="contained"
-              color="primary"
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => handleOpenModal(values)}
               className="mt-4 w-full bg-green-900 hover:bg-green-600"
             >
               Book Now
@@ -215,7 +240,6 @@ const MainDataBookingForm: React.FC<MainDataBookingFormProps> = ({
                     </Button>
                     <Button
                       variant="contained"
-                      color="primary"
                       onClick={() => handleConfirmBooking(values)}
                       className="ml-2 bg-green-900 hover:bg-green-600"
                     >
@@ -229,6 +253,7 @@ const MainDataBookingForm: React.FC<MainDataBookingFormProps> = ({
         )}
       </Formik>
       {isPending && <Spinner />}
+      <ToastContainer />
     </div>
   );
 };

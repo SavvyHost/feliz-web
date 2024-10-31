@@ -14,7 +14,8 @@ import { notify } from "@/utils/toast";
 import { Spinner } from "../UI/Spinner";
 import Thanks from "@/components/molecules/Thanks";
 import SelectMonth from "@/components/molecules/selects/SelectMonth";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function BookingFormModal({ DetailTour }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDatePickerModalOpen, setIsDatePickerModalOpen] = useState(false);
@@ -237,6 +238,7 @@ export default function BookingFormModal({ DetailTour }) {
           </div>
         </Modal>
       )}
+      <ToastContainer />
     </>
   );
 }

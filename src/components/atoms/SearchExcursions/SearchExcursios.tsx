@@ -55,7 +55,7 @@ const SearchExcursions: React.FC = () => {
           }}
         />
 
-        <button className="hidden sm:block bg-[#232323] text-white font-segoe rounded-md px-4 py-2 flex items-center text-center justify-center">
+        <button className="hidden sm:block text-gray-400 hover:bg-gray-100 bg-white border-2 border-gray-300 font-segoe rounded-md px-4 py-[6px] flex items-center text-center justify-center">
           Search
         </button>
       </div>

@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react"; // Import useEffect
 import { Formik, Form, Field } from "formik";
 import { Calendar, CalendarClock, MapPin } from "lucide-react";
 import PhoneInput from "react-phone-number-input";
 import { FaCheckCircle, FaCircle, FaEnvelope, FaUser } from "react-icons/fa";
 import dayjs from "dayjs";
-
+import "react-toastify/dist/ReactToastify.css";
 // Assuming these components are imported or defined elsewhere
 import BaseInputField from "@/components/molecules/formik-fields/BaseInputField";
 import SelectMonth from "@/components/molecules/selects/SelectMonth";
@@ -15,6 +15,7 @@ import { Spinner } from "../UI/Spinner";
 import { notify } from "@/utils/toast";
 import { Stepper, Step, StepLabel, Button } from "@mui/material";
 import { useMutate } from "@/hooks/UseMutate";
+import { ToastContainer } from "react-toastify";
 
 function IntegratedBookingForm({ DetailTour, setIsThanksVisible }) {
   const { mutate, isPending } = useMutate({
@@ -206,47 +207,66 @@ function IntegratedBookingForm({ DetailTour, setIsThanksVisible }) {
           <StepLabel>Choose Dates</StepLabel>
         </Step>
         <Step>
-          <StepLabel>Enter Details</StepLabel>
+          <StepLabel>Personal Details</StepLabel>
         </Step>
       </Stepper>
       <Formik
         initialValues={{
           name: "",
           email: "",
-          nationality_id: "",
-          month: "",
           phone: "",
-          num_of_adults: 1,
+          month: "",
+          num_of_adults: 0,
           num_of_children: 0,
           num_of_infants: 0,
-          tour_id: DetailTour?.id,
-          duration: "",
-          phone_code: "+20",
+          nationality_id: "",
+          details: "",
         }}
         onSubmit={handleSubmit}
       >
-        {({ setFieldValue, values, isSubmitting }) => (
+        {({ values, setFieldValue, isSubmitting }) => (
           <Form>
             {step === 0
               ? renderStep1(values, setFieldValue)
               : renderStep2(values, setFieldValue)}
-            <div className="flex justify-end mt-6 space-x-4">
-              {step > 0 && (
+            <div className="flex justify-between mt-4">
+              {step === 1 && ( // Only show the Back button in the second step
                 <Button
-                  className="bg-green-500 text-white hover:bg-green-800"
-                  onClick={() => setStep(step - 1)}
+                  type="button"
+                  onClick={() => setStep((prev) => Math.max(prev - 1, 0))}
+                  className="bg-blue-600 hover:bg-blue-700 text-white rounded-md px-4 py-2"
                 >
                   Back
                 </Button>
               )}
-              <Button
-                className="bg-green-500 text-white hover:bg-green-800"
-                type="submit"
-                disabled={isSubmitting || (step === 1 && !values.phone)}
-              >
-                {step === 1 ? isPending ? <Spinner /> : "Submit" : "Next"}
-              </Button>
+              <div className="flex flex-grow justify-end">
+                {" "}
+                {/* Adjusted this div */}
+                <Button
+                  type="submit"
+                  disabled={
+                    isSubmitting ||
+                    (step === 0 &&
+                      values.num_of_adults +
+                        values.num_of_children +
+                        values.num_of_infants ===
+                        0)
+                  }
+                  className="bg-blue-600 text-white rounded-md px-4 py-2 hover:bg-blue-700"
+                >
+                  {step === 1 ? (
+                    isPending ? (
+                      <Spinner size={20} />
+                    ) : (
+                      "Book Now"
+                    )
+                  ) : (
+                    "Next"
+                  )}
+                </Button>
+              </div>
             </div>
+            <ToastContainer />
           </Form>
         )}
       </Formik>

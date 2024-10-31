@@ -77,7 +77,7 @@ const ExcursionsTab: React.FC<ExcursionsTabProps> = ({ toursData }) => {
         ""
       )}
 
-      <div className="w-full md:w-3/4 mb-5 lg:mt-0 mt-24  lg:mb-4 px-2">
+      <div className="w-full md:w-3/4 mb-5 lg:mt-0   lg:mb-4 px-2">
         <TravelPackagePage toursData={toursData} />
       </div>
 

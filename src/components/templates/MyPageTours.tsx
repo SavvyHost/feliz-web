@@ -20,12 +20,7 @@ interface MyPageProps {
 const MyPageTours: React.FC<MyPageProps> = ({ DetailTour }) => {
   return (
     <div>
-      <ImageGallery
-        title={DetailTour.title}
-        breadcrumb={["Home", "Tours", DetailTour.title]}
-        mainContent={DetailTour.description}
-        images={DetailTour.images}
-      />
+      <ImageGallery DetailTour={DetailTour} />
       <div className="p-4 lg:p-0">
         <TripInfo DetailTour={DetailTour} />
       </div>

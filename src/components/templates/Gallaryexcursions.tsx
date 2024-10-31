@@ -10,12 +10,7 @@ interface MyPageProps {
 const GallaryExcusrions: React.FC<MyPageProps> = ({ DetailTour }) => {
   return (
     <div>
-      <ImageGallery
-        title={DetailTour.title}
-        breadcrumb={["Home", "Tours", DetailTour.title]}
-        mainContent={DetailTour.description}
-        images={DetailTour.images}
-      />
+      <ImageGallery DetailTour={DetailTour} />
     </div>
   );
 };

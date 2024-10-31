@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Facebook, Instagram, Twitter, Globe, Menu, Heart } from "lucide-react";
 import MobileMenu from "./MobileMenu";
 import DesktopMenu from "./DesktopMenu";
+import { useRouter } from "next/router";
 
 export const Header = ({ header, className }: any) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,6 +37,22 @@ export const Header = ({ header, className }: any) => {
   const handleLanguageChange = () => {
     alert("Language change button clicked!");
   };
+
+  const [wishlistCount, setWishlistCount] = useState(0);
+  const router = useRouter();
+
+  const handleWishlistClick = () => {
+    router.push("/wishlist", undefined, { scroll: true }).then(() => {
+      window.location.reload(); // Use window.location.reload() instead of router.refresh()
+    });
+  };
+
+  useEffect(() => {
+    const savedWishlist = localStorage.getItem("wishlist");
+    if (savedWishlist) {
+      setWishlistCount(JSON.parse(savedWishlist).length);
+    }
+  }, []);
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -82,8 +99,15 @@ export const Header = ({ header, className }: any) => {
             >
               <Globe className="w-6 h-6 text-black" />
             </button>
-            <button className="block focus:outline-none">
-              <Heart className="w-6 h-6 text-black" />
+            <button
+              onClick={handleWishlistClick}
+              className="relative  text-gray-600 hover:text-gray-900"
+            >
+              <Heart className="w-6 h-6" />
+
+              <span className="absolute -top-[10px] -right-[12px] bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                {wishlistCount}
+              </span>
             </button>
             <Link
               href="/inquire"

@@ -152,17 +152,20 @@ const FilterModal: React.FC<FilterModalProps> = ({
             zIndex: 1,
           }}
         >
-          <Button onClick={handleClearFilters} variant="outlined" color="info">
+          <div
+            onClick={handleClearFilters}
+            color="primary"
+            className="transition-colors hover:bg-red-300 hover:border-red-300 px-2 cursor-pointer bg-red-50 text-red-400 hover:text-white border-2 border-gray-300 p-2 rounded-lg"
+          >
             Clear All
-          </Button>
-          <Button
+          </div>
+          <div
             onClick={handleApplyFilters}
-            variant="contained"
-            className="bg-green-700 hover:bg-green-400 hover:text-black text-white"
+            className="transition-colors hover:bg-blue-300 hover:border-blue-300 px-2 cursor-pointer bg-blue-50 text-blue-400 hover:text-white border-2 border-gray-300 p-2 rounded-lg"
             color="primary"
           >
             Apply Filters
-          </Button>
+          </div>
         </Box>
       </Box>
     </Modal>
