@@ -4,12 +4,15 @@ import { Facebook, Instagram, Twitter, Globe, Menu, Heart } from "lucide-react";
 import MobileMenu from "./MobileMenu";
 import DesktopMenu from "./DesktopMenu";
 import { useRouter } from "next/router";
+import { useWishlist } from "@/contexts/wishlist-context";
 
 export const Header = ({ header, className }: any) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const [isDesktop, setIsDesktop] = useState(false);
+  const router = useRouter();
+  const { wishlistCount } = useWishlist();
 
   useEffect(() => {
     const handleResize = () => {
@@ -38,21 +41,9 @@ export const Header = ({ header, className }: any) => {
     alert("Language change button clicked!");
   };
 
-  const [wishlistCount, setWishlistCount] = useState(0);
-  const router = useRouter();
-
   const handleWishlistClick = () => {
-    router.push("/wishlist", undefined, { scroll: true }).then(() => {
-      window.location.reload(); // Use window.location.reload() instead of router.refresh()
-    });
+    router.push("/wishlist");
   };
-
-  useEffect(() => {
-    const savedWishlist = localStorage.getItem("wishlist");
-    if (savedWishlist) {
-      setWishlistCount(JSON.parse(savedWishlist).length);
-    }
-  }, []);
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -93,21 +84,16 @@ export const Header = ({ header, className }: any) => {
           {/* Right side - Social Icons, Language Change, and Book Tour Button */}
           <div className="flex items-center lg:w-1/3 justify-end space-x-4">
             <button
-              className="lg:block hidden focus:outline-none"
-              onClick={handleLanguageChange}
-              title="Change Language"
-            >
-              <Globe className="w-6 h-6 text-black" />
-            </button>
-            <button
               onClick={handleWishlistClick}
-              className="relative  text-gray-600 hover:text-gray-900"
+              className="relative text-gray-600 hover:text-gray-900"
+              aria-label={`View wishlist containing ${wishlistCount} items`}
             >
-              <Heart className="w-6 h-6" />
-
-              <span className="absolute -top-[10px] -right-[12px] bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                {wishlistCount}
-              </span>
+              <Heart className="w-5 h-5" />
+              {wishlistCount > 0 && (
+                <span className="absolute -top-[10px] -right-[12px] bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {wishlistCount}
+                </span>
+              )}
             </button>
             <Link
               href="/inquire"

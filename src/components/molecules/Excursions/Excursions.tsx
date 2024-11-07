@@ -1,91 +1,113 @@
-import { TourPackage } from "@/types/tour";
-import { Button } from "@mui/material";
-import Image from "next/image";
+import React from "react";
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
-import {
-  BsClock,
-  BsFillCircleFill,
-  BsHeart,
-  BsLuggage,
-  BsMap,
-} from "react-icons/bs";
+import { Clock, Heart, Luggage, MapPin } from "lucide-react";
+import { useWishlist } from "@/contexts/wishlist-context";
 
-interface ExcursionsProps {
-  toursData: TourPackage[];
+interface ExcursionCardProps {
+  id: number;
+  title: string;
+  location: string;
+  price: number;
+  image: StaticImageData;
+  rating: number;
+  duration: number;
+  ageRange: string;
+  destination: string;
 }
 
-export default function ExcursionsCardTour({ toursData }: ExcursionsProps) {
-  const dataToDisplay = toursData;
+const ExcursionCard: React.FC<ExcursionCardProps> = ({
+  id,
+  title,
+  location,
+  price,
+  destination,
+  image,
+  rating,
+  duration,
+  ageRange,
+}) => {
+  const { toggleWishlist, isInWishlist } = useWishlist();
 
   return (
-    <div className="relative">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
-        {dataToDisplay?.length ? (
-          dataToDisplay.map((excursion: TourPackage) => (
-            <div key={excursion.id} className="px-[5px] md:px-[5px] mb-3">
-              <Link href={`/top-excursions/${excursion.id}`}>
-                <div className="px-[4px] mb-3">
-                  <div className="flex flex-col max-w-lg mx-auto cursor-pointer hover:shadow-xl  rounded-2xl overflow-hidden  h-[450px] transition-all duration-300 ease-in-out">
-                    <div className="relative h-72 overflow-hidden">
-                      <Image
-                        className="w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-105"
-                        src={excursion.main_image.url}
-                        alt={excursion.title}
-                        width={100}
-                        height={100}
-                      />
-                      <div className="absolute top-2 left-2 bg-green-800 text-white text-xs font-segoe font-medium px-2 py-1 rounded">
-                        Top Rated
-                      </div>
-                      <Button className="absolute top-2 right-2 text-white hover:text-red-500">
-                        <BsHeart size={24} />
-                      </Button>
-                    </div>
-                    <div className="flex flex-col flex-grow px-4 py-4">
-                      <div className="flex items-center text-gray-600 text-sm mb-2 font-segoe">
-                        <BsMap size={16} className="mr-1" />
-                        <span className="font-segoe">
-                          {excursion.destination}
-                        </span>
-                      </div>
-                      <h2 className="font-segoe text-xl mb-2 truncate">
-                        {excursion.title}
-                      </h2>
-                      <div className="flex items-center text-gray-600 text-sm mb-4">
-                        <BsClock size={16} className="mr-1" />
-                        <span>{excursion.duration} Hours</span>
-                      </div>
-                      <div className="flex items-center text-gray-600 text-sm mb-4">
-                        <BsLuggage size={16} className="mr-3" />
-                        <span>Age Range : {excursion.age_range} </span>
-                      </div>
-
-                      <div className="text-sm">
-                        <span className="line-through text-gray-500">
-                          From ${excursion.min_price}
-                        </span>
-                      </div>
-                      <div className="mt-1">
-                        <span className="font-segoe text-xl text-green-700">
-                          From $
-                          {excursion.tour_prices[0]?.prices[0]?.price || "N/A"}
-                        </span>
-                        <span className="text-gray-600 text-sm"> / Person</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </div>
-          ))
-        ) : (
-          <div className="col-span-4 mt-10">
-            <p className="flex justify-center font-extrabold ">
-              Not Found Data
-            </p>
+    <Link
+      href={`/top-excursions/${id}`}
+      className="block group transition-transform"
+    >
+      <div className=" rounded-3xl overflow-hidden hover:shadow-lg transition-shadow duration-300">
+        <div className="relative aspect-[4/3] w-full overflow-hidden">
+          <Image
+            src={image}
+            alt={title}
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+          <div className="absolute top-3 left-3">
+            <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-green-600 text-white">
+              Top Rated
+            </span>
           </div>
-        )}
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              toggleWishlist({
+                id,
+                title,
+                location,
+                price,
+                image,
+                rating,
+                duration,
+                destination,
+                ageRange,
+              });
+            }}
+            className="absolute top-2 right-2 p-2 rounded-full text-white hover:text-green-500 hover:bg-white/20 transition-colors"
+          >
+            <Heart
+              className={`h-5 w-5 ${isInWishlist(id) ? "text-green-500" : ""}`}
+            />
+          </button>
+        </div>
+
+        <div className="p-4">
+          <div className="flex items-center gap-1.5 text-sm text-gray-600 mb-2">
+            <MapPin className="h-4 w-4" />
+            <span className="truncate">{destination}</span>
+          </div>
+
+          <h2 className="font-medium text-base sm:text-lg mb-3 line-clamp-2 group-hover:underline group-hover:text-green-600 transition-colors">
+            {title}
+          </h2>
+
+          <div className="space-y-3 flex-col justify-between text-sm text-gray-600 mb-4">
+            <div className="flex items-center gap-1.5">
+              <Clock className="h-4 w-4" />
+              <span>{duration} Hours</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <Luggage className="h-4 w-4" />
+              <span>Age: {ageRange}</span>
+            </div>
+          </div>
+
+          <div>
+            <div className="text-sm">
+              <span className="line-through text-gray-500">
+                From ${price + 20}
+              </span>
+            </div>
+            <div className="flex items-baseline gap-1 mt-1">
+              <span className="text-lg font-medium text-green-600">
+                From ${price}
+              </span>
+              <span className="text-sm text-gray-600">/ Person</span>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </Link>
   );
-}
+};
+
+export default ExcursionCard;

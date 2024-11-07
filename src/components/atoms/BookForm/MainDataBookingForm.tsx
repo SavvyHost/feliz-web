@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react"; // Import useEffect
+import React, { useState, useEffect } from "react";
 import { Formik, Form, Field } from "formik";
 import { Calendar, CalendarClock, MapPin } from "lucide-react";
 import PhoneInput from "react-phone-number-input";
 import { FaCheckCircle, FaCircle, FaEnvelope, FaUser } from "react-icons/fa";
 import dayjs from "dayjs";
 import "react-toastify/dist/ReactToastify.css";
-// Assuming these components are imported or defined elsewhere
 import BaseInputField from "@/components/molecules/formik-fields/BaseInputField";
 import SelectMonth from "@/components/molecules/selects/SelectMonth";
 import SelectNationality from "@/components/molecules/selects/SelectNationality";
@@ -55,7 +54,43 @@ function IntegratedBookingForm({ DetailTour, setIsThanksVisible }) {
     }
   };
 
-  const renderStep1 = (values, setFieldValue) => (
+  const validate = (values) => {
+    const errors = {};
+
+    if (step === 0) {
+      if (!values.month) {
+        errors.month = "Month is required";
+      }
+      if (!selectedDate) {
+        errors.date = "Date is required";
+      }
+      if (
+        values.num_of_adults +
+          values.num_of_children +
+          values.num_of_infants ===
+        0
+      ) {
+        errors.travelers = "At least one traveler is required";
+      }
+    } else if (step === 1) {
+      if (!values.name) {
+        errors.name = "Name is required";
+      }
+      if (!values.email) {
+        errors.email = "Email is required";
+      }
+      if (!values.nationality_id) {
+        errors.nationality_id = "Nationality is required";
+      }
+      if (!values.phone) {
+        errors.phone = "Phone number is required";
+      }
+    }
+
+    return errors;
+  };
+
+  const renderStep1 = (values, setFieldValue, errors) => (
     <>
       <div className="grid grid-cols-1 gap-4 mb-4">
         <Dropdown
@@ -69,7 +104,11 @@ function IntegratedBookingForm({ DetailTour, setIsThanksVisible }) {
       </div>
       <div className="grid grid-cols-1 gap-4 mb-4">
         <div className="relative">
-          <SelectMonth name="month" placeholder="Select Month" />
+          <SelectMonth
+            name="month"
+            placeholder="Select Month"
+            error={errors.month}
+          />
           <div className="absolute left-3 top-5 text-gray-400">
             <Calendar size={16} />
           </div>
@@ -92,6 +131,9 @@ function IntegratedBookingForm({ DetailTour, setIsThanksVisible }) {
               </span>
             )}
           </button>
+          {errors.date && (
+            <p className="text-red-500 text-sm mt-1">{errors.date}</p>
+          )}
         </div>
       </div>
       <DatePickerModal
@@ -139,10 +181,13 @@ function IntegratedBookingForm({ DetailTour, setIsThanksVisible }) {
           </div>
         ))}
       </div>
+      {errors.travelers && (
+        <p className="text-red-500 text-sm mb-4">{errors.travelers}</p>
+      )}
     </>
   );
 
-  const renderStep2 = (values, setFieldValue) => (
+  const renderStep2 = (values, setFieldValue, errors) => (
     <>
       <div className="grid grid-cols-1 gap-4 mb-4">
         <div className="relative">
@@ -150,6 +195,7 @@ function IntegratedBookingForm({ DetailTour, setIsThanksVisible }) {
             name="name"
             placeholder="Name"
             type="text"
+            error={errors.name}
             className="block w-full pl-10 bg-[#f0f1f2] focus:bg-transparent text-black text-sm border outline-[#007bff] rounded transition-all"
           />
           <div className="absolute left-3 top-5 text-gray-400">
@@ -161,6 +207,7 @@ function IntegratedBookingForm({ DetailTour, setIsThanksVisible }) {
             name="email"
             placeholder="Email"
             type="email"
+            error={errors.email}
             className="block w-full pl-10 bg-[#f0f1f2] focus:bg-transparent text-black text-sm border outline-[#007bff] rounded transition-all"
           />
           <div className="absolute left-3 top-5 text-gray-400">
@@ -170,7 +217,11 @@ function IntegratedBookingForm({ DetailTour, setIsThanksVisible }) {
       </div>
       <div className="grid grid-cols-1 gap-4 mb-4">
         <div className="relative">
-          <SelectNationality name="nationality_id" placeholder="Nationality" />
+          <SelectNationality
+            name="nationality_id"
+            placeholder="Nationality"
+            error={errors.nationality_id}
+          />
           <div className="absolute left-3 top-5 text-gray-400">
             <MapPin size={16} />
           </div>
@@ -181,6 +232,7 @@ function IntegratedBookingForm({ DetailTour, setIsThanksVisible }) {
             value={values.phone}
             onChange={(value) => setFieldValue("phone", value)}
             defaultCountry="EG"
+            error={errors.phone}
             className="block w-full my-3 mt-2 pb-3 p-2 bg-[#f0f1f2] focus:bg-transparent text-black text-sm border outline-[#007bff] rounded transition-all"
             inputStyle={{
               textAlign: "center",
@@ -223,14 +275,15 @@ function IntegratedBookingForm({ DetailTour, setIsThanksVisible }) {
           details: "",
         }}
         onSubmit={handleSubmit}
+        validate={validate}
       >
-        {({ values, setFieldValue, isSubmitting }) => (
+        {({ values, setFieldValue, isSubmitting, errors }) => (
           <Form>
             {step === 0
-              ? renderStep1(values, setFieldValue)
-              : renderStep2(values, setFieldValue)}
+              ? renderStep1(values, setFieldValue, errors)
+              : renderStep2(values, setFieldValue, errors)}
             <div className="flex justify-between mt-4">
-              {step === 1 && ( // Only show the Back button in the second step
+              {step === 1 && (
                 <Button
                   type="button"
                   onClick={() => setStep((prev) => Math.max(prev - 1, 0))}
@@ -240,17 +293,23 @@ function IntegratedBookingForm({ DetailTour, setIsThanksVisible }) {
                 </Button>
               )}
               <div className="flex flex-grow justify-end">
-                {" "}
-                {/* Adjusted this div */}
                 <Button
                   type="submit"
                   disabled={
                     isSubmitting ||
                     (step === 0 &&
-                      values.num_of_adults +
-                        values.num_of_children +
-                        values.num_of_infants ===
-                        0)
+                      (errors.month ||
+                        errors.date ||
+                        errors.travelers ||
+                        values.num_of_adults +
+                          values.num_of_children +
+                          values.num_of_infants ===
+                          0)) ||
+                    (step === 1 &&
+                      (errors.name ||
+                        errors.email ||
+                        errors.nationality_id ||
+                        errors.phone))
                   }
                   className="bg-blue-600 text-white rounded-md px-4 py-2 hover:bg-blue-700"
                 >

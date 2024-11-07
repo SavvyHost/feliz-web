@@ -1,12 +1,29 @@
 import React, { useState } from "react";
-import { Calendar, Globe, MapPin, Users } from "lucide-react";
+import { Calendar, Globe, Heart, MapPin, Users } from "lucide-react";
 import defaultImage from "../../../../public/assets/Secondimage.jpeg";
 import Link from "next/link";
 import { Button } from "@mui/material";
-import { ToursData } from "@/types/tour";
 import Pagination from "../Pagination";
 import Image from "next/image";
 import { FaWhatsapp } from "react-icons/fa";
+import { useWishlist } from "@/contexts/wishlist-context";
+
+interface Tour {
+  id: number;
+  title: string;
+  destination: string;
+  duration: number;
+  age_range: string;
+  run: string;
+  min_price: number;
+  main_image: {
+    url: string;
+  } | null;
+}
+
+interface ToursData {
+  data: Tour[];
+}
 
 interface TravelPackagePageProps {
   toursData: ToursData;
@@ -15,6 +32,7 @@ interface TravelPackagePageProps {
 const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const toursPerPage = 6;
+  const { toggleWishlist, isInWishlist } = useWishlist();
 
   const handlePageChange = (selectedItem: { selected: number }) => {
     setCurrentPage(selectedItem.selected);
@@ -24,6 +42,12 @@ const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
   const indexOfFirstTour = indexOfLastTour - toursPerPage;
   const currentTours = toursData.data.slice(indexOfFirstTour, indexOfLastTour);
   const pageCount = Math.ceil(toursData.data.length / toursPerPage);
+
+  const handleWishlistClick = (e: React.MouseEvent, tour: Tour) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleWishlist(tour);
+  };
 
   return (
     <div className="w-full">
@@ -43,6 +67,19 @@ const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
                   <div className="absolute top-5 left-5 bg-green-500 text-white px-3 py-1 text-sm font-segoe rounded-sm shadow-md">
                     Special Offer 20%
                   </div>
+
+                  <button
+                    onClick={(e) => handleWishlistClick(e, pkg)}
+                    className="absolute top-2 right-2 bg-white p-1 rounded-lg shadow-md hover:bg-gray-100 transition-colors duration-200 group"
+                  >
+                    <Heart
+                      className={`w-6 h-6 ${
+                        isInWishlist(pkg.id)
+                          ? "text-green-500"
+                          : "text-gray-600"
+                      } hover:text-green-500`}
+                    />
+                  </button>
                 </div>
                 <div className="w-full md:w-3/5 p-6 flex flex-col justify-between">
                   <div>
@@ -51,6 +88,7 @@ const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
                         <h2 className="lg:text-2xl text-xl font-bold text-gray-800">
                           {pkg.title}
                         </h2>
+
                         {/* <div className="flex items-center mt-1">
                           {[1, 2, 3, 4, 5].map((star) => (
                             <svg

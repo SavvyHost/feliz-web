@@ -74,7 +74,7 @@ const TimeDetails: React.FC<CityDetailsProps> = ({ formData, onChange }) => {
       <Typography
         variant="h4"
         gutterBottom
-        className="text-3xl font-bold text-blue-800 mb-6"
+        className="text-3xl font-bold text-green-800 mb-6"
       >
         When will you embark on your journey?
       </Typography>
@@ -98,7 +98,7 @@ const TimeDetails: React.FC<CityDetailsProps> = ({ formData, onChange }) => {
           control={<Radio color="primary" />}
           label={
             <div className="flex items-center space-x-2">
-              <Calendar className="w-5 h-5 text-blue-500" />
+              <Calendar className="w-5 h-5 text-green-500" />
               <span className="text-lg">I know the exact dates</span>
             </div>
           }
@@ -124,7 +124,10 @@ const TimeDetails: React.FC<CityDetailsProps> = ({ formData, onChange }) => {
 
       <Fade in={dateOption === "approximate"}>
         <div className={dateOption === "approximate" ? "block" : "hidden"}>
-          <Typography variant="h6" className="font-semibold text-blue-700 mb-4">
+          <Typography
+            variant="h6"
+            className="font-semibold text-green-700 mb-4"
+          >
             Which month do you plan to travel?
           </Typography>
           <Grid container spacing={2} className="mb-8">
@@ -133,8 +136,8 @@ const TimeDetails: React.FC<CityDetailsProps> = ({ formData, onChange }) => {
                 <button
                   className={`w-full h-12 rounded-lg transition-transform duration-200 ${
                     approximateMonth === month
-                      ? "bg-blue-500 text-white transform translate-y-[-2px]"
-                      : "bg-white border border-blue-300 text-blue-700"
+                      ? "bg-green-500 text-white transform translate-y-[-2px]"
+                      : "bg-white border border-green-300 text-green-700"
                   } hover:shadow-lg`}
                   onClick={() => handleApproximateDateChange(month, duration)}
                 >
@@ -144,7 +147,10 @@ const TimeDetails: React.FC<CityDetailsProps> = ({ formData, onChange }) => {
             ))}
           </Grid>
 
-          <Typography variant="h6" className="font-semibold text-blue-700 mb-4">
+          <Typography
+            variant="h6"
+            className="font-semibold text-green-700 mb-4"
+          >
             How long will your adventure last?
           </Typography>
           <Grid container spacing={2}>
@@ -153,8 +159,8 @@ const TimeDetails: React.FC<CityDetailsProps> = ({ formData, onChange }) => {
                 <button
                   className={`w-full h-12 rounded-lg transition-transform duration-200 ${
                     duration === length
-                      ? "bg-blue-500 text-white transform translate-y-[-2px]"
-                      : "bg-white border border-blue-300 text-blue-700"
+                      ? "bg-green-500 text-white transform translate-y-[-2px]"
+                      : "bg-white border border-green-300 text-green-700"
                   } hover:shadow-lg`}
                   onClick={() =>
                     handleApproximateDateChange(approximateMonth, length)

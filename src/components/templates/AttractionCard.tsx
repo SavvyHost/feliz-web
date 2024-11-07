@@ -1,74 +1,13 @@
-import React, { useEffect, useState, useRef } from "react";
-import Image, { StaticImageData } from "next/image";
+import React, { useRef } from "react";
+import Image from "next/image";
 import { useRouter } from "next/router";
-import defaultImage from "../../../public/assets/camels.jpeg";
 import { FaStar, FaRegStar, FaHeart, FaRegHeart } from "react-icons/fa";
-
-interface AttractionCardProps {
-  id: number;
-  title: string;
-  location?: string;
-  price: number;
-  image: StaticImageData;
-  rating: number;
-  duration: string;
-  ageRange: string;
-  isFeatured?: boolean;
-  isOnSale?: boolean;
-}
-
-const useWishlist = () => {
-  const [wishlist, setWishlist] = useState<AttractionCardProps[]>([]);
-
-  useEffect(() => {
-    loadWishlist();
-  }, []);
-
-  const loadWishlist = () => {
-    try {
-      const savedWishlist = localStorage.getItem("wishlist");
-      if (savedWishlist) {
-        const parsed = JSON.parse(savedWishlist);
-        if (Array.isArray(parsed)) {
-          setWishlist(parsed);
-        } else {
-          throw new Error("Invalid wishlist format");
-        }
-      }
-    } catch (error) {
-      console.error("Error loading wishlist:", error);
-      localStorage.removeItem("wishlist");
-      setWishlist([]);
-    }
-  };
-
-  const saveWishlist = (newWishlist: AttractionCardProps[]) => {
-    try {
-      localStorage.setItem("wishlist", JSON.stringify(newWishlist));
-    } catch (error) {
-      console.error("Error saving wishlist:", error);
-    }
-  };
-
-  const toggleWishlist = (attraction: AttractionCardProps) => {
-    setWishlist((prev) => {
-      const isInWishlist = prev.some((item) => item.id === attraction.id);
-      const newWishlist = isInWishlist
-        ? prev.filter((item) => item.id !== attraction.id)
-        : [...prev, { ...attraction }];
-
-      saveWishlist(newWishlist);
-      return newWishlist;
-    });
-  };
-
-  const isInWishlist = (id: number) => wishlist.some((item) => item.id === id);
-
-  return { wishlist, toggleWishlist, isInWishlist };
-};
+import { useWishlist } from "@/contexts/wishlist-context";
+import { AttractionCardProps } from "@/types/attraction";
 
 const AttractionCard: React.FC<AttractionCardProps> = ({
   id,
+  type,
   title,
   location,
   price,
@@ -78,6 +17,11 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
   ageRange,
   isFeatured = false,
   isOnSale = true,
+  age_range,
+  run,
+  min_price,
+  main_image,
+  destination,
 }) => {
   const { toggleWishlist, isInWishlist } = useWishlist();
   const router = useRouter();
@@ -104,11 +48,12 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
   };
 
   const handleNavigate = () => {
-    router.push(`/top-packages/${id}`);
+    router.push(
+      `${type === "tour_package" ? "/top-packages" : "/top-excursions"}/${id}`
+    );
   };
 
   const handleWishlistClick = (e: React.MouseEvent) => {
-    window.location.reload();
     e.preventDefault();
     e.stopPropagation();
 
@@ -123,6 +68,12 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
       ageRange,
       isFeatured,
       isOnSale,
+      age_range,
+      run,
+      min_price,
+      main_image,
+      destination,
+      type,
     };
 
     toggleWishlist(attraction);
@@ -133,41 +84,44 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
       ref={cardRef}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
-      className="flex group transition-all ease-in-out flex-col cursor-pointer overflow-hidden bg-transparent md:max-w-xs max-w-sm sm:mx-2 mx-3 my-2 sm:my-4 lg:my-6"
+      className="group h-full flex flex-col mb-3 duration-300 overflow-hidden cursor-pointer"
     >
-      <div className="relative h-60 w-full transition-shadow duration-300 group-hover:shadow-xl">
-        {" "}
-        {/* Apply shadow on hover here */}
-        <Image
-          src={image || defaultImage}
-          width={0}
-          height={0}
-          alt={title}
-          className="w-full rounded-md h-full object-cover"
-        />
+      <div className="relative">
+        <div className="absolute top-4 right-4 z-10">
+          <button
+            onClick={handleWishlistClick}
+            className="p-2 rounded-full bg-white/80 hover:bg-white transition-colors duration-200"
+            aria-label={
+              isInWishlist(id) ? "Remove from wishlist" : "Add to wishlist"
+            }
+          >
+            {isInWishlist(id) ? (
+              <FaHeart className="text-red-500 w-6 h-6" />
+            ) : (
+              <FaRegHeart className="text-gray-600 w-6 h-6" />
+            )}
+          </button>
+        </div>
+
+        <div className="relative h-48 w-full">
+          <Image
+            src={image || main_image?.url}
+            alt={title}
+            fill
+            className="object-cover group-hover:shadow-lg"
+            priority={false}
+          />
+        </div>
       </div>
-      <div className="absolute top-7 right-4 z-10">
-        <button
-          onClick={handleWishlistClick}
-          className="p-2 rounded-full  hover:bg-white transition-colors duration-200"
-          aria-label={
-            isInWishlist(id) ? "Remove from wishlist" : "Add to wishlist"
-          }
-        >
-          {isInWishlist(id) ? (
-            <FaHeart className="text-red-500 w-6 h-6" />
-          ) : (
-            <FaRegHeart className="text-black w-6 h-6" />
-          )}
-        </button>
-      </div>
-      <div className="flex-1 pt-3 flex flex-col h-72">
-        <h3 className="font-semibold text-lg font-segoe text-black mb-1 truncate group-hover:underline">
+
+      <div className="flex-1 flex flex-col p-4">
+        <h3 className="text-xl font-semibold mb-2 truncate group-hover:underline group-hover:text-blue-600">
           {title}
         </h3>
-        <p className="text-gray-600 text-sm mb-2 font-segoe">{location}</p>
+        {location && (
+          <p className="text-gray-600 mb-2 truncate text-sm">{location}</p>
+        )}
 
-        {/* Display rating as stars */}
         <div className="flex items-center mb-2">
           {Array.from({ length: 5 }, (_, index) =>
             index < rating ? (
@@ -178,17 +132,22 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
           )}
         </div>
 
-        {/* Display duration */}
-        <p className="text-gray-600 text-sm mb-2">Duration: {duration} days</p>
-
-        {/* Display age range */}
-        <p className="text-gray-600 text-sm mb-2">Age Range: {ageRange}</p>
-
-        <div className="mt-auto text-left">
-          <p className="text-black font-semibold text-lg font-segoe">
-            From ${price}
-          </p>
+        <div className="text-sm text-gray-600 mb-2">
+          Duration: {duration} {type === "tour_package" ? "days" : "hours"}
+          <p>Age Range: {ageRange || age_range}</p>
         </div>
+        <div className="text-sm text-gray-600 mb-1">
+          {destination && (
+            <p className="text-sm text-gray-600 mb-1">
+              Location: {destination}
+            </p>
+          )}
+          {run && <p className="text-sm text-gray-600 mb-1">Run: {run}</p>}
+        </div>
+
+        <p className="text-lg font-bold text-blue-600 mt-auto">
+          From ${price || min_price}
+        </p>
       </div>
     </div>
   );

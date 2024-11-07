@@ -12,7 +12,7 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = ({ toursData }) => {
   return (
-    <div className="lg:px-16 p-4">
+    <div className="lg:px-16 p-2">
       <div className="mt-28">
         <SearchExcursions />
       </div>
@@ -24,10 +24,23 @@ const Home: React.FC<HomeProps> = ({ toursData }) => {
       </div>
       <div>
         <h2 className="md:text-3xl text-xl font-segoe mb-4 text-start">
-          Tours and Tickets to Experience Giza Pyramids
+          Tours and Tickets
         </h2>
-        <div className="">
-          <Excursions toursData={toursData} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4">
+          {toursData.map((tour) => (
+            <Excursions
+              key={tour.id}
+              id={tour.id}
+              title={tour.title}
+              location={tour.location}
+              price={tour.min_price}
+              image={tour.main_image.url}
+              rating={2}
+              destination={tour.destination}
+              duration={tour.duration}
+              ageRange={tour.age_range}
+            />
+          ))}
         </div>
       </div>
     </div>
