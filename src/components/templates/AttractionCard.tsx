@@ -1,3 +1,4 @@
+// AttractionCard.tsx
 import React, { useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -5,7 +6,9 @@ import { FaStar, FaRegStar, FaHeart, FaRegHeart } from "react-icons/fa";
 import { useWishlist } from "@/contexts/wishlist-context";
 import { AttractionCardProps } from "@/types/attraction";
 
-const AttractionCard: React.FC<AttractionCardProps> = ({
+const AttractionCard: React.FC<
+  AttractionCardProps & { onRemove?: () => void }
+> = ({
   id,
   type,
   title,
@@ -22,6 +25,7 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
   min_price,
   main_image,
   destination,
+  onRemove,
 }) => {
   const { toggleWishlist, isInWishlist } = useWishlist();
   const router = useRouter();
@@ -77,6 +81,11 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
     };
 
     toggleWishlist(attraction);
+
+    // Check if the onRemove callback is provided
+    if (onRemove && isInWishlist(id)) {
+      onRemove();
+    }
   };
 
   return (

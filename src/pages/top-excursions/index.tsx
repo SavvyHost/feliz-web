@@ -26,7 +26,7 @@ const Home: React.FC<HomeProps> = ({ toursData }) => {
         <h2 className="md:text-3xl text-xl font-segoe mb-4 text-start">
           Tours and Tickets
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:p-0 p-2">
           {toursData.map((tour) => (
             <Excursions
               key={tour.id}
