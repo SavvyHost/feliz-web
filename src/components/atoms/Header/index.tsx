@@ -5,6 +5,8 @@ import MobileMenu from "./MobileMenu";
 import DesktopMenu from "./DesktopMenu";
 import { useRouter } from "next/router";
 import { useWishlist } from "@/contexts/wishlist-context";
+import Image from "next/image";
+import LOGO from "../../../../public/assets/felizlogo.png";
 
 export const Header = ({ header, className }: any) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,16 +18,16 @@ export const Header = ({ header, className }: any) => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 1024); // 1024px is typically the breakpoint for lg in Tailwind
+      setIsDesktop(window.innerWidth >= 1024);
     };
 
-    handleResize(); // Set initial value
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const handleScroll = () => {
-    if (!isDesktop) return; // Only apply scroll behavior on desktop
+    if (!isDesktop) return;
 
     const currentScrollPos = window.pageYOffset;
     setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
@@ -60,8 +62,8 @@ export const Header = ({ header, className }: any) => {
           isDesktop && !visible ? "-translate-y-full" : "translate-y-0"
         }`}
       >
-        <div className="flex items-center justify-between py-4">
-          {/* Mobile Menu Toggle (visible on small screens) */}
+        <div className="flex items-center justify-between ">
+          {/* Mobile Menu Toggle */}
           <button
             className="lg:hidden text-[#191e61] focus:outline-none"
             onClick={() => setIsMenuOpen(true)}
@@ -69,19 +71,27 @@ export const Header = ({ header, className }: any) => {
             <Menu className="w-6 h-6" />
           </button>
 
-          {/* Logo aligned to the left */}
-          <div className="flex-shrink-0 lg:w-2/12">
-            <Link href="/">
-              <span className="text-xl font-bold">Felize Tours</span>
+          {/* Logo */}
+          <div className="flex-shrink-0">
+            <Link href="/" className="block">
+              <div className="relative w-40 lg:h-20 h-16">
+                <Image
+                  src={LOGO}
+                  alt="Feliz Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
             </Link>
           </div>
 
-          {/* Center - Desktop Menu (links centered only on desktop) */}
+          {/* Desktop Menu */}
           <div className="hidden lg:flex lg:w-2/3 justify-center">
             <DesktopMenu navLinks={navLinks} />
           </div>
 
-          {/* Right side - Social Icons, Language Change, and Book Tour Button */}
+          {/* Right side actions */}
           <div className="flex items-center lg:w-1/3 justify-end space-x-4">
             <button
               onClick={handleWishlistClick}
@@ -90,14 +100,14 @@ export const Header = ({ header, className }: any) => {
             >
               <Heart className="w-5 h-5" />
               {wishlistCount > 0 && (
-                <span className="absolute -top-[10px] -right-[12px] bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                   {wishlistCount}
                 </span>
               )}
             </button>
             <Link
               href="/inquire"
-              className="bg-green-700 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-[#45ca34]"
+              className="bg-green-700 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-green-600 transition-colors duration-200"
             >
               Tailored made
             </Link>
@@ -115,3 +125,5 @@ export const Header = ({ header, className }: any) => {
     </>
   );
 };
+
+export default Header;
