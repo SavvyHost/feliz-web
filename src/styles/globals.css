@@ -144,3 +144,54 @@ input:focus {
 input {
     background-color: transparent;
 }
+
+.PhoneInput {
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    padding: 4px 12px;
+    gap: 0px;
+}
+
+.PhoneInputCountry {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.PhoneInputCountryIcon {
+    width: 24px;
+    height: 16px;
+}
+
+.PhoneInputCountrySelectArrow {
+    margin-left: 4px;
+    width: 8px;
+    height: 8px;
+    border-style: solid;
+    border-color: #6b7280;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.PhoneInputInput {
+    background: transparent;
+    border: none;
+    color: black;
+    font-size: 14px;
+    padding: 4px 8px;
+    flex: 1;
+    outline: none;
+}
+
+.PhoneInputCountrySelect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    border: none;
+    opacity: 0;
+    cursor: pointer;
+}

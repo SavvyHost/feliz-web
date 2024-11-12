@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Button } from "@mui/material";
 import Pagination from "../Pagination";
 import Image from "next/image";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaHeart, FaRegHeart, FaWhatsapp } from "react-icons/fa";
 import { useWishlist } from "@/contexts/wishlist-context";
 
 interface Tour {
@@ -70,15 +70,18 @@ const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
 
                   <button
                     onClick={(e) => handleWishlistClick(e, pkg)}
-                    className="absolute top-2 right-2 bg-white p-1 rounded-lg shadow-md hover:bg-gray-100 transition-colors duration-200 group"
+                    className={`absolute top-3 right-3 p-2 rounded-full shadow-md bg-white/80 hover:bg-white transition-colors duration-200`}
+                    aria-label={
+                      isInWishlist(pkg.id)
+                        ? "Remove from wishlist"
+                        : "Add to wishlist"
+                    }
                   >
-                    <Heart
-                      className={`w-6 h-6 ${
-                        isInWishlist(pkg.id)
-                          ? "text-green-500"
-                          : "text-gray-600"
-                      } hover:text-green-500`}
-                    />
+                    {isInWishlist(pkg.id) ? (
+                      <FaHeart className="text-red-500 w-6 h-6" />
+                    ) : (
+                      <FaRegHeart className="text-gray-600 w-6 h-6" />
+                    )}
                   </button>
                 </div>
                 <div className="w-full md:w-3/5 p-6 flex flex-col justify-between">

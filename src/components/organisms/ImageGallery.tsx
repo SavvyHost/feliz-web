@@ -20,6 +20,7 @@ interface ImageGalleryProps {
 const ImageGallery: React.FC<ImageGalleryProps> = ({ DetailTour }) => {
   const [mainImage, setMainImage] = useState<number>(0);
   const [showSeeMore, setShowSeeMore] = useState<boolean>(false);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
   const maxImages = 5;
   const hasMultipleImages = DetailTour.images.length > 1;
 
@@ -44,17 +45,23 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ DetailTour }) => {
     e?: React.MouseEvent,
     startIndex: number = mainImage
   ) => {
-    e?.preventDefault();
-    e?.stopPropagation();
-    Fancybox.show(
-      DetailTour.images.map((img) => ({
-        src: img.url,
-        type: "image",
-      })),
-      {
-        startIndex: startIndex,
-      }
-    );
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    // Only open gallery if we're not dragging
+    if (!isDragging) {
+      Fancybox.show(
+        DetailTour.images.map((img) => ({
+          src: img.url,
+          type: "image",
+        })),
+        {
+          startIndex: startIndex,
+        }
+      );
+    }
   };
 
   const settings = {
@@ -68,11 +75,24 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ DetailTour }) => {
       setMainImage(next);
       setShowSeeMore(next === maxImages - 1);
     },
+    swipe: true,
+    swipeToSlide: true,
+    touchThreshold: 10,
+    beforeSlide: () => {
+      setIsDragging(true);
+    },
+    afterSlide: () => {
+      // Reset dragging state after a short delay
+      setTimeout(() => {
+        setIsDragging(false);
+      }, 100);
+    },
   };
 
   let slider: any;
 
-  const next = () => {
+  const next = (e: React.MouseEvent) => {
+    e.stopPropagation();
     if (!hasMultipleImages) return;
     if (
       mainImage === Math.min(DetailTour.images.length, maxImages) - 1 ||
@@ -85,7 +105,8 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ DetailTour }) => {
     }
   };
 
-  const previous = () => {
+  const previous = (e: React.MouseEvent) => {
+    e.stopPropagation();
     if (!hasMultipleImages) return;
     if (mainImage === 0) {
       slider.slickGoTo(Math.min(DetailTour.images.length, maxImages) - 1);
@@ -109,6 +130,21 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ DetailTour }) => {
       slider.slickGoTo(index);
       setShowSeeMore(index === maxImages - 1);
     }
+  };
+
+  const handleImageClick = (e: React.MouseEvent, index: number) => {
+    // Only open gallery if we're not dragging
+    if (!isDragging) {
+      openGallery(e, index);
+    }
+  };
+
+  const handleMouseDown = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseMove = () => {
+    setIsDragging(true);
   };
 
   if (!DetailTour.images.length) {
@@ -200,10 +236,15 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ DetailTour }) => {
           {hasMultipleImages ? (
             <Slider ref={(c) => (slider = c)} {...settings}>
               {DetailTour.images.slice(0, maxImages).map((img, index) => (
-                <div key={index} className="relative rounded-lg">
+                <div
+                  key={index}
+                  className="relative rounded-lg"
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                >
                   <Image
                     src={img.url}
-                    onClick={() => openGallery(undefined, index)}
+                    onClick={(e) => handleImageClick(e, index)}
                     alt={`Tour image ${index + 1}`}
                     width={1000}
                     height={350}
@@ -227,14 +268,18 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ DetailTour }) => {
               ))}
             </Slider>
           ) : (
-            <div className="relative rounded-lg">
+            <div
+              className="relative rounded-lg"
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+            >
               <Image
                 src={DetailTour.images[0].url}
-                onClick={() => openGallery(undefined, 0)}
+                onClick={(e) => handleImageClick(e, 0)}
                 alt="Tour image"
                 width={1000}
                 height={350}
-                className="lg:w-11/12 w-full  cursor-pointer h-[250px] md:h-[390px] object-cover rounded-md"
+                className="lg:w-11/12 w-full cursor-pointer h-[250px] md:h-[390px] object-cover rounded-md"
               />
             </div>
           )}

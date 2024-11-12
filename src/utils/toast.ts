@@ -1,23 +1,20 @@
-import {
-  toast,
-  ToastOptions as ToastOptions_TP,
-  ToastPosition,
-} from 'react-toastify';
+import { toast, ToastOptions as ToastOptions_TP, ToastPosition } from 'react-toastify';
 
 const toastOptions: ToastOptions_TP = {
   position: 'top-right',
-  autoClose: 2000,
+  autoClose: 500,
   hideProgressBar: true,
-  closeOnClick: true,
+  closeOnClick: false,      // Disabled click to close
   pauseOnHover: true,
   draggable: false,
   progress: undefined,
   theme: 'light',
+  closeButton: false,       // Hide the X icon
 };
 
 const STYLES = {
-  success: 'text-mainGreen',
-  error: 'bg-mainRed text-white',
+  success: 'text-mainred',
+  error: 'bg-mainred text-white',
   info: 'bg-blue-300 text-white',
   loading: 'bg-blue-300 text-white',
 };
@@ -30,19 +27,21 @@ export const notify = (
   position: ToastPosition = 'top-right',
   isLoading: boolean = false
 ) => {
-  let message = msg || ('Successful operation');
-
-  if (type === 'error' && !!!msg) {
-    message = ('Something went wrong');
+  let message = msg || 'Successful operation';
+  
+  if (type === 'error' && !msg) {
+    message = 'Something went wrong';
   }
+  
   if (isLoading) {
-    message = msg || ('Uploading now...');
+    message = msg || 'Uploading now...';
   }
+  
   const className = STYLES[isLoading ? 'loading' : type];
-
+  
   toast[type](message, {
     ...toastOptions,
-    autoClose: isLoading ? false : 2000,
+    autoClose: isLoading ? false : 500,
     className,
     position,
   });

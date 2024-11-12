@@ -122,7 +122,7 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
           <p className="text-gray-600 mb-2 truncate text-sm">{location}</p>
         )}
 
-        <div className="flex items-center mb-2">
+        {/* <div className="flex items-center mb-2">
           {Array.from({ length: 5 }, (_, index) =>
             index < rating ? (
               <FaStar key={index} className="text-yellow-400" />
@@ -130,7 +130,7 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
               <FaRegStar key={index} className="text-gray-300" />
             )
           )}
-        </div>
+        </div> */}
 
         <div className="text-sm text-gray-600 mb-2">
           Duration: {duration} {type === "tour_package" ? "days" : "hours"}

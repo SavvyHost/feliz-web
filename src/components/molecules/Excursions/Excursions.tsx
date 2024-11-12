@@ -3,6 +3,7 @@ import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { Clock, Heart, Luggage, MapPin } from "lucide-react";
 import { useWishlist } from "@/contexts/wishlist-context";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 interface ExcursionCardProps {
   id: number;
@@ -62,11 +63,16 @@ const ExcursionCard: React.FC<ExcursionCardProps> = ({
                 ageRange,
               });
             }}
-            className="absolute top-2 right-2 p-2 rounded-full text-white hover:text-green-500 hover:bg-white/20 transition-colors"
+            className="absolute top-2 right-2 p-2 rounded-full bg-white/80 hover:bg-white transition-colors duration-200 shadow-md"
+            aria-label={
+              isInWishlist(id) ? "Remove from wishlist" : "Add to wishlist"
+            }
           >
-            <Heart
-              className={`h-5 w-5 ${isInWishlist(id) ? "text-green-500" : ""}`}
-            />
+            {isInWishlist(id) ? (
+              <FaHeart className="text-red-500 w-5 h-5" />
+            ) : (
+              <FaRegHeart className="text-gray-600 w-5 h-5" />
+            )}
           </button>
         </div>
 

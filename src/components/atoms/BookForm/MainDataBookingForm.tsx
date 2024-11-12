@@ -15,6 +15,7 @@ import { notify } from "@/utils/toast";
 import { Stepper, Step, StepLabel, Button } from "@mui/material";
 import { useMutate } from "@/hooks/UseMutate";
 import { ToastContainer } from "react-toastify";
+import PickerBook from "./PickerBook";
 
 function IntegratedBookingForm({ DetailTour, setIsThanksVisible }) {
   const { mutate, isPending } = useMutate({
@@ -114,34 +115,24 @@ function IntegratedBookingForm({ DetailTour, setIsThanksVisible }) {
           </div>
         </div>
         <div className="mt-2">
-          <button
-            type="button"
-            onClick={() => setIsDatePickerOpen(true)}
-            className="block w-full pl-3 pr-3 py-[8px] justify-start items-center text-gray-400 text-left bg-[#f0f1f2] focus:bg-transparent text-black text-sm border outline-[#007bff] rounded transition-all"
-          >
-            {selectedDate ? (
-              <span className="block text-gray-700">
-                {`${selectedDate.format("YYYY-MM-DD")} to ${selectedDate
-                  .add(rangeDays - 1, "day")
-                  .format("YYYY-MM-DD")}`}
-              </span>
-            ) : (
-              <span className="flex gap-2 text-gray-500">
-                <CalendarClock /> <span className="mt-1">Select Date</span>
-              </span>
-            )}
-          </button>
+          <PickerBook
+            onDateChange={handleDateChange}
+            setFieldValue={setFieldValue}
+          />
+
           {errors.date && (
             <p className="text-red-500 text-sm mt-1">{errors.date}</p>
           )}
         </div>
       </div>
-      <DatePickerModal
+
+      {/* <DatePickerModal
         open={isDatePickerOpen}
         onClose={() => setIsDatePickerOpen(false)}
         onDateChange={handleDateChange}
         setFieldValue={setFieldValue}
-      />
+      /> */}
+
       <div className="grid grid-cols-3 gap-4 mb-4">
         {[
           { label: "Adults", name: "num_of_adults" },
@@ -228,12 +219,13 @@ function IntegratedBookingForm({ DetailTour, setIsThanksVisible }) {
         </div>
         <div className="flex flex-col space-y-2">
           <PhoneInput
+            international
             placeholder="Enter Your Number"
             value={values.phone}
             onChange={(value) => setFieldValue("phone", value)}
             defaultCountry="EG"
             error={errors.phone}
-            className="block w-full my-3 mt-2 pb-3 p-2 bg-[#f0f1f2] focus:bg-transparent text-black text-sm border outline-[#007bff] rounded transition-all"
+            className="block rounded-xl w-full my-3 mt-2 pb-3 p-2 bg-[#f0f1f2] focus:bg-transparent text-black text-sm border outline-[#007bff]  transition-all"
             inputStyle={{
               textAlign: "center",
             }}

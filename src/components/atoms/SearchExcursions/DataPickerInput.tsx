@@ -1,3 +1,4 @@
+// DatePickerInput.tsx
 import React, { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -16,6 +17,7 @@ interface DatePickerInputProps {
     color?: string;
     transform?: string;
   };
+  isOpen?: boolean; // New prop to control date picker opening
 }
 
 const DatePickerInput: React.FC<DatePickerInputProps> = ({
@@ -29,15 +31,21 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
     color: "rgba(0, 0, 0, 0.6)",
     transform: "translate(14px, 16px) scale(1)",
   },
+  isOpen = false, // Default value for isOpen prop
 }) => {
   const [isDatePickerOpen, setIsDatePickerOpen] = useState<boolean>(false);
-  const [isLabelVisible, setIsLabelVisible] = useState<boolean>(true); // Start with label visible
-
-  // Use media query to determine if it's mobile or laptop
+  const [isLabelVisible, setIsLabelVisible] = useState<boolean>(true);
   const isLaptop = useMediaQuery((theme: Theme) => theme.breakpoints.up("md"));
 
+  // Effect to handle external opening of date picker
   useEffect(() => {
-    // Update label visibility based on selectedDate
+    if (isOpen) {
+      setIsDatePickerOpen(true);
+      setIsLabelVisible(false);
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
     setIsLabelVisible(!selectedDate);
   }, [selectedDate]);
 
@@ -47,13 +55,12 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
   };
 
   const handleInputClick = () => {
-    setIsLabelVisible(false); // Hide label when input is clicked
+    setIsLabelVisible(false);
     setIsDatePickerOpen(true);
   };
 
   const handleClosePicker = () => {
     setIsDatePickerOpen(false);
-    // Check if no date is selected and show the label again
     if (!selectedDate) {
       setIsLabelVisible(true);
     }
@@ -67,7 +74,8 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
         onChange={handleDateChange}
         open={isDatePickerOpen}
         onOpen={handleInputClick}
-        onClose={handleClosePicker} // Use the new close handler
+        onClose={handleClosePicker}
+        desktopModeMediaQuery="(min-width: 0px)"
         slotProps={{
           textField: {
             onClick: handleInputClick,
@@ -77,7 +85,7 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
               }
             },
             sx: {
-              width: isLaptop ? laptopWidth : mobileWidth, // Set width based on screen size
+              width: isLaptop ? laptopWidth : mobileWidth,
               height,
               "& .MuiInputBase-root": {
                 height: "100%",
@@ -110,6 +118,14 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({
             },
             fullWidth: false,
             variant: "outlined",
+          },
+          popper: {
+            sx: {
+              "& .MuiPaper-root": {
+                boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
+                borderRadius: "0.5rem",
+              },
+            },
           },
         }}
       />

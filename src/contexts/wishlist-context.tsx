@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { AttractionCardProps } from "../types/attraction";
-import { toast } from "react-toastify";
+import { notify } from "@/utils/toast";
 
 interface WishlistContextType {
   wishlist: AttractionCardProps[];
@@ -38,6 +38,7 @@ export const WishlistProvider: React.FC<{ children: React.ReactNode }> = ({
         console.error("Error loading wishlist:", error);
         localStorage.removeItem("wishlist");
         setWishlist([]);
+        notify("error", "Failed to load wishlist");
       }
     }
   };
@@ -48,6 +49,7 @@ export const WishlistProvider: React.FC<{ children: React.ReactNode }> = ({
         localStorage.setItem("wishlist", JSON.stringify(newWishlist));
       } catch (error) {
         console.error("Error saving wishlist:", error);
+        notify("error", "Failed to save wishlist");
       }
     }
   };
@@ -59,11 +61,11 @@ export const WishlistProvider: React.FC<{ children: React.ReactNode }> = ({
         ? prev.filter((item) => item.id !== attraction.id)
         : [...prev, { ...attraction }];
 
-      // Show notification based on add/remove action
+      // Show notification based on add/remove action using our custom notify
       if (isInWishlist) {
-        toast.info(`${attraction.title} removed from wishlist`);
+        notify("info", `${attraction.title} removed from wishlist`);
       } else {
-        toast.success(`${attraction.title} added to wishlist`);
+        notify("success", `${attraction.title} added to wishlist`);
       }
 
       saveWishlist(newWishlist);

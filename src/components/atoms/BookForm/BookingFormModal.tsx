@@ -3,7 +3,7 @@ import { Button, Modal, Slide, IconButton, Input } from "@mui/material";
 import { Form, Formik } from "formik";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
-import { Plus, Minus, X } from "lucide-react";
+import { Plus, Minus, X, Heart } from "lucide-react";
 import dayjs from "dayjs";
 import BaseInputField from "@/components/molecules/formik-fields/BaseInputField";
 import SelectNationality from "@/components/molecules/selects/SelectNationality";
@@ -14,14 +14,16 @@ import { notify } from "@/utils/toast";
 import { Spinner } from "../UI/Spinner";
 import Thanks from "@/components/molecules/Thanks";
 import SelectMonth from "@/components/molecules/selects/SelectMonth";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useWishlist } from "@/contexts/wishlist-context";
+import PickerBook from "./PickerBook";
+
 export default function BookingFormModal({ DetailTour }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDatePickerModalOpen, setIsDatePickerModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [rangeDays, setRangeDays] = useState(1);
   const [showThanks, setShowThanks] = useState(false);
+  const { toggleWishlist, isInWishlist } = useWishlist();
 
   const { mutate, isPending } = useMutate({
     mutationKey: ["bookings"],
@@ -41,14 +43,38 @@ export default function BookingFormModal({ DetailTour }) {
     setRangeDays(days);
   };
 
+  const handleWishlistClick = (e, tour) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleWishlist(tour);
+  };
+
   return (
     <>
-      <Button
-        className="py-2 capitalize w-full bg-green-700 text-white rounded-none hover:bg-green-500 transition duration-300 font-segoe fixed top-[68px] right-0 z-30 md:hidden"
-        onClick={() => setIsModalOpen(true)}
-      >
-        Open Booking Form
-      </Button>
+      <div className="fixed top-[68px] p-2 right-0 z-30 w-full flex items-center justify-between bg-white md:hidden">
+        <button
+          className="w-auto p-3 bg-green-700 text-white capitalize rounded-none hover:bg-green-500 transition duration-300 font-segoe flex-1 flex items-center justify-center"
+          onClick={() => setIsModalOpen(true)}
+        >
+          Open Booking Form
+        </button>
+
+        {/* Wishlist Button */}
+        <button
+          onClick={(e) => handleWishlistClick(e, DetailTour)}
+          className={`ml-4 p-3 rounded-md shadow-md border transition duration-200 ${
+            isInWishlist(DetailTour.id)
+              ? "bg-green-600 text-white hover:bg-green-700 border-transparent"
+              : "bg-gray-100 text-green-700 border-green-700 hover:bg-gray-200"
+          }`}
+        >
+          <Heart
+            className={
+              isInWishlist(DetailTour.id) ? "text-white" : "text-green-700"
+            }
+          />
+        </button>
+      </div>
 
       <Modal
         open={isModalOpen}
@@ -142,29 +168,11 @@ export default function BookingFormModal({ DetailTour }) {
                     </div>
 
                     <div className="relative">
-                      <Input
-                        type="text"
-                        placeholder="Start Date"
-                        value={
-                          selectedDate
-                            ? `${selectedDate.format(
-                                "YYYY-MM-DD"
-                              )} to ${selectedDate
-                                .add(rangeDays - 1, "day")
-                                .format("YYYY-MM-DD")}`
-                            : "Select a date range"
-                        }
-                        onClick={() => setIsDatePickerModalOpen(true)}
-                        className="w-full p-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      <PickerBook
+                        onDateChange={handleDateChange}
+                        setFieldValue={setFieldValue}
                       />
                     </div>
-
-                    <DatePickerModal
-                      open={isDatePickerModalOpen}
-                      onClose={() => setIsDatePickerModalOpen(false)}
-                      onDateChange={handleDateChange}
-                      setFieldValue={setFieldValue}
-                    />
 
                     {["Adults", "Children", "Infants"].map((type) => (
                       <div
@@ -238,7 +246,6 @@ export default function BookingFormModal({ DetailTour }) {
           </div>
         </Modal>
       )}
-      <ToastContainer />
     </>
   );
 }
