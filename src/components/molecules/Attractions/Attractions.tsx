@@ -22,7 +22,7 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
   return (
     <Link
       href={`/attractions/${id}`}
-      className="flex flex-col items-center cursor-pointer rounded-lg overflow-hidden transition-transform duration-300 ease-in-out border border-transparent hover:border-gray-200 hover:bg-white hover:shadow-xl"
+      className="flex flex-col items-center cursor-pointer rounded-lg overflow-hidden transition-transform duration-300 ease-in-out border border-transparent hover:border-custom-yellow hover:bg-white hover:shadow-xl"
     >
       <div className="flex flex-col items-center cursor-pointer rounded-lg overflow-hidden  w-80 h-52 md:h-60 ">
         <div className="relative w-full h-2/3 overflow-hidden">

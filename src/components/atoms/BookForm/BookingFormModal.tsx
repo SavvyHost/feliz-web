@@ -53,7 +53,7 @@ export default function BookingFormModal({ DetailTour }) {
     <>
       <div className="fixed top-[68px] p-2 right-0 z-30 w-full flex items-center justify-between bg-white md:hidden">
         <button
-          className="w-auto p-3 bg-green-700 text-white capitalize rounded-none hover:bg-green-500 transition duration-300 font-segoe flex-1 flex items-center justify-center"
+          className="w-auto p-3 bg-blue-700 text-white capitalize rounded-none hover:bg-blue-500 transition duration-300 font-segoe flex-1 flex items-center justify-center"
           onClick={() => setIsModalOpen(true)}
         >
           Open Booking Form
@@ -64,13 +64,13 @@ export default function BookingFormModal({ DetailTour }) {
           onClick={(e) => handleWishlistClick(e, DetailTour)}
           className={`ml-4 p-3 rounded-md shadow-md border transition duration-200 ${
             isInWishlist(DetailTour.id)
-              ? "bg-green-600 text-white hover:bg-green-700 border-transparent"
-              : "bg-gray-100 text-green-700 border-green-700 hover:bg-gray-200"
+              ? "bg-blue-600 text-white hover:bg-blue-700 border-transparent"
+              : "bg-gray-100 text-blue-700 border-blue-700 hover:bg-gray-200"
           }`}
         >
           <Heart
             className={
-              isInWishlist(DetailTour.id) ? "text-white" : "text-green-700"
+              isInWishlist(DetailTour.id) ? "text-white" : "text-blue-700"
             }
           />
         </button>
@@ -219,7 +219,7 @@ export default function BookingFormModal({ DetailTour }) {
                     <div className="fixed bottom-0 left-0 right-0 p-4 bg-white z-50">
                       <Button
                         type="submit"
-                        className="w-full p-3 bg-green-950 text-white rounded-md hover:bg-green-700 transition duration-150"
+                        className="w-full p-3 bg-blue-950 text-white rounded-md hover:bg-blue-700 transition duration-150"
                       >
                         {isPending ? <Spinner /> : "Submit"}
                       </Button>

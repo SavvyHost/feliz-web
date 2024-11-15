@@ -14,8 +14,8 @@ const TournCard: React.FC<ExcursionCardProps> = ({ recommendation }) => {
 
   return (
     <div
-      className={`rounded-lg ml-3 cursor-pointer  overflow-hidden hover:shadow-md border border-green-500 transition-border duration-300 ease-in-out ${
-        isSelected ? "bg-green-800 text-white" : ""
+      className={`rounded-lg ml-3 cursor-pointer  overflow-hidden hover:shadow-md border border-blue-500 transition-border duration-300 ease-in-out ${
+        isSelected ? "bg-blue-800 text-white" : ""
       }`}
       style={{ width: "90%" }} // Reduce card width
       onClick={handleSelectChange} // Toggle selection on click

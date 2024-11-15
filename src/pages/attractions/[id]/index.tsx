@@ -73,13 +73,13 @@ const AttractionSection: React.FC<AttractionSectionProps> = ({
       </div>
       <div className="flex flex-wrap justify-center mt-28 lg:mt-20 px-4 sm:px-6 overflow-x-auto">
         <div className="flex space-x-2 sm:space-x-4">
-          {["Overview", "Tours & Tickets", "Excursions"].map((tab) => (
+          {["Tours & Tickets", "Excursions"].map((tab) => (
             <button
               key={tab}
-              className={`text-center font-segoe py-2 px-4 border-b border-b-green-400 whitespace-nowrap ${
+              className={`text-center font-segoe py-2 px-4 border-b border-b-blue-400 whitespace-nowrap ${
                 activeTab === tab
-                  ? "bg-green-800 text-white border-none"
-                  : "bg-white text-gray-700 hover:bg-green-100"
+                  ? "bg-blue-800 text-white border-none"
+                  : "bg-white text-gray-700 hover:bg-blue-100"
               }`}
               onClick={() => setActiveTab(tab)}
             >

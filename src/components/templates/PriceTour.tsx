@@ -26,7 +26,7 @@ const roomIcons: Record<string, React.ReactNode> = {
   SGL: <FaBed className="text-purple-500" />,
   DBL: <FaHotel className="text-blue-500" />,
   TPL: <FaRegHeart className="text-red-500" />,
-  Suite: <FaSuitcase className="text-green-500" />,
+  Suite: <FaSuitcase className="text-blue-500" />,
 };
 
 const PriceTour: React.FC<Props> = ({ DetailTour }) => {
@@ -42,7 +42,7 @@ const PriceTour: React.FC<Props> = ({ DetailTour }) => {
   };
 
   return (
-    <div className="p-6 border-green-200 border rounded-lg bg-white mt-2 shadow-lg">
+    <div className="p-6 border-blue-200 border rounded-lg bg-white mt-2 shadow-lg">
       <h1 className="text-2xl font-bold text-left mb-6">Tour Prices</h1>
       {DetailTour.tour_prices.map((group) => (
         <div
@@ -64,7 +64,7 @@ const PriceTour: React.FC<Props> = ({ DetailTour }) => {
                 )}
                 <p className="text-lg ml-2">{price.title}</p>
               </div>
-              <p className="text-lg font-semibold text-green-600">
+              <p className="text-lg font-semibold text-blue-600">
                 ${price.price}
               </p>
             </div>

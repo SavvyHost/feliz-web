@@ -12,6 +12,7 @@ import fetchData from "@/helper/FetchData";
 import { TourPackage, ToursData } from "@/types/tour";
 import AttractionPageSection from "@/components/molecules/Attractions/AttractionsPageSection";
 import SuggestAttractionsSetion from "@/components/molecules/Attractions/SuggestAttractionsSection";
+import AttractionCard from "@/components/templates/AttractionCard";
 
 // Define the Props for the component
 type City = {
@@ -46,7 +47,7 @@ const AttractionsDetails: React.FC<Props> = ({
       href: `/destinations/${city.country_id}/${city.name.toLowerCase()}`,
     },
   ];
-  const limitedAttractions = attractionsData.slice(0, 16);
+  const limitedAttractions = attractionsData.slice(0, 8);
   return (
     <div className="">
       {/* Hero Banner with dynamic city name */}
@@ -66,6 +67,29 @@ const AttractionsDetails: React.FC<Props> = ({
       />
 
       {/* Sections for tours and excursions */}
+      <div className="lg:px-16 p-4">
+        <div className="text-left text-black font-segoe sm:font-semi-bold font-medium text-2xl md:text-special-offer mb-4">
+          Tours and Excusrions
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 ">
+          {toursData.data.map((attraction) => (
+            <div key={attraction.id} className="tour-card-wrapper">
+              <AttractionCard
+                id={attraction.id}
+                title={attraction.title}
+                location={attraction.location}
+                price={attraction.min_price}
+                image={attraction.main_image.url}
+                rating={2}
+                duration={attraction.duration}
+                ageRange={attraction.age_range}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div className="lg:px-16 p-4">
         <SuggestAttractionsSetion attractions={limitedAttractions} />
       </div>

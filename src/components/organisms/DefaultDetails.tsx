@@ -11,11 +11,11 @@ type Props = {};
 
 const DefaultDetails = (props: Props) => {
   return (
-    <div className="w-full mx-auto border px-4 py-2 mt-2 bg-white border-green-200 rounded-lg shadow-md">
+    <div className="w-full mx-auto border px-4 py-2 mt-2 bg-white border-blue-200 rounded-lg shadow-md">
       {" "}
       <ul className="space-y-4 text-lg">
         <li className="flex items-start">
-          <FaTag className="w-6 h-6 mr-3 text-green-600" />
+          <FaTag className="w-6 h-6 mr-3 text-blue-600" />
           <div>
             <p className="font-semibold">Free cancellation</p>
             <p className="text-gray-600">
@@ -24,7 +24,7 @@ const DefaultDetails = (props: Props) => {
           </div>
         </li>
         <li className="flex items-start">
-          <FaMoneyCheckAlt className="w-6 h-6 mr-3 text-green-600" />
+          <FaMoneyCheckAlt className="w-6 h-6 mr-3 text-blue-600" />
           <div>
             <p className="font-semibold">Reserve now & pay later</p>
             <p className="text-gray-600">
@@ -34,7 +34,7 @@ const DefaultDetails = (props: Props) => {
           </div>
         </li>
         <li className="flex items-start">
-          <FaRegClock className="w-6 h-6 mr-3 text-green-600" />
+          <FaRegClock className="w-6 h-6 mr-3 text-blue-600" />
           <div>
             <p className="font-semibold">
               Check availability to see starting times.
@@ -42,7 +42,7 @@ const DefaultDetails = (props: Props) => {
           </div>
         </li>
         <li className="flex items-start">
-          <FaDoorOpen className="w-6 h-6 mr-3 text-green-600" />
+          <FaDoorOpen className="w-6 h-6 mr-3 text-blue-600" />
           <div>
             <p className="font-semibold">
               Skip the line through a separate entrance
@@ -50,7 +50,7 @@ const DefaultDetails = (props: Props) => {
           </div>
         </li>
         <li className="flex items-start">
-          <FaUser className="w-6 h-6 mr-3 text-green-600" />
+          <FaUser className="w-6 h-6 mr-3 text-blue-600" />
           <div>
             <p className="font-semibold">Live tour guide</p>
           </div>

@@ -16,38 +16,38 @@ import {
 const interests = [
   {
     name: "Activities",
-    icon: <FaHiking size={32} className="text-green-700" />,
+    icon: <FaHiking size={32} className="text-blue-700" />,
   },
   {
     name: "Adventure",
-    icon: <FaMountain size={32} className="text-green-700" />,
+    icon: <FaMountain size={32} className="text-blue-700" />,
   },
   {
     name: "Attractions",
-    icon: <FaLandmark size={32} className="text-green-700" />,
+    icon: <FaLandmark size={32} className="text-blue-700" />,
   },
   {
     name: "Beaches",
-    icon: <FaUmbrellaBeach size={32} className="text-green-700" />,
+    icon: <FaUmbrellaBeach size={32} className="text-blue-700" />,
   },
   {
     name: "Culture",
-    icon: <FaPagelines size={32} className="text-green-700" />,
+    icon: <FaPagelines size={32} className="text-blue-700" />,
   },
   {
     name: "Destination",
-    icon: <FaMapMarkedAlt size={32} className="text-green-700" />,
+    icon: <FaMapMarkedAlt size={32} className="text-blue-700" />,
   },
   {
     name: "Festivals",
-    icon: <FaMusic size={32} className="text-green-700" />,
+    icon: <FaMusic size={32} className="text-blue-700" />,
   },
-  { name: "Food", icon: <FaUtensils size={32} className="text-green-700" /> },
+  { name: "Food", icon: <FaUtensils size={32} className="text-blue-700" /> },
   {
     name: "Life Style",
-    icon: <FaHeart size={32} className="text-green-700" />,
+    icon: <FaHeart size={32} className="text-blue-700" />,
   },
-  { name: "Shore", icon: <FaShip size={32} className="text-green-700" /> },
+  { name: "Shore", icon: <FaShip size={32} className="text-blue-700" /> },
 ];
 
 const InterestsSection: React.FC = () => {
@@ -85,9 +85,10 @@ const InterestsSection: React.FC = () => {
                 key={index}
                 className="flex flex-col items-center p-4 space-y-4"
               >
-                <div className="w-24 h-24 flex items-center justify-center rounded-full border border-green-600 bg-white">
+                <div className="w-24 h-24 flex items-center justify-center rounded-full border border-blue-600 bg-white">
                   {interest.icon}
-                </div>hero
+                </div>
+                hero
                 <p className="text-sm font-segoe text-center">
                   {interest.name}
                 </p>
@@ -99,7 +100,7 @@ const InterestsSection: React.FC = () => {
         <div className="hidden lg:grid lg:grid-cols-5 gap-8">
           {interests.map((interest, index) => (
             <div key={index} className="flex flex-col items-center p-4">
-              <div className="w-24 h-24 flex items-center justify-center rounded-full border border-green-600 bg-white">
+              <div className="w-24 h-24 flex items-center justify-center rounded-full border border-blue-600 bg-white">
                 {interest.icon}
               </div>
               <p className="mt-4 text-sm font-segoe text-center">

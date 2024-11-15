@@ -263,7 +263,7 @@ export default function ExcursionsCardTour({ toursData }: ExcursionsProps) {
                           {[...Array(excursion.starRating)].map((_, index) => (
                             <BsFillCircleFill
                               key={index}
-                              className="text-green-500 w-4 h-4 ml-1"
+                              className="text-blue-500 w-4 h-4 ml-1"
                             />
                           ))}
                           <span className="m-2 text-gray-600 text-sm">

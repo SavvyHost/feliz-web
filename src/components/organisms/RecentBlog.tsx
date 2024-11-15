@@ -87,7 +87,7 @@ const RecentBlog = () => {
                       <Button className="bg-black text-white text-xs py-1 px-3 rounded-sm hover:bg-gray-800">
                         Read More
                       </Button>
-                      <Button className="bg-green-300 text-green-900 text-xs py-1 px-3 rounded-sm hover:bg-green-400 flex items-center">
+                      <Button className="bg-blue-300 text-blue-900 text-xs py-1 px-3 rounded-sm hover:bg-blue-400 flex items-center">
                         <FaWhatsapp className="mr-1" size={12} />
                         Share
                       </Button>
@@ -133,7 +133,7 @@ const RecentBlog = () => {
                       </Button>
                     </div>
                     <div className="flex space-x-2">
-                      <Button className="bg-green-300 text-green-900 text-xs py-2 px-4 rounded-md hover:bg-green-400 flex items-center">
+                      <Button className="bg-blue-300 text-blue-900 text-xs py-2 px-4 rounded-md hover:bg-blue-400 flex items-center">
                         <FaWhatsapp className="mr-2" size={16} />
                         Share
                       </Button>

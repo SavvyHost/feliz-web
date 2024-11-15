@@ -54,7 +54,7 @@ const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
       <div className="grid grid-cols-1 gap-6 mt-3 lg:mt-0">
         {currentTours.map((pkg) => (
           <Link href={`/top-packages/${pkg.id}`} key={pkg.id}>
-            <div className="w-full hover:border-green-500 group bg-white border-gray-300 border overflow-hidden transition-shadow duration-300 hover:shadow-xl cursor-pointer">
+            <div className="w-full hover:border-blue-500 group bg-white border-gray-300 border overflow-hidden transition-shadow duration-300 hover:shadow-xl cursor-pointer">
               <div className="flex flex-col md:flex-row">
                 <div className="w-full md:w-2/5 p-3 h-64 md:h-auto relative  overflow-hidden">
                   <Image
@@ -64,7 +64,7 @@ const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
                     objectFit="cover"
                     className="rounded-none transition-transform duration-700 group-hover:scale-110" // Add the scaling effect here
                   />
-                  <div className="absolute top-5 left-5 bg-green-500 text-white px-3 py-1 text-sm font-segoe rounded-sm shadow-md">
+                  <div className="absolute top-5 left-5 bg-blue-500 text-white px-3 py-1 text-sm font-segoe rounded-sm shadow-md">
                     Special Offer 20%
                   </div>
 
@@ -109,7 +109,7 @@ const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
                       </div>
                       <div className="text-right">
                         <p className="text-sm text-gray-600">From</p>
-                        <p className="text-3xl font-bold text-green-600">
+                        <p className="text-3xl font-bold text-blue-600">
                           ${pkg.min_price}
                         </p>
                         <p className="text-center text-xs text-nowrap text-gray-600">
@@ -152,7 +152,7 @@ const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
                     <Button className="bg-black text-white font-semibold py-2 px-4 rounded transition duration-300 ease-in-out hover:bg-gray-800">
                       View Details
                     </Button>
-                    <Button className="bg-green-500 text-white font-semibold py-2 px-4 rounded transition duration-300 ease-in-out hover:bg-green-600 flex items-center">
+                    <Button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded transition duration-300 ease-in-out hover:bg-blue-600 flex items-center">
                       <FaWhatsapp className="mr-2" />
                       WhatsApp
                     </Button>

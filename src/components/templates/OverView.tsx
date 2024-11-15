@@ -27,8 +27,21 @@ const OverView: React.FC<OverViewProps> = ({ toursData }) => {
         <h2 className="md:text-3xl text-xl font-segoe mb-4 text-start">
           Tours and Tickets to Experience Giza Pyramids
         </h2>
-        <div className="">
-          <Excursions toursData={toursData} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:p-0 p-2">
+          {toursData.map((tour) => (
+            <Excursions
+              key={tour.id}
+              id={tour.id}
+              title={tour.title}
+              location={tour.location}
+              price={tour.min_price}
+              image={tour.main_image.url}
+              rating={2}
+              destination={tour.destination}
+              duration={tour.duration}
+              ageRange={tour.age_range}
+            />
+          ))}
         </div>
       </div>
     </div>

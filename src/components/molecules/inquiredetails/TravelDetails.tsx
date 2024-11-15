@@ -84,7 +84,7 @@ const TravelDetails: React.FC<TravelDetailsProps> = ({
 
   return (
     <div className="font-sans w-full mx-auto lg:px-40 bg-white rounded-xl overflow-hidden">
-      <h2 className="text-3xl text-green-600 text-center mb-4 font-semibold">
+      <h2 className="text-3xl text-blue-600 text-center mb-4 font-semibold">
         Tell Us About Your Travel Plans
       </h2>
       <form className="space-y-4">
@@ -183,7 +183,7 @@ const TravelDetails: React.FC<TravelDetailsProps> = ({
                       Math.max(formik.values[type] - 1, 0)
                     )
                   }
-                  className="bg-gray-100 text-green-600 rounded-full w-8 h-8 flex items-center justify-center text-lg focus:outline-none hover:bg-green-200 transition-colors"
+                  className="bg-gray-100 text-blue-600 rounded-full w-8 h-8 flex items-center justify-center text-lg focus:outline-none hover:bg-blue-200 transition-colors"
                 >
                   -
                 </button>
@@ -195,7 +195,7 @@ const TravelDetails: React.FC<TravelDetailsProps> = ({
                   onClick={() =>
                     formik.setFieldValue(type, formik.values[type] + 1)
                   }
-                  className="bg-gray-100 text-green-600 rounded-full w-8 h-8 flex items-center justify-center text-lg focus:outline-none hover:bg-green-200 transition-colors"
+                  className="bg-gray-100 text-blue-600 rounded-full w-8 h-8 flex items-center justify-center text-lg focus:outline-none hover:bg-blue-200 transition-colors"
                 >
                   +
                 </button>
@@ -231,7 +231,7 @@ const TravelDetails: React.FC<TravelDetailsProps> = ({
               name="flightOffer"
               checked={formik.values.flightOffer}
               onChange={formik.handleChange}
-              className="mr-3 h-5 w-5 text-green-600 focus:ring-transparent border-green-300 rounded"
+              className="mr-3 h-5 w-5 text-blue-600 focus:ring-transparent border-blue-300 rounded"
             />
             <label htmlFor="flightOffer" className="text-sm">
               Add flight offer to your vacation package
@@ -397,7 +397,7 @@ export default TravelDetails;
 //                       <button
 //                         onClick={() => setOpenPassengers(false)}
 //                         type="button"
-//                         className="w-full p-3 bg-green-700 text-white rounded-md hover:bg-green-900"
+//                         className="w-full p-3 bg-blue-700 text-white rounded-md hover:bg-blue-900"
 //                       >
 //                         Apply
 //                       </button>
@@ -451,7 +451,7 @@ export default TravelDetails;
 //               variant="contained"
 //               color="primary"
 //               onClick={() => handleConfirmBooking(values)}
-//               className="mt-4 w-full bg-green-600 hover:bg-green-900"
+//               className="mt-4 w-full bg-blue-600 hover:bg-blue-900"
 //             >
 //               Confirm Booking <FaWhatsapp size={20} className="ml-2" />
 //             </Button>

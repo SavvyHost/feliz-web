@@ -101,7 +101,7 @@ const TrustpilotReviewComponent: React.FC = () => {
           <h2 className="text-xl font-bold mb-2">Excellent</h2>
           <div className="flex mb-2">
             {[1, 2, 3, 4, 5].map((i) => (
-              <Star key={i} className="text-green-500 fill-current" size={24} />
+              <Star key={i} className="text-blue-600 fill-current" size={24} />
             ))}
           </div>
           <p className="text-sm text-gray-600 mb-4">Based on 223,512 reviews</p>
@@ -131,7 +131,7 @@ const TrustpilotReviewComponent: React.FC = () => {
                       key={i}
                       className={`${
                         i < review.rating
-                          ? "text-green-500 fill-current"
+                          ? "text-blue-800 fill-current"
                           : "text-gray-300"
                       }`}
                       size={16}

@@ -5,6 +5,7 @@ import { StaticImageData } from "next/image";
 export interface TourPackage {
   id: number;
   name: string;
+  category : string
   title: string;
   destination: string;
   price: number;

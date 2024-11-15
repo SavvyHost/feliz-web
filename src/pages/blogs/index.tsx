@@ -32,20 +32,20 @@ type Props = {
 const BLogs: React.FC<Props> = ({ blogData, Destinations }) => {
   const limitedDestinations = Destinations.slice(0, 8);
   return (
-    <div className="bg-[#FAFAFA] lg:px-16 mt-16 pt-3 px-4 py-3">
-      {/* <HeroBlog /> */}
+    <div className="bg-[#FAFAFA]  mt-16 pt-3 py-3">
+      <HeroBlog />
       {/* <InterestsSection /> */}
       {/* <div className="lg:px-16 p-4 bg-[#FAFAFA] ">
         <DestinationSection Destinations={limitedDestinations} />
       </div> */}
 
       <div className=" ">
-        <div className="text-left text-black font-segoe sm:font-semi-bold font-medium text-2xl md:text-special-offer mb-4">
+        {/* <div className="text-left text-black font-segoe sm:font-semi-bold font-medium text-2xl md:text-special-offer mb-4">
           Recent Blogs
         </div>
-        <RecentBlog />
+        <RecentBlog /> */}
       </div>
-      <div className="mt-4">
+      <div className="mt-4 lg:px-16  px-4">
         <BlogSection blogData={blogData} />
       </div>
     </div>

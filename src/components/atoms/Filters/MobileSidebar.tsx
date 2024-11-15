@@ -242,7 +242,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
                 handleApplyFilters();
                 setIsModalOpen(false);
               }}
-              className="bg-green-800 p-3 text-white rounded-md w-full"
+              className="bg-blue-800 p-3 text-white rounded-md w-full"
             >
               Apply Filters
             </button>

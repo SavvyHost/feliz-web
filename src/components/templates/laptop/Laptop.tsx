@@ -4,13 +4,17 @@ import TravelPackagePage from "@/components/molecules/TravelCardSearch/TravelCar
 import SearchInput from "@/components/atoms/Search/Search";
 import { ToursData } from "@/types/tour";
 import PaginationExample from "@/components/molecules/Pagination";
-import Explore from "@/components/molecules/ExploreTours";
+import Explore from "@/components/molecules/ExploreExcursios";
+import { useRouter } from "next/router";
 
 interface LaptopProps {
   toursData: ToursData;
+  categories: Category[];
 }
 
-const Laptop: React.FC<LaptopProps> = ({ toursData }) => {
+const Laptop: React.FC<LaptopProps> = ({ toursData, categories }) => {
+  const router = useRouter();
+
   // State management for filters
   const [price, setPrice] = useState<[number, number]>([0, 1000]);
   const [selectedDestination, setSelectedDestination] =
@@ -22,6 +26,7 @@ const Laptop: React.FC<LaptopProps> = ({ toursData }) => {
   ]);
   const [selectedAccommodationType, setSelectedAccommodationType] =
     useState<string>("Hotel");
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
 
   // Handle price change
   const handlePriceChange = (event: Event, newValue: number | number[]) => {
@@ -51,13 +56,19 @@ const Laptop: React.FC<LaptopProps> = ({ toursData }) => {
   };
 
   return (
-    <div className=" bg-[#FAFAFA]">
+    <div className="bg-[#FAFAFA]">
       {/* Search Bar */}
       <div className="mt-20">
         <SearchInput />
       </div>
+
+      {/* Explore Categories */}
       <div className="">
-        <Explore />
+        <Explore
+          categories={categories}
+          setSelectedCategory={setSelectedCategory}
+          router={router}
+        />
       </div>
 
       {/* Main Content Layout: Filters on the left, Cards on the right */}

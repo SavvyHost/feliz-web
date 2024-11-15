@@ -6,9 +6,10 @@ import "slick-carousel/slick/slick-theme.css";
 import { Attraction } from "@/types/tour";
 import defaultImage from "../../../../public/assets/trail.jpeg";
 import Link from "next/link";
+
 type AttractionCardProps = {
   name: string;
-  imageSrc: string; // Updated to string for dynamic image URLs
+  imageSrc: string;
   toursCount: number;
   id: number;
 };
@@ -20,9 +21,9 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
   id,
 }) => {
   return (
-    <Link href={`/attractions/${id}`} className="h-full block">
-      <div className="group bg-white shadow-md hover:shadow-xl w-full h-full rounded-lg overflow-hidden font-sans">
-        <div className="relative w-full h-64 overflow-hidden">
+    <Link href={`/attractions/${id}`} className="block max-w-xs mx-auto">
+      <div className="group bg-white shadow-md hover:shadow-lg w-full rounded-none overflow-hidden font-sans">
+        <div className="relative w-full h-36 overflow-hidden">
           <Image
             src={imageSrc}
             alt={name}
@@ -31,11 +32,11 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
             className="transform transition-transform duration-300 ease-in-out group-hover:scale-110"
           />
         </div>
-        <div className="p-4">
-          <h3 className="text-gray-800 text-xl font-bold line-clamp-2">
+        <div className="p-3">
+          <h3 className="text-gray-800 text-lg font-semibold line-clamp-1">
             {name}
           </h3>
-          <p className="mt-2 text-sm text-gray-500">
+          <p className="mt-1 text-xs text-gray-500">
             {toursCount} Tours and Activities
           </p>
         </div>
@@ -45,7 +46,7 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
 };
 
 type Props = {
-  attractions: Attraction[]; // Accept dynamic data for attractions
+  attractions: Attraction[];
 };
 
 const Attractions: React.FC<Props> = ({ attractions }) => {
@@ -57,7 +58,7 @@ const Attractions: React.FC<Props> = ({ attractions }) => {
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // Initial check
+    handleResize();
 
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -90,9 +91,9 @@ const Attractions: React.FC<Props> = ({ attractions }) => {
           ))}
         </Slider>
       ) : (
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-4 gap-x-4">
           {attractions.map((attraction) => (
-            <div key={attraction.id} className="h-96">
+            <div key={attraction.id} className="h-60">
               <AttractionCard
                 name={attraction.name}
                 id={attraction.id}

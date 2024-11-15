@@ -67,10 +67,10 @@ const CitySelection: React.FC<CitySelectionProps> = ({
 
   return (
     <div className="pt-4 lg:px-32">
-      <h2 className="text-3xl font-bold text-green-800 mb-4 text-center">
+      <h2 className="text-3xl font-bold text-blue-800 mb-4 text-center">
         Choose Your Dream Destinations
       </h2>
-      <p className="text-center text-green-600 mb-8">
+      <p className="text-center text-blue-600 mb-8">
         Select one or more cities for your journey
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -78,7 +78,7 @@ const CitySelection: React.FC<CitySelectionProps> = ({
           <motion.div
             key={index}
             className={`relative overflow-hidden rounded-sm shadow-lg cursor-pointer transition-all duration-300 ${
-              isCitySelected(city.name) ? "ring-4 ring-green-500" : ""
+              isCitySelected(city.name) ? "ring-4 ring-blue-500" : ""
             }`}
             whileHover={{ scale: 1.05 }}
             onClick={() => handleCitySelect(city.name)}
@@ -115,9 +115,9 @@ const CitySelection: React.FC<CitySelectionProps> = ({
               transition={{ duration: 0.2 }}
             >
               {isCitySelected(city.name) ? (
-                <Check className="w-6 h-6 text-green-500" />
+                <Check className="w-6 h-6 text-blue-500" />
               ) : (
-                <Plus className="w-6 h-6 text-green-600" />
+                <Plus className="w-6 h-6 text-blue-600" />
               )}
             </motion.div>
           </motion.div>
@@ -128,15 +128,13 @@ const CitySelection: React.FC<CitySelectionProps> = ({
         {formData.selectedCities && formData.selectedCities.length > 0 ? (
           <ul className="list-decimal list-inside flex gap-x-2">
             {formData.selectedCities.map((city: string) => (
-              <li key={city} className="text-lg text-green-700">
+              <li key={city} className="text-lg text-blue-700">
                 {city}
               </li>
             ))}
           </ul>
         ) : (
-          <p className="text-green-500 text-lg">
-            No destinations selected yet.
-          </p>
+          <p className="text-blue-500 text-lg">No destinations selected yet.</p>
         )}
       </div>
     </div>

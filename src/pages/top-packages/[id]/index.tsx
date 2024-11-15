@@ -62,14 +62,14 @@ const TourDetails: React.FC<ImageGalleryProps> = ({ DetailTour }) => {
           >
             <button
               onClick={scrollToTop}
-              className="text-lg text-green-600 hover:text-green-700 transition duration-200 underline ml-4"
+              className="text-lg text-blue-600 hover:text-blue-700 transition duration-200 underline ml-4"
             >
               Book Now
             </button>
 
             <div className="text-xl font-normal">
               Price Start From
-              <span className="text-2xl ml-3 underline font-semibold text-green-600 min-w-[80px] text-center">
+              <span className="text-2xl ml-3 underline font-semibold text-blue-600 min-w-[80px] text-center">
                 {DetailTour.min_price} $
               </span>{" "}
               Per Person
@@ -79,13 +79,13 @@ const TourDetails: React.FC<ImageGalleryProps> = ({ DetailTour }) => {
               onClick={(e) => handleWishlistClick(e, DetailTour)}
               className={`p-3 rounded-md shadow-md border transition-all duration-200 ${
                 isInWishlist(DetailTour.id)
-                  ? "bg-green-600 text-white hover:bg-green-700"
-                  : "bg-gray-100 text-green-700 border-green-700 hover:bg-gray-200"
+                  ? "bg-blue-600 text-white hover:bg-blue-700"
+                  : "bg-gray-100 text-blue-700 border-blue-700 hover:bg-gray-200"
               }`}
             >
               <Heart
                 className={
-                  isInWishlist(DetailTour.id) ? "text-white" : "text-green-700"
+                  isInWishlist(DetailTour.id) ? "text-white" : "text-blue-700"
                 }
               />
             </button>

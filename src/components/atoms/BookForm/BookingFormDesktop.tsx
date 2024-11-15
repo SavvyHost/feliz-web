@@ -64,10 +64,10 @@ export default function BookingFormDesktop({
 
         <button
           onClick={(e) => handleWishlistClick(e, DetailTour)}
-          className={`absolute -top-14 right-3 p-2 rounded-none border border-green-700 transition-colors duration-200 ${
+          className={`absolute -top-14 right-3 p-2 rounded-none border border-blue-700 transition-colors duration-200 ${
             isInWishlist(DetailTour.id)
-              ? "bg-green-500 text-white hover:bg-green-600"
-              : "bg-white text-green-600 hover:bg-gray-100"
+              ? "bg-blue-500 text-white hover:bg-blue-600"
+              : "bg-white text-blue-600 hover:bg-gray-100"
           }`}
         >
           {isInWishlist(DetailTour.id) ? "In Wishlist" : "Add to Wishlist"}

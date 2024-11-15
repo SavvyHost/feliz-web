@@ -1,23 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import Excursions from "@/components/molecules/Excursions/Excursions";
 import fetchData from "@/helper/FetchData";
 import { TourPackage } from "@/types/tour";
 import SearchExcursions from "@/components/atoms/SearchExcursions/SearchExcursios";
 import Explore from "@/components/molecules/ExploreExcursios";
 import Drops from "@/components/atoms/drops";
+import { useRouter } from "next/router";
 
 interface HomeProps {
   toursData: TourPackage[];
+  categories: Category[];
 }
 
-const Home: React.FC<HomeProps> = ({ toursData }) => {
+interface Category {
+  id: number;
+  name: string;
+  name_ar: string;
+  name_en: string;
+  description: string | null;
+  is_active: number;
+  created_at: string;
+  images: any[];
+  panar_image: {
+    id: number;
+    url: string;
+    name: string;
+  };
+}
+
+const Home: React.FC<HomeProps> = ({ toursData, categories }) => {
+  const router = useRouter();
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+
   return (
     <div className="lg:px-16 p-2">
       <div className="mt-28">
         <SearchExcursions />
       </div>
       <div className="">
-        <Explore />
+        <Explore
+          categories={categories}
+          setSelectedCategory={setSelectedCategory}
+          router={router}
+        />
       </div>
       <div className="lg:my-6 my-0">
         <Drops />
@@ -31,6 +56,7 @@ const Home: React.FC<HomeProps> = ({ toursData }) => {
             <Excursions
               key={tour.id}
               id={tour.id}
+              category={tour.category}
               title={tour.title}
               location={tour.location}
               price={tour.min_price}
@@ -51,10 +77,12 @@ export default Home;
 
 export async function getServerSideProps() {
   const data = await fetchData("tours?type=excursion");
+  const categoriesData = await fetchData("categories");
 
   return {
     props: {
-      toursData: data.data as TourPackage[], // Ensure this matches the type
+      toursData: data.data as TourPackage[],
+      categories: categoriesData.data || [],
     },
   };
 }

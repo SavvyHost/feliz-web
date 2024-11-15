@@ -71,7 +71,7 @@ const LargeScreenSidebar: React.FC<LargeScreenSidebarProps> = ({
 
       {/* Price Filter */}
       <FilterSection title="Price">
-        <div className="px-2">
+        <div className="px-4">
           <Slider
             value={price}
             onChange={handlePriceChange}
@@ -195,7 +195,7 @@ const LargeScreenSidebar: React.FC<LargeScreenSidebarProps> = ({
       {/* Apply Filters Button */}
       <div className="mt-4">
         <Button
-          className="bg-green-500 hover:bg-green-900 text-white w-full"
+          className="bg-blue-500 hover:bg-blue-900 text-white w-full"
           onClick={handleApplyFilters}
         >
           Apply Filters

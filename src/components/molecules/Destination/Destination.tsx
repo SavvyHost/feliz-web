@@ -11,7 +11,7 @@ import defaultImage from "../../../../public/assets/bgblogs.png"; // Update the 
 
 const NextArrow = ({ onClick }) => (
   <div
-    className="absolute -top-8 lg:block hidden right-4 transform -translate-y-1/2 cursor-pointer rounded-full p-2 bg-white shadow-md hover:shadow-lg hover:bg-gray-200 transition-all duration-300 ease-in-out"
+    className="absolute -top-8 lg:block hidden right-4 transform -translate-y-1/2 cursor-pointer rounded-full p-2 bg-custom-lightblue shadow-md hover:shadow-lg hover:bg-custom-darkblue text-custom-white transition-all duration-300 ease-in-out"
     onClick={onClick}
   >
     <FiChevronRight size={24} />
@@ -20,7 +20,7 @@ const NextArrow = ({ onClick }) => (
 
 const PrevArrow = ({ onClick }) => (
   <div
-    className="absolute -top-8 right-20 lg:block hidden transform -translate-y-1/2 cursor-pointer rounded-full p-2 bg-white shadow-md hover:shadow-lg hover:bg-gray-200 transition-all duration-300 ease-in-out"
+    className="absolute -top-8 right-20 lg:block hidden transform -translate-y-1/2 cursor-pointer rounded-full p-2 bg-custom-lightblue shadow-md hover:shadow-lg hover:bg-custom-darkblue text-custom-white transition-all duration-300 ease-in-out"
     onClick={onClick}
   >
     <FiChevronLeft size={24} />
@@ -79,7 +79,7 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
         className="transition-transform duration-300 group-hover:scale-110"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end justify-start p-4">
-        <h3 className="text-white text-xl font-semibold text-shadow-custom">
+        <h3 className="text-white text-shadow-shine text-xl font-semibold text-shadow-custom">
           {name}
         </h3>
       </div>

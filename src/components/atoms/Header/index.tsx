@@ -65,7 +65,7 @@ export const Header = ({ header, className }: any) => {
         <div className="flex items-center justify-between ">
           {/* Mobile Menu Toggle */}
           <button
-            className="lg:hidden text-[#191e61] focus:outline-none"
+            className="lg:hidden text-custom-darkblue focus:outline-none"
             onClick={() => setIsMenuOpen(true)}
           >
             <Menu className="w-6 h-6" />
@@ -107,7 +107,7 @@ export const Header = ({ header, className }: any) => {
             </button>
             <Link
               href="/inquire"
-              className="bg-green-700 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-green-600 transition-colors duration-200"
+              className="bg-custom-lightblue text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-custom-darkblue transition-colors duration-200"
             >
               Tailored made
             </Link>

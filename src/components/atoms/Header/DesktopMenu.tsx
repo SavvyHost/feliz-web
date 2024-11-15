@@ -15,8 +15,8 @@ const DesktopMenu = ({ navLinks }) => {
               href={href}
               className={`font-semibold text-sm ${
                 router.pathname === href
-                  ? "text-green-500"
-                  : "text-[#134712] hover:text-[#27751d]"
+                  ? "text-custom-turquoise"
+                  : "text-custom-darkblue hover:text-custom-lightblue"
               }`}
             >
               {label}

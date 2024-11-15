@@ -172,7 +172,7 @@ const MainDataBookingForm = ({
                           onClick={() =>
                             setFieldValue(name, Math.max(min, values[name] - 1))
                           }
-                          className="p-2 bg-gray-100 text-green-600 rounded-full flex items-center justify-center focus:outline-none hover:bg-green-200 transition-colors"
+                          className="p-2 bg-gray-100 text-blue-600 rounded-full flex items-center justify-center focus:outline-none hover:bg-blue-200 transition-colors"
                         >
                           <Minus size={16} />
                         </button>
@@ -182,7 +182,7 @@ const MainDataBookingForm = ({
                           onClick={() =>
                             setFieldValue(name, Math.min(max, values[name] + 1))
                           }
-                          className="p-2 bg-gray-100 text-green-600 rounded-full flex items-center justify-center focus:outline-none hover:bg-green-200 transition-colors"
+                          className="p-2 bg-gray-100 text-blue-600 rounded-full flex items-center justify-center focus:outline-none hover:bg-blue-200 transition-colors"
                         >
                           <Plus size={16} />
                         </button>
@@ -196,7 +196,7 @@ const MainDataBookingForm = ({
                         calculateTotalPrice(values);
                       }}
                       type="button"
-                      className="w-full p-3 bg-green-700 text-white rounded-md hover:bg-green-900 transition duration-150"
+                      className="w-full p-3 bg-blue-700 text-white rounded-md hover:bg-blue-900 transition duration-150"
                     >
                       Apply
                     </button>
@@ -228,7 +228,7 @@ const MainDataBookingForm = ({
             <Button
               variant="contained"
               onClick={() => handleOpenModal(values)}
-              className="mt-4 w-full bg-green-900 hover:bg-green-600"
+              className="mt-4 w-full bg-blue-900 hover:bg-blue-600"
             >
               Book Now
             </Button>
@@ -314,7 +314,7 @@ const MainDataBookingForm = ({
                       <Button
                         variant="contained"
                         onClick={() => handleConfirmBooking(values)}
-                        className="flex-1 bg-green-900 hover:bg-green-800"
+                        className="flex-1 bg-blue-900 hover:bg-blue-800"
                       >
                         Confirm
                       </Button>

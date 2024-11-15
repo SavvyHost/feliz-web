@@ -1,73 +1,89 @@
 import React, { useState } from "react";
 import Slider from "react-slick";
 import ExcursionCard from "@/components/templates/ExcursionCard";
-import { excursions } from "@/data";
-import { StaticImageData } from "next/image";
+import { Category } from "@/types/tour";
 
-type Excursion = {
-  id: number;
-  imageSrc: StaticImageData;
-  recommendation: string;
-};
+interface ExploreProps {
+  categories: Category[];
+  setSelectedCategory: (categoryName: string) => void;
+}
 
-const sliderSettings = {
-  dots: false,
-  infinite: false,
-  speed: 500,
-  slidesToShow: 8,
-  slidesToScroll: 1,
-  centerMode: false,
-  arrows: false,
-  responsive: [
-    {
-      breakpoint: 768,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        centerMode: false,
-      },
-    },
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        arrows: true,
-        centerMode: false,
-      },
-    },
-  ],
-};
-
-const Explore: React.FC = () => {
-  // Set the default selected card to the first excursion's id
-  const [selectedCardId, setSelectedCardId] = useState<number | null>(
-    excursions[0]?.id || null
+const Explore: React.FC<ExploreProps> = ({
+  categories,
+  setSelectedCategory,
+  router,
+}) => {
+  const [selectedCategoryName, setSelectedCategoryName] = useState<string>(
+    categories[0]?.name || ""
   );
 
-  const handleCardSelect = (id: number) => {
-    setSelectedCardId(id); // Only one card selected at a time
+  const handleCategorySelect = (name: string) => {
+    setSelectedCategoryName(name);
+    setSelectedCategory(name);
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, category: name },
+    });
+  };
+
+  const sliderSettings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 8,
+    slidesToScroll: 1,
+    centerMode: false,
+    centerPadding: "0px",
+    arrows: false,
+    swipeToSlide: true,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          centerMode: false,
+          centerPadding: "0px",
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 1,
+          arrows: true,
+          centerMode: false,
+          centerPadding: "0px",
+        },
+      },
+    ],
   };
 
   return (
-    <div className="explore-container">
+    <div className="w-full">
       <h2 className="md:text-3xl text-xl font-segoe mb-6 text-start">
         Explore Excursions
       </h2>
 
-      <div className="block lg:w-full">
-        <Slider {...sliderSettings}>
-          {excursions.map((excursion) => (
-            <div key={excursion.id} className="p-2">
-              <ExcursionCard
-                imageSrc={excursion.imageSrc}
-                recommendation={excursion.recommendation}
-                isSelected={selectedCardId === excursion.id}
-                onSelect={() => handleCardSelect(excursion.id)}
-              />
-            </div>
-          ))}
-        </Slider>
+      <div className="w-full relative">
+        <div className="overflow-hidden">
+          <Slider {...sliderSettings}>
+            {categories.map((category) => (
+              <div key={category.id} className="pr-2">
+                <ExcursionCard
+                  imageSrc={{
+                    src: category.panar_image.url,
+                    width: 400,
+                    height: 300,
+                  }}
+                  recommendation={category.name}
+                  isSelected={selectedCategoryName === category.name}
+                  onSelect={() => handleCategorySelect(category.name)}
+                />
+              </div>
+            ))}
+          </Slider>
+        </div>
       </div>
     </div>
   );

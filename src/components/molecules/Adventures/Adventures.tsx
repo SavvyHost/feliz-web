@@ -113,10 +113,10 @@ const Adventures: React.FC<AdventuresProps> = ({ categories }) => {
                   height={160}
                 />
                 <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-4 text-white bg-black bg-opacity-30 group-hover:bg-opacity-40 transition-all duration-300">
-                  <h2 className="text-xl font-bold text-white text-shadow-custom">
+                  <h2 className="text-xl font-bold text-white text-shadow-custom text-shadow-shine">
                     {category.name}
                   </h2>
-                  <div className="absolute bottom-0 left-0 right-0 p-2 bg-black bg-opacity-50 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                  <div className="absolute bottom-0 left-0 right-0 p-2 bg-custom-orange  transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                     <p className="text-sm">
                       {category.description || "Explore this category"}
                     </p>

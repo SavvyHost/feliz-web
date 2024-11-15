@@ -24,6 +24,7 @@ const ExcursionCard: React.FC<ExcursionCardProps> = ({
   price,
   destination,
   image,
+  category,
   rating,
   duration,
   ageRange,
@@ -44,7 +45,7 @@ const ExcursionCard: React.FC<ExcursionCardProps> = ({
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
           <div className="absolute top-3 left-3">
-            <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-green-600 text-white">
+            <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-blue-600 text-white">
               Top Rated
             </span>
           </div>
@@ -82,7 +83,7 @@ const ExcursionCard: React.FC<ExcursionCardProps> = ({
             <span className="truncate">{destination}</span>
           </div>
 
-          <h2 className="font-medium text-base sm:text-lg mb-3 line-clamp-2 group-hover:underline group-hover:text-green-600 transition-colors">
+          <h2 className="font-medium text-base sm:text-lg mb-3 line-clamp-2 group-hover:underline group-hover:text-blue-600 transition-colors">
             {title}
           </h2>
 
@@ -104,7 +105,7 @@ const ExcursionCard: React.FC<ExcursionCardProps> = ({
               </span>
             </div>
             <div className="flex items-baseline gap-1 mt-1">
-              <span className="text-lg font-medium text-green-600">
+              <span className="text-lg font-medium text-blue-600">
                 From ${price}
               </span>
               <span className="text-sm text-gray-600">/ Person</span>

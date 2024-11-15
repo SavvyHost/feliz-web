@@ -23,7 +23,7 @@ interface TourDetailsProps {
 
 const TripExcusrions: FC<TourDetailsProps> = ({ DetailTour }) => {
   return (
-    <div className="w-full mx-auto mt-2 px-4 py-2 border bg-white mb-3 border-green-200 rounded-lg shadow-md">
+    <div className="w-full mx-auto mt-2 px-4 py-2 border bg-white mb-3 border-blue-200 rounded-lg shadow-md">
       <h2 className="text-2xl font-semibold mb-4">About this tour</h2>
 
       <div
@@ -35,7 +35,7 @@ const TripExcusrions: FC<TourDetailsProps> = ({ DetailTour }) => {
 
       <ul className="flex flex-wrap gap-4">
         <li className="flex items-center bg-white p-3 rounded-lg shadow-md w-full sm:w-1/2 lg:w-1/4">
-          <FaRegClock className="text-green-500 mr-3" />
+          <FaRegClock className="text-blue-500 mr-3" />
           <span className="text-gray-800">
             Duration: {DetailTour.duration} Hours
           </span>

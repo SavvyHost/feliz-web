@@ -13,7 +13,7 @@ const TourCard = ({ itinerary, index, isLast }) => {
     <div className="w-full overflow-hidden my-1 relative">
       {/* Vertical line and dot */}
       <div className="absolute left-3 top-0 bottom-0 w-0.5 bg-gray-300">
-        <div className="absolute left-1/2 top-6 w-4 h-4 rounded-full bg-green-500 transform -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute left-1/2 top-6 w-4 h-4 rounded-full bg-blue-500 transform -translate-x-1/2 -translate-y-1/2" />
       </div>
 
       {/* Content moved to the right */}
@@ -68,7 +68,7 @@ const TourCard = ({ itinerary, index, isLast }) => {
 
 const TourItinerary = ({ DetailTour }) => {
   return (
-    <div className="flex flex-wrap border-green-200 border rounded-lg bg-white p-4">
+    <div className="flex flex-wrap border-blue-200 border rounded-lg bg-white p-4">
       <h1 className="text-2xl font-bold mb-4 w-full">Tour Itineraries</h1>
       {DetailTour.tour_itineraries.map((itinerary, index) => (
         <TourCard

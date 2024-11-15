@@ -35,7 +35,7 @@ const SearchModal: React.FC<SearchModalProps> = ({
           <h2 className="text-lg font-semibold">Search</h2>
           <button
             onClick={() => setIsModalOpen(false)}
-            className="text-green-500"
+            className="text-blue-500"
           >
             <AiOutlineClose className="w-6 h-6" />
           </button>
@@ -51,15 +51,15 @@ const SearchModal: React.FC<SearchModalProps> = ({
               }
               onChange={(e) => setLocation(e.target.value)}
               placeholder="Where"
-              className="bg-transparent rounded-md pl-3 pr-10 py-2 focus:outline-none w-full cursor-pointer border border-green-300"
+              className="bg-transparent rounded-md pl-3 pr-10 py-2 focus:outline-none w-full cursor-pointer border border-blue-300"
             />
-            <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-green-400" />
+            <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-blue-400" />
             {isLocationDropdownOpen && (
-              <div className="absolute z-10 mt-1 w-full bg-white border border-green-300 rounded-md shadow-lg">
+              <div className="absolute z-10 mt-1 w-full bg-white border border-blue-300 rounded-md shadow-lg">
                 {locations.map((loc) => (
                   <div
                     key={loc}
-                    className="px-3 py-2 hover:bg-green-200 text-sm cursor-pointer"
+                    className="px-3 py-2 hover:bg-blue-200 text-sm cursor-pointer"
                     onClick={() => {
                       setLocation(loc);
                       setIsLocationDropdownOpen(false);
@@ -81,7 +81,7 @@ const SearchModal: React.FC<SearchModalProps> = ({
               }
               onChange={(e) => setMonth(e.target.value)}
               placeholder="Select month"
-              className="bg-transparent rounded-md pl-3 pr-10 py-2 focus:outline-none w-full cursor-pointer border border-green-300"
+              className="bg-transparent rounded-md pl-3 pr-10 py-2 focus:outline-none w-full cursor-pointer border border-blue-300"
             />
             <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-transparent" />
             {isMonthDropdownOpen && (
@@ -122,7 +122,7 @@ const SearchModal: React.FC<SearchModalProps> = ({
 
           <Filter />
           <button
-            className="bg-green-800 text-white font-segoe rounded-md px-4 mt-4 py-2 w-full flex items-center justify-center"
+            className="bg-blue-800 text-white font-segoe rounded-md px-4 mt-4 py-2 w-full flex items-center justify-center"
             onClick={() => setIsModalOpen(false)}
           >
             <Search className="mr-2 w-5 h-5" />

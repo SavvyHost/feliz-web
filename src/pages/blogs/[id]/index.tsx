@@ -79,7 +79,7 @@ const BlogDetails: React.FC<Props> = ({ blogData, DetailBlogs }) => {
       {isVisible && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-4 right-4 bg-green-500 text-white p-3 rounded-none shadow-lg transition-opacity duration-300 hover:bg-green-600"
+          className="fixed bottom-4 right-4 bg-blue-500 text-white p-1 rounded-none shadow-lg transition-opacity duration-300 hover:bg-blue-600"
           aria-label="Scroll to top"
         >
           <ArrowUpToLine />

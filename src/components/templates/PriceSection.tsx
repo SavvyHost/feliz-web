@@ -33,7 +33,7 @@ const Prices: FC<PricesProps> = ({ DetailTour }) => {
   const tourPrices = DetailTour.tour_prices;
 
   return (
-    <div className="w-full mx-auto mb-3 border rounded-lg px-4 py-2 mt-2 bg-white border-green-200 shadow-md">
+    <div className="w-full mx-auto mb-3 border rounded-lg px-4 py-2 mt-2 bg-white border-blue-200 shadow-md">
       <h3 className="text-2xl font-semibold mb-2">Tour Prices</h3>
       {tourPrices.map((tourPrice, index) => (
         <div key={index}>

@@ -84,7 +84,7 @@ const DatePickerModal: React.FC<DatePickerModalProps> = ({
                 Total Days: {rangeDays}
               </Typography>
               <Button
-                className="bg-green-600 text-white hover:bg-green-500 border border-green-500 hover:border-green-700"
+                className="bg-blue-600 text-white hover:bg-blue-500 border border-blue-500 hover:border-blue-700"
                 variant="outlined"
                 onClick={decrementDays}
                 disabled={rangeDays <= 1}
@@ -93,7 +93,7 @@ const DatePickerModal: React.FC<DatePickerModalProps> = ({
               </Button>
               <Button
                 variant="outlined"
-                className="bg-green-600 text-white hover:bg-green-500 border border-green-500 hover:border-green-700"
+                className="bg-blue-600 text-white hover:bg-blue-500 border border-blue-500 hover:border-blue-700"
                 onClick={incrementDays}
                 sx={{ ml: 1 }}
               >
@@ -123,7 +123,7 @@ const DatePickerModal: React.FC<DatePickerModalProps> = ({
               setFieldValue("duration", rangeDays);
             }}
             variant="contained"
-            className="bg-green-900 hover:bg-green-600"
+            className="bg-blue-900 hover:bg-blue-600"
           >
             Apply
           </Button>

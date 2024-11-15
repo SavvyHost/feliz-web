@@ -20,7 +20,7 @@ const OriginalExperience: FC<OriginalExperienceProps> = ({ DetailTour }) => {
   }
 
   return (
-    <div className="w-full mx-auto mb-3 mt-2 px-4 py-2 border bg-white border-green-200 rounded-lg shadow-md">
+    <div className="w-full mx-auto mb-3 mt-2 px-4 py-2 border bg-white border-blue-200 rounded-lg shadow-md">
       <h2 className="text-2xl font-semibold mb-4">Includes</h2>
 
       {/* Includes Section */}
@@ -30,7 +30,7 @@ const OriginalExperience: FC<OriginalExperienceProps> = ({ DetailTour }) => {
             <li key={item.id} className="flex items-center text-gray-600">
               <div>
                 {item.status === "yes" ? (
-                  <FaCheckCircle className="text-green-600 mr-2" />
+                  <FaCheckCircle className="text-blue-600 mr-2" />
                 ) : (
                   <FaTimesCircle className="text-red-600 mr-2" />
                 )}
