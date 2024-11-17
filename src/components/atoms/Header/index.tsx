@@ -72,7 +72,7 @@ export const Header = ({ header, className }: any) => {
           </button>
 
           {/* Logo */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 -translate-x-8 lg:-translate-x-0">
             <Link href="/" className="block">
               <div className="relative w-40 lg:h-20 h-16">
                 <Image
@@ -107,7 +107,7 @@ export const Header = ({ header, className }: any) => {
             </button>
             <Link
               href="/inquire"
-              className="bg-custom-lightblue text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-custom-darkblue transition-colors duration-200"
+              className="bg-custom-lightblue text-nowrap text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-custom-darkblue transition-colors duration-200"
             >
               Tailored made
             </Link>
