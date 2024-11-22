@@ -7,7 +7,7 @@ import { useWishlist } from "@/contexts/wishlist-context";
 import { AttractionCardProps } from "@/types/attraction";
 
 const AttractionCard: React.FC<
-  AttractionCardProps & { onRemove?: () => void }
+  AttractionCardProps & { isEditMode?: boolean }
 > = ({
   id,
   type,
@@ -16,6 +16,7 @@ const AttractionCard: React.FC<
   price,
   image,
   rating,
+
   duration,
   ageRange,
   isFeatured = false,
@@ -25,7 +26,7 @@ const AttractionCard: React.FC<
   min_price,
   main_image,
   destination,
-  onRemove,
+  isEditMode = false,
 }) => {
   const { toggleWishlist, isInWishlist } = useWishlist();
   const router = useRouter();
@@ -37,7 +38,7 @@ const AttractionCard: React.FC<
   };
 
   const handleMouseUp = (e: React.MouseEvent) => {
-    if (startPos.current) {
+    if (startPos.current && !isEditMode) {
       const dx = Math.abs(e.clientX - startPos.current.x);
       const dy = Math.abs(e.clientY - startPos.current.y);
 
@@ -81,11 +82,6 @@ const AttractionCard: React.FC<
     };
 
     toggleWishlist(attraction);
-
-    // Check if the onRemove callback is provided
-    if (onRemove && isInWishlist(id)) {
-      onRemove();
-    }
   };
 
   return (
@@ -124,7 +120,7 @@ const AttractionCard: React.FC<
       </div>
 
       <div className="flex-1 flex flex-col p-4">
-        <h3 className="text-xl font-semibold mb-2 truncate group-hover:underline group-hover:text-blue-600">
+        <h3 className="text-xl font-semibold mb-2 line-clamp-2 group-hover:underline group-hover:text-blue-600">
           {title}
         </h3>
         {location && (

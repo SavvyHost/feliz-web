@@ -4,6 +4,7 @@ export interface AttractionCardProps {
   name: any;
   id: string;
   title: string;
+    type: 'tour_package' | 'excursion';  // Added this line
   location: string;
   price: number;
   image: StaticImageData;

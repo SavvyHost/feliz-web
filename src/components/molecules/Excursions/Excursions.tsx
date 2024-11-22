@@ -3,6 +3,7 @@ import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { Clock, Heart, Luggage, MapPin } from "lucide-react";
 import { useWishlist } from "@/contexts/wishlist-context";
+import { useRecentlyViewed } from "@/contexts/recently-viewed-context"; // Import the recently viewed context
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 interface ExcursionCardProps {
@@ -24,19 +25,34 @@ const ExcursionCard: React.FC<ExcursionCardProps> = ({
   price,
   destination,
   image,
-  category,
   rating,
   duration,
   ageRange,
 }) => {
   const { toggleWishlist, isInWishlist } = useWishlist();
+  const { addToRecentlyViewed } = useRecentlyViewed(); // Use recently viewed context
+
+  const handleViewTour = () => {
+    addToRecentlyViewed({
+      id,
+      title,
+      location,
+      price,
+      image,
+      rating,
+      duration,
+      ageRange,
+      destination,
+    });
+  };
 
   return (
     <Link
       href={`/top-excursions/${id}`}
       className="block group transition-transform"
+      onClick={handleViewTour} // Add to recently viewed when clicked
     >
-      <div className=" rounded-3xl overflow-hidden hover:shadow-lg transition-shadow duration-300">
+      <div className="rounded-3xl overflow-hidden hover:shadow-lg transition-shadow duration-300">
         <div className="relative aspect-[4/3] w-full overflow-hidden">
           <Image
             src={image}
@@ -51,7 +67,7 @@ const ExcursionCard: React.FC<ExcursionCardProps> = ({
           </div>
           <button
             onClick={(e) => {
-              e.preventDefault();
+              e.preventDefault(); // Prevent default to avoid navigating away
               toggleWishlist({
                 id,
                 title,

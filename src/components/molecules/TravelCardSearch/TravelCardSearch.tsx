@@ -7,6 +7,7 @@ import Pagination from "../Pagination";
 import Image from "next/image";
 import { FaHeart, FaRegHeart, FaWhatsapp } from "react-icons/fa";
 import { useWishlist } from "@/contexts/wishlist-context";
+import { useRecentlyViewed } from "@/contexts/recently-viewed-context";
 
 interface Tour {
   id: number;
@@ -48,13 +49,30 @@ const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
     e.stopPropagation();
     toggleWishlist(tour);
   };
+  const { addToRecentlyViewed } = useRecentlyViewed(); // Use recently viewed context
+
+  const handleViewTour = (tour: Tour) => {
+    addToRecentlyViewed({
+      id: tour.id,
+      title: tour.title,
+      destination: tour.destination,
+      duration: tour.duration,
+      age_range: tour.age_range,
+      run: tour.run,
+      min_price: tour.min_price,
+      image: tour.main_image?.url || defaultImage, // Use the tour image or a default one
+    });
+  };
 
   return (
     <div className="w-full">
       <div className="grid grid-cols-1 gap-6 mt-3 lg:mt-0">
         {currentTours.map((pkg) => (
           <Link href={`/top-packages/${pkg.id}`} key={pkg.id}>
-            <div className="w-full hover:border-blue-500 group bg-white border-gray-300 border overflow-hidden transition-shadow duration-300 hover:shadow-xl cursor-pointer">
+            <div
+              onClick={() => handleViewTour(pkg)}
+              className="w-full hover:border-blue-500 group bg-white border-gray-300 border overflow-hidden transition-shadow duration-300 hover:shadow-xl cursor-pointer"
+            >
               <div className="flex flex-col md:flex-row">
                 <div className="w-full md:w-2/5 p-3 h-64 md:h-auto relative  overflow-hidden">
                   <Image
@@ -121,7 +139,7 @@ const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
                       <div className="flex items-center space-x-2">
                         <Calendar className="w-5 h-5 text-gray-500" />
                         <span className="text-sm text-gray-600">
-                          {pkg.duration} hours
+                          {pkg.duration} days
                         </span>
                       </div>
                       <div className="flex items-center space-x-2">

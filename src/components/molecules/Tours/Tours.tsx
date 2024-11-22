@@ -56,6 +56,7 @@ const Tours: React.FC<ToursProps> = ({ toursData }) => {
                   image={attraction.main_image.url}
                   rating={2}
                   duration={attraction.duration}
+                  type={attraction.type}
                   ageRange={attraction.age_range}
                 />
               </div>
