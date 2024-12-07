@@ -5,6 +5,7 @@ import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import Slider from "react-slick";
 import Link from "next/link";
+import ShareButton from "../atoms/ShareButton";
 
 interface TourDetail {
   title: string;
@@ -153,6 +154,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ DetailTour }) => {
         <h1 className="text-lg lg:text-2xl font-bold lg:mb-4 mb-2 text-gray-800 pt-3 pl-3 lg:pl-0 lg:pt-0">
           {DetailTour.title}
         </h1>
+
         <div className="w-full h-[250px] md:h-[390px] bg-gray-200 rounded-md flex items-center justify-center">
           <span className="text-gray-500">No images available</span>
         </div>
@@ -162,11 +164,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ DetailTour }) => {
 
   return (
     <div className="flex flex-col">
-      <h1 className="text-lg lg:text-2xl font-bold lg:mb-4 mb-2 text-gray-800 pt-3 pl-3 lg:pl-0 lg:pt-0">
-        {DetailTour.title}
-      </h1>
-
-      <nav className="mb-4 pl-3 lg:pl-0 lg:pt-0">
+      <nav className=" pl-3 lg:pl-0 lg:pt-0">
         {breadcrumb.map((crumb, index) => (
           <span key={index} className="text-gray-500 font-segoe">
             {index === 0 ? (
@@ -191,6 +189,9 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ DetailTour }) => {
           </span>
         ))}
       </nav>
+      <h1 className="text-base px-2 flex justify-between lg:text-2xl font-bold lg:mb-4 mb-2 text-gray-800 pt-3 pl-3 lg:pl-0 lg:pt-0">
+        {DetailTour.title}
+      </h1>
 
       <div className="flex flex-col md:flex-row">
         {hasMultipleImages && (
@@ -253,7 +254,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ DetailTour }) => {
                   {index === maxImages - 1 &&
                     DetailTour.images.length > maxImages && (
                       <div
-                        className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white overlay cursor-pointer"
+                        className="absolute rounded-md inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white overlay cursor-pointer"
                         onClick={(e) => {
                           e.stopPropagation();
                           openGallery(e, index);

@@ -317,7 +317,6 @@ function IntegratedBookingForm({ DetailTour, setIsThanksVisible }) {
                 </Button>
               </div>
             </div>
-            <ToastContainer />
           </Form>
         )}
       </Formik>

@@ -133,17 +133,17 @@ const TravelStepper: React.FC = () => {
       </div>
 
       {!isDone && (
-        <div className="sticky bottom-0 left-0 w-full bg-green-100 shadow-lg flex justify-between p-4">
+        <div className="sticky bottom-0 left-0 w-full bg-blue-100 shadow-lg flex justify-between p-4">
           <Button
             onClick={handleBack}
             disabled={activeStep === 0}
-            className="text-green-500"
+            className="text-blue-500"
           >
             Back
           </Button>
 
           <Button
-            className="bg-green-600 hover:bg-green-400"
+            className="bg-blue-600 hover:bg-blue-400"
             variant="contained"
             onClick={handleNext}
             disabled={

@@ -2,14 +2,16 @@
 
 import React, { useRef } from "react";
 import Slider from "react-slick";
-import { useRecentlyViewed } from "@/contexts/recently-viewed-context";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Luggage, MapPin, Heart } from "lucide-react";
-import { useWishlist } from "@/contexts/wishlist-context";
+
 import { useRouter } from "next/router";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useRecentlyViewed } from "@/contexts/recently-viewed-context";
+import { useWishlist } from "@/contexts/wishlist-context";
 
 const RecentlyViewedSection = () => {
   const router = useRouter();
@@ -65,7 +67,6 @@ const RecentlyViewedSection = () => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
-    rtl: false,
     responsive: [
       {
         breakpoint: 1024,
@@ -77,7 +78,7 @@ const RecentlyViewedSection = () => {
       {
         breakpoint: 640,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 1.1,
           slidesToScroll: 1,
         },
       },
@@ -85,17 +86,21 @@ const RecentlyViewedSection = () => {
   };
 
   return (
-    <section className="bg-gradient-to-b from-gray-50 to-white">
-      <div className="">
-        <div className="text-left mb-4 text-black font-segoe sm:font-semi-bold font-medium text-2xl md:text-special-offer ">
-          Recently Viewed
-        </div>
-        <div className="relative -mx-4">
+    <section className="py-6">
+      <h2 className="text-left mb-6 text-black font-segoe sm:font-semi-bold font-medium text-2xl md:text-special-offer">
+        Recently Viewed
+      </h2>
+      <div className="container mx-auto px-2">
+        <div className="relative">
           <Slider {...settings} className="slick-carousel" ref={cardRef}>
             {recentlyViewed.map((item, index) => (
-              <div key={item.id} className="px-2 pb-4" data-index={index}>
+              <div
+                key={item.id}
+                className="lg:px-3 px-1 pb-6"
+                data-index={index}
+              >
                 <div
-                  className="bg-white rounded-2xl cursor-pointer overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full"
+                  className="bg-white rounded-lg cursor-pointer overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 h-full"
                   onMouseDown={handleMouseDown}
                   onMouseUp={handleMouseUp}
                 >
@@ -105,14 +110,14 @@ const RecentlyViewedSection = () => {
                         src={item.image || item.main_image?.url}
                         alt={item.title}
                         fill
-                        className="object-cover transition-transform duration-500 hover:scale-110"
+                        className="object-cover transition-transform duration-500 hover:scale-105"
                       />
                     </div>
 
                     <div className="absolute top-4 right-4 flex gap-2">
                       <button
                         onClick={(e) => handleWishlistClick(e, item)}
-                        className="p-2 rounded-full bg-white/90 backdrop-blur-sm hover:bg-white transition-all duration-200 shadow-lg"
+                        className="p-2 rounded-full bg-white/90 backdrop-blur-sm hover:bg-white transition-all duration-200 shadow"
                         aria-label={
                           isInWishlist(item.id)
                             ? "Remove from wishlist"
@@ -131,30 +136,28 @@ const RecentlyViewedSection = () => {
 
                     {item.isFeatured && (
                       <div className="absolute top-4 left-4">
-                        <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-blue-600 text-white shadow-lg">
+                        <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-primary-light text-white shadow">
                           Featured
                         </span>
                       </div>
                     )}
                   </div>
 
-                  <div className="p-5">
-                    <div className="flex items-center gap-1.5 text-sm text-gray-600 mb-2">
+                  <div className="p-4 space-y-3">
+                    <div className="flex items-center gap-1.5 text-sm text-gray-600">
                       <MapPin className="h-4 w-4" />
                       <span className="truncate font-medium">
                         {item.location || item.destination}
                       </span>
                     </div>
 
-                    <h3 className="text-lg font-semibold mb-3 text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2">
+                    <h3 className="text-lg font-semibold text-gray-900 group-hover:text-primary-light transition-colors line-clamp-2">
                       {item.title}
                     </h3>
 
-                    <div className="space-y-3 mb-4">
-                      <div className="flex items-center gap-1.5 text-sm text-gray-600">
-                        <Luggage className="h-4 w-4" />
-                        <span>Age: {item.ageRange || item.age_range}</span>
-                      </div>
+                    <div className="flex items-center gap-1.5 text-sm text-gray-600">
+                      <Luggage className="h-4 w-4" />
+                      <span>Age: {item.ageRange || item.age_range}</span>
                     </div>
 
                     <div className="border-t pt-4">
@@ -168,7 +171,7 @@ const RecentlyViewedSection = () => {
                             </div>
                           )}
                           <div className="flex items-baseline gap-1">
-                            <span className="text-2xl font-bold text-blue-600">
+                            <span className="text-2xl font-bold text-primary-dark">
                               ${item.price || item.min_price}
                             </span>
                             <span className="text-sm text-gray-600">
@@ -182,7 +185,7 @@ const RecentlyViewedSection = () => {
                               ? "top-packages"
                               : "top-excursions"
                           }/${item.id}`}
-                          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+                          className="px-4 py-2 bg-primary-dark text-white rounded-lg hover:bg-primary-light transition-colors text-sm font-medium"
                         >
                           View Details
                         </Link>
