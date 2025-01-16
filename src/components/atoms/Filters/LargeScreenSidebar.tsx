@@ -57,9 +57,9 @@ const LargeScreenSidebar: React.FC<LargeScreenSidebarProps> = ({
                 checked={selectedDestination === country}
                 // Prevent div click when clicking on radio
                 sx={{
-                  color: "#228B22",
+                  color: "blue",
                   "&.Mui-checked": {
-                    color: "#228B22",
+                    color: "blue",
                   },
                 }}
               />
@@ -79,12 +79,12 @@ const LargeScreenSidebar: React.FC<LargeScreenSidebarProps> = ({
             min={0}
             max={1000}
             sx={{
-              color: "#228B22",
+              color: "blue",
               "& .MuiSlider-thumb": {
-                backgroundColor: "#228B22",
+                backgroundColor: "blue",
               },
               "& .MuiSlider-rail": {
-                backgroundColor: "#228B22",
+                backgroundColor: "blue",
               },
             }}
           />
@@ -115,9 +115,9 @@ const LargeScreenSidebar: React.FC<LargeScreenSidebarProps> = ({
                   checked={selectedAmenities.includes(rating)}
                   // Prevent div click when clicking on checkbox
                   sx={{
-                    color: "#228B22",
+                    color: "blue",
                     "&.Mui-checked": {
-                      color: "#228B22",
+                      color: "blue",
                     },
                   }}
                 />
@@ -153,9 +153,9 @@ const LargeScreenSidebar: React.FC<LargeScreenSidebarProps> = ({
                 checked={selectedAmenities.includes(amenity)}
                 // Prevent div click when clicking on checkbox
                 sx={{
-                  color: "#228B22",
+                  color: "blue",
                   "&.Mui-checked": {
-                    color: "#228B22",
+                    color: "blue",
                   },
                 }}
               />
@@ -179,9 +179,9 @@ const LargeScreenSidebar: React.FC<LargeScreenSidebarProps> = ({
                   checked={selectedAccommodationType === type}
                   // Prevent div click when clicking on checkbox
                   sx={{
-                    color: "#228B22",
+                    color: "blue",
                     "&.Mui-checked": {
-                      color: "#228B22",
+                      color: "blue",
                     },
                   }}
                 />

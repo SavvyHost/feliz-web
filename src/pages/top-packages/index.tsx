@@ -66,11 +66,11 @@ export default function Home({
   };
 
   return (
-    <div className="md:p-6 p-0 bg-[#FAFAFA] lg:px-16">
+    <div className=" p-0 bg-[#FAFAFA] ">
       <div className="block lg:hidden">
         <Mobile toursData={toursData} categories={categories} />
       </div>
-      <div className="hidden lg:block">
+      <div className="hidden lg:block ">
         <Laptop toursData={toursData} categories={categories} />
       </div>
       {/* 
