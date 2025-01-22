@@ -134,7 +134,7 @@ const LargeScreenSidebar: React.FC<LargeScreenSidebarProps> = ({
       {/* Apply Filters Button */}
       <div className="mt-4">
         <Button
-          className="bg-primary-light hover:bg-primary-dark text-white w-full"
+          className="bg-blue-500 hover:bg-blue-900 text-white w-full"
           onClick={handleApplyFilters}
         >
           Apply Filters
