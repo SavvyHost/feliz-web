@@ -105,13 +105,13 @@ const Adventures: React.FC<AdventuresProps> = ({ categories }) => {
               className="flex flex-col items-start group relative cursor-pointer"
             >
               <div className="relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 w-full">
-                <Image
+                {/* <Image
                   className="w-full h-40 object-cover transition-transform transform group-hover:scale-110 duration-500"
                   src={category.panar_image.url}
                   alt={category.name}
                   width={320}
                   height={160}
-                />
+                /> */}
                 <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-4 text-white bg-black bg-opacity-30 group-hover:bg-opacity-40 transition-all duration-300">
                   <h2 className="text-xl font-bold text-white text-shadow-custom text-shadow-shine">
                     {category.name}

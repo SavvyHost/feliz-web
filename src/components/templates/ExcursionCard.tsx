@@ -1,8 +1,8 @@
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import React from "react";
 
 type ExcursionCardProps = {
-  imageSrc: StaticImageData;
+  imageSrc: string; // Changed to string for URL compatibility
   recommendation: string;
   isSelected: boolean;
   onSelect: () => void;
@@ -24,7 +24,7 @@ const ExcursionCard: React.FC<ExcursionCardProps> = ({
     >
       <div className="relative w-full" style={{ height: "150px" }}>
         <Image
-          src={imageSrc}
+          src={imageSrc} // Expecting a string URL
           alt="Excursion"
           layout="fill"
           objectFit="cover"

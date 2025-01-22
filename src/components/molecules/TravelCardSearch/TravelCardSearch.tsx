@@ -159,12 +159,12 @@ const TravelPackagePage: React.FC<TravelPackagePageProps> = ({ toursData }) => {
                         <span className="text-sm text-gray-600">{pkg.run}</span>
                       </div>
                     </div>
-                    <div
+                    {/* <div
                       className="text-gray-700 line-clamp-3 mb-4"
                       dangerouslySetInnerHTML={{
                         __html: pkg.description,
                       }}
-                    />
+                    /> */}
                   </div>
                   <div className="flex justify-end space-x-2">
                     <Button className="bg-black text-white font-semibold py-2 px-4 rounded transition duration-300 ease-in-out hover:bg-gray-800">

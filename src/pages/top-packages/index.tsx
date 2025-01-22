@@ -37,9 +37,12 @@ export default function Home({
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<string>("");
 
+ 
+  
   const toursPerPage = 6;
   const pageCount = Math.ceil(toursData.data.length / toursPerPage);
 
+  console.log("ali");
   const updateToursData = async () => {
     let endpoint = "tours?type=tour_package";
     if (router.query.category) {

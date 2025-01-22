@@ -78,9 +78,9 @@ export default function Home({
       <div className="lg:px-16 p-4 bg-[#FAFAFA] ">
         <AttractionsSection attractions={limitedAttractions} />
       </div>
-      {/* <div className="lg:px-16 p-4 bg-[#FAFAFA] ">
+      <div className="lg:px-16 p-4 bg-[#FAFAFA] ">
         <AdventuresSection categories={categories} />{" "}
-      </div> */}
+      </div>
       <div className="lg:px-16 p-4 bg-[#FAFAFA] ">
         <CallToActionSection />
       </div>

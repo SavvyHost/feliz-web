@@ -10,7 +10,7 @@ interface PaginationProps {
 
 const Pagination: React.FC<PaginationProps> = ({ pageCount, onPageChange }) => {
   return (
-    <div className="flex justify-center mt-6 ">
+    <div className="flex justify-center my-6 ">
       <ReactPaginate
         previousLabel={
           <span className="inline-flex items-center justify-center px-3 py-1 rounded-md">

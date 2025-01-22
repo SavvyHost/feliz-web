@@ -6,6 +6,7 @@ import { Category } from "@/types/tour";
 interface ExploreProps {
   categories: Category[];
   setSelectedCategory: (categoryName: string) => void;
+  router: any; // Add appropriate type for the router object if needed
 }
 
 const Explore: React.FC<ExploreProps> = ({
@@ -71,11 +72,7 @@ const Explore: React.FC<ExploreProps> = ({
             {categories.map((category) => (
               <div key={category.id} className="pr-2">
                 <ExcursionCard
-                  imageSrc={{
-                    src: category.panar_image.url,
-                    width: 400,
-                    height: 300,
-                  }}
+                  imageSrc={category.panar_image.url || "/fallback-image.jpg"} // Ensure imageSrc is a string
                   recommendation={category.name}
                   isSelected={selectedCategoryName === category.name}
                   onSelect={() => handleCategorySelect(category.name)}

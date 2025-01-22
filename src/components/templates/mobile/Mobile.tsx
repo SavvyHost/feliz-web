@@ -7,6 +7,7 @@ import MobileSidebar from "@/components/atoms/Filters/MobileSidebar";
 import Explore from "@/components/molecules/ExploreExcursios";
 import { Filter, SlidersHorizontal } from "lucide-react";
 import { useRouter } from "next/router";
+import fetchData from "@/helper/FetchData";
 
 interface MobileProps {
   toursData: ToursData;
