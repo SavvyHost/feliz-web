@@ -4,14 +4,15 @@ import FilterSection from "./FilterSection";
 
 interface LargeScreenSidebarProps {
   price: [number, number];
-  selectedDestination: string;
+  selectedCategory: string;
   selectedStarRating: string;
   selectedAmenities: string[];
   selectedAccommodationType: string;
+  categories: string[];
   handlePriceChange: (event: Event, newValue: number | number[]) => void;
   handleClearFilters: () => void;
   handleApplyFilters: () => void;
-  setSelectedDestination: (destination: string) => void;
+  setSelectedCategory: (category: string) => void;
   setSelectedStarRating: (rating: string) => void;
   setSelectedAmenities: React.Dispatch<React.SetStateAction<string[]>>;
   setSelectedAccommodationType: (type: string) => void;
@@ -19,20 +20,24 @@ interface LargeScreenSidebarProps {
 
 const LargeScreenSidebar: React.FC<LargeScreenSidebarProps> = ({
   price,
-  selectedDestination,
+  selectedCategory,
   selectedStarRating,
   selectedAmenities,
   selectedAccommodationType,
+  categories,
   handlePriceChange,
   handleClearFilters,
   handleApplyFilters,
-  setSelectedDestination,
+  setSelectedCategory,
   setSelectedStarRating,
   setSelectedAmenities,
   setSelectedAccommodationType,
 }) => {
+  // Add "All Categories" at the top of the categories list
+  const updatedCategories = ["All Categories", ...categories];
+
   return (
-    <div className="">
+    <div className="mt-4">
       {/* Filters Header */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-segoe">Applied filters</h2>
@@ -44,18 +49,17 @@ const LargeScreenSidebar: React.FC<LargeScreenSidebarProps> = ({
         </Button>
       </div>
 
-      {/* Destination Filter */}
-      <FilterSection title="Destinations">
+      {/* Categories Filter */}
+      <FilterSection title="Categories">
         <div className="space-y-2">
-          {["Spain", "Italy", "Greece", "Turkey", "Croatia"].map((country) => (
+          {updatedCategories.map((category) => (
             <div
-              key={country}
-              className="flex items-center cursor-pointer hover:bg-gray-100"
-              onClick={() => setSelectedDestination(country)}
+              key={category}
+              className="flex items-center cursor-pointer hover:bg-blue-100"
+              onClick={() => setSelectedCategory(category)}
             >
               <Radio
-                checked={selectedDestination === country}
-                // Prevent div click when clicking on radio
+                checked={selectedCategory === category}
                 sx={{
                   color: "blue",
                   "&.Mui-checked": {
@@ -63,7 +67,7 @@ const LargeScreenSidebar: React.FC<LargeScreenSidebarProps> = ({
                   },
                 }}
               />
-              <span className="ml-2 font-segoe">{country}</span>
+              <span className="ml-2 font-segoe">{category}</span>
             </div>
           ))}
         </div>
@@ -102,7 +106,7 @@ const LargeScreenSidebar: React.FC<LargeScreenSidebarProps> = ({
             (rating) => (
               <div
                 key={rating}
-                className="flex items-center cursor-pointer hover:bg-gray-100"
+                className="flex items-center cursor-pointer hover:bg-blue-100"
                 onClick={() =>
                   setSelectedAmenities((prev) =>
                     prev.includes(rating)
@@ -113,7 +117,6 @@ const LargeScreenSidebar: React.FC<LargeScreenSidebarProps> = ({
               >
                 <Checkbox
                   checked={selectedAmenities.includes(rating)}
-                  // Prevent div click when clicking on checkbox
                   sx={{
                     color: "blue",
                     "&.Mui-checked": {
@@ -128,74 +131,10 @@ const LargeScreenSidebar: React.FC<LargeScreenSidebarProps> = ({
         </div>
       </FilterSection>
 
-      {/* Amenities Filter */}
-      <FilterSection title="Amenities">
-        <div className="space-y-2">
-          {[
-            "Restaurant",
-            "Hotel bar",
-            "Free breakfast",
-            "Room service",
-            "Fitness center",
-          ].map((amenity) => (
-            <div
-              key={amenity}
-              className="flex items-center cursor-pointer hover:bg-gray-100"
-              onClick={() =>
-                setSelectedAmenities((prev) =>
-                  prev.includes(amenity)
-                    ? prev.filter((item) => item !== amenity)
-                    : [...prev, amenity]
-                )
-              }
-            >
-              <Checkbox
-                checked={selectedAmenities.includes(amenity)}
-                // Prevent div click when clicking on checkbox
-                sx={{
-                  color: "blue",
-                  "&.Mui-checked": {
-                    color: "blue",
-                  },
-                }}
-              />
-              <span className="ml-2 font-segoe">{amenity}</span>
-            </div>
-          ))}
-        </div>
-      </FilterSection>
-
-      {/* Accommodation Type Filter */}
-      <FilterSection title="Accommodation Type">
-        <div className="space-y-2">
-          {["Hotel", "Apartment", "Resort", "Villa", "Bed & Breakfast"].map(
-            (type) => (
-              <div
-                key={type}
-                className="flex items-center cursor-pointer hover:bg-gray-100"
-                onClick={() => setSelectedAccommodationType(type)}
-              >
-                <Checkbox
-                  checked={selectedAccommodationType === type}
-                  // Prevent div click when clicking on checkbox
-                  sx={{
-                    color: "blue",
-                    "&.Mui-checked": {
-                      color: "blue",
-                    },
-                  }}
-                />
-                <span className="ml-2 font-segoe">{type}</span>
-              </div>
-            )
-          )}
-        </div>
-      </FilterSection>
-
       {/* Apply Filters Button */}
       <div className="mt-4">
         <Button
-          className="bg-blue-500 hover:bg-blue-900 text-white w-full"
+          className="bg-primary-light hover:bg-primary-dark text-white w-full"
           onClick={handleApplyFilters}
         >
           Apply Filters

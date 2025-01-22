@@ -1,18 +1,22 @@
 import React, { useState } from "react";
 import LargeScreenSidebar from "@/components/atoms/Filters/LargeScreenSidebar";
 import TravelPackagePage from "@/components/molecules/TravelCardSearch/TravelCardSearch";
-import SearchInput from "@/components/atoms/Search/Search";
 import { ToursData } from "@/types/tour";
-import PaginationExample from "@/components/molecules/Pagination";
-import Explore from "@/components/molecules/ExploreExcursios";
+import { useRouter } from "next/router";
 import Banner from "./Banner";
 
 interface LaptopProps {
   toursData: ToursData;
+  categories: { name: string }[]; // Ensure categories prop is typed correctly
 }
 
-const Laptop: React.FC<LaptopProps> = ({ toursData }) => {
+const Laptop: React.FC<LaptopProps> = ({
+  toursData,
+  categories,
+  whatsnumber,
+}) => {
   // State management for filters
+  const categoryNames = categories.map((category) => category.name);
   const [price, setPrice] = useState<[number, number]>([0, 1000]);
   const [selectedDestination, setSelectedDestination] =
     useState<string>("Spain");
@@ -23,6 +27,10 @@ const Laptop: React.FC<LaptopProps> = ({ toursData }) => {
   ]);
   const [selectedAccommodationType, setSelectedAccommodationType] =
     useState<string>("Hotel");
+
+  // Default category is set to "All Categories"
+  const [selectedCategory, setSelectedCategory] =
+    useState<string>("All Categories");
 
   // Handle price change
   const handlePriceChange = (event: Event, newValue: number | number[]) => {
@@ -38,6 +46,7 @@ const Laptop: React.FC<LaptopProps> = ({ toursData }) => {
     setSelectedStarRating("");
     setSelectedAmenities([]);
     setSelectedAccommodationType("");
+    setSelectedCategory("All Categories"); // Reset category to default
   };
 
   // Apply filters
@@ -48,38 +57,32 @@ const Laptop: React.FC<LaptopProps> = ({ toursData }) => {
       selectedStarRating,
       selectedAmenities,
       selectedAccommodationType,
+      selectedCategory,
     });
   };
 
-  // Calculate dynamic results count
-  const filteredResultsCount = toursData.data.length; // Update this logic based on active filters
+  const router = useRouter();
 
   return (
-    <div className="mt-3">
-      {/* Search Bar */}
-      {/* <div className="mt-24">
-        <SearchInput />
-      </div>
-      <div className="">
-        <Explore />
-      </div> */}
-
-      <div className="mt-16">
+    <div className="bg-[#FAFAFA]">
+      <div className="mt-0">
         <Banner overlayText="Explore Amazing Tour Packages" />
       </div>
-
       {/* Main Content Layout: Filters on the left, Cards on the right */}
-      <div className="flex flex-col md:flex-row gap-8 mt-8 px-20">
+      <div className="flex flex-col md:flex-row gap-8 mt-8 lg:px-16 ">
         {/* Filters Sidebar */}
         <div className="w-full md:w-1/4">
           <LargeScreenSidebar
             price={price}
+            categories={[...categoryNames]} // Add "All Categories" at the top
+            selectedCategory={selectedCategory} // Pass the selected category state
             selectedDestination={selectedDestination}
             selectedStarRating={selectedStarRating}
             selectedAmenities={selectedAmenities}
             selectedAccommodationType={selectedAccommodationType}
             handlePriceChange={handlePriceChange}
             handleClearFilters={handleClearFilters}
+            setSelectedCategory={setSelectedCategory} // Pass the setSelectedCategory function
             setSelectedDestination={setSelectedDestination}
             setSelectedStarRating={setSelectedStarRating}
             setSelectedAmenities={setSelectedAmenities}
@@ -89,14 +92,8 @@ const Laptop: React.FC<LaptopProps> = ({ toursData }) => {
         </div>
 
         {/* Travel Packages */}
-        <div className="w-full md:w-3/4">
-          {/* Dynamic Results Count */}
-          <div className="mb-4 text-primary-dark text-lg font-semibold">
-            {filteredResultsCount === 1 ? "Result" : "Results"} (
-            {filteredResultsCount})
-          </div>
-
-          <TravelPackagePage toursData={toursData} />
+        <div className="w-full md:w-3/4 mt-1">
+          <TravelPackagePage toursData={toursData} whatsnumber={whatsnumber} />
         </div>
       </div>
     </div>
