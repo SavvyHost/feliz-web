@@ -47,7 +47,7 @@ const Tours: React.FC<ToursProps> = ({ toursData }) => {
         {toursData.data.map(
           (attraction) =>
             attraction.is_best_deal === 1 && (
-              <div key={attraction.id} className="tour-card-wrapper">
+              <div key={attraction.id} className="">
                 <AttractionCard
                   id={attraction.id}
                   title={attraction.title}

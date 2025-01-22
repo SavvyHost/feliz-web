@@ -89,7 +89,7 @@ const AttractionCard: React.FC<
       ref={cardRef}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
-      className="group h-full flex flex-col mb-3 duration-300 overflow-hidden cursor-pointer"
+      className="group h-full flex flex-col mx-3 duration-300 overflow-hidden cursor-pointer"
     >
       <div className="relative">
         <div className="absolute top-4 right-4 z-10">
