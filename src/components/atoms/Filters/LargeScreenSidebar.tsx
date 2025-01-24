@@ -144,4 +144,4 @@ const LargeScreenSidebar: React.FC<LargeScreenSidebarProps> = ({
   );
 };
 
-export default LargeScreenSidebar;
+export default LargeScreenSidebar
