@@ -16,6 +16,7 @@ import { Destination } from "./blogs";
 import { Attraction } from "@/types/tour";
 import BlogSection from "@/components/organisms/BlogSection";
 import RecentlyViewedSection from "@/components/templates/RecentlyViewedSection";
+import Seo from "@/components/molecules/Seo";
 
 type Blog = {
   id: number;
@@ -50,6 +51,7 @@ interface HomeProps {
   Destinations: Destination[];
   attractionsData: Attraction[];
   categories: Category[]; // New: Categories data
+  seoData: any;
 }
 
 export default function Home({
@@ -58,6 +60,7 @@ export default function Home({
   blogData,
   Destinations,
   attractionsData,
+  seoData,
   categories, // New: Destructure categories
 }: HomeProps) {
   const limitedDestinations = Destinations.slice(0, 8);
@@ -65,6 +68,15 @@ export default function Home({
 
   return (
     <>
+      <Seo
+        pageTitle={seoData?.title}
+        metaDescription={seoData?.description}
+        ogDescription={seoData?.og_description}
+        keywords={seoData?.keywords}
+        ogImage={seoData?.og_image?.url}
+        ogUrl={seoData?.ogUrl}
+        ogTitle={seoData?.og_title}
+      />
       <HeroSection />
       <div className="lg:px-16 p-4 ">
         <WhyUsSection />
@@ -104,6 +116,7 @@ export async function getServerSideProps() {
   const blogData = await fetchData("blogs");
   const attractionsData = await fetchData("places");
   const categoriesData = await fetchData("categories"); // New: Fetch categories data
+  const seoData = await fetchData("seo-page?model_type=Home");
 
   return {
     props: {
@@ -113,6 +126,7 @@ export async function getServerSideProps() {
       Destinations: Destinations.data,
       attractionsData: attractionsData.data,
       categories: categoriesData.data, // New: Pass categories data
+      seoData: seoData?.data,
     },
   };
 }

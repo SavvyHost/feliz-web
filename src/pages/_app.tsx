@@ -8,6 +8,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { AppProps } from "next/app";
 import { ToastContainer } from "react-toastify";
+import Script from "next/script";
 
 const theme = createTheme({
   typography: {
@@ -30,6 +31,14 @@ export default function App(props: AppProps) {
         <ThemeProvider theme={theme}>
           <WishlistProvider>
             <RecentlyViewedProvider>
+              <Script id="google-analytics" strategy="afterInteractive">
+                {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-WK6D3JZL9S');
+      `}
+              </Script>
               <Layout>
                 <Component {...pageProps} />
               </Layout>
