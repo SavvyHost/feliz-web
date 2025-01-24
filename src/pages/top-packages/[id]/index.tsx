@@ -7,12 +7,14 @@ import { GetServerSidePropsContext } from "next";
 import { TourDetail } from "@/types/tour";
 import { useWishlist } from "@/contexts/wishlist-context";
 import { Heart } from "lucide-react";
+import Seo from "@/components/molecules/Seo";
 
 interface ImageGalleryProps {
   DetailTour: TourDetail;
+  seoData: any;
 }
 
-const TourDetails: React.FC<ImageGalleryProps> = ({ DetailTour }) => {
+const TourDetails: React.FC<ImageGalleryProps> = ({ DetailTour, seoData }) => {
   const [isMounted, setIsMounted] = useState(false);
   const [showFixed, setShowFixed] = useState(false);
   const { toggleWishlist, isInWishlist } = useWishlist();
@@ -38,6 +40,15 @@ const TourDetails: React.FC<ImageGalleryProps> = ({ DetailTour }) => {
 
   return (
     <>
+      <Seo
+        pageTitle={seoData?.title}
+        metaDescription={seoData?.description}
+        ogDescription={seoData?.og_description}
+        keywords={seoData?.keywords}
+        ogImage={seoData?.og_image?.url}
+        ogUrl={seoData?.ogUrl}
+        ogTitle={seoData?.og_title}
+      />
       <div className="flex flex-col md:flex-row md:pt-5 md:px-16">
         <div className="w-full md:w-1/3 p-2 lg:px-0 pt-20 md:pt-28 order-1 md:order-2">
           <BookingFormModal DetailTour={DetailTour} />
@@ -101,9 +112,13 @@ export default TourDetails;
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { id } = context.params as { id: string };
   const DetailTour = await fetchData(`tours/${id}`);
+  const seoData: any = await fetchData(
+    `seo-page?model_type=tour&model_id=${id}`
+  );
   return {
     props: {
       DetailTour: DetailTour.data,
+      seoData: seoData?.data,
     },
   };
 }

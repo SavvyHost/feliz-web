@@ -6,11 +6,14 @@ import { ToursData } from "@/types/tour";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Explore from "@/components/molecules/ExploreExcursios";
+import Seo from "@/components/molecules/Seo";
 
 interface HomeProps {
   toursData: ToursData;
   currentPage: number;
   categories: Category[];
+
+  seoData: any;
 }
 
 interface Category {
@@ -33,12 +36,11 @@ export default function Home({
   toursData,
   currentPage,
   categories,
+  seoData,
 }: HomeProps) {
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<string>("");
 
- 
-  
   const toursPerPage = 6;
   const pageCount = Math.ceil(toursData.data.length / toursPerPage);
 
@@ -69,20 +71,31 @@ export default function Home({
   };
 
   return (
-    <div className=" p-0 bg-[#FAFAFA] ">
-      <div className="block lg:hidden">
-        <Mobile toursData={toursData} categories={categories} />
-      </div>
-      <div className="hidden lg:block ">
-        <Laptop toursData={toursData} categories={categories} />
-      </div>
-      {/* 
+    <>
+      <Seo
+        pageTitle={seoData?.title}
+        metaDescription={seoData?.description}
+        ogDescription={seoData?.og_description}
+        keywords={seoData?.keywords}
+        ogImage={seoData?.og_image?.url}
+        ogUrl={seoData?.ogUrl}
+        ogTitle={seoData?.og_title}
+      />
+      <div className=" p-0 bg-[#FAFAFA] ">
+        <div className="block lg:hidden">
+          <Mobile toursData={toursData} categories={categories} />
+        </div>
+        <div className="hidden lg:block ">
+          <Laptop toursData={toursData} categories={categories} />
+        </div>
+        {/* 
       <Explore
         categories={categories}
         setSelectedCategory={setSelectedCategory}
         router={router}
       /> */}
-    </div>
+      </div>
+    </>
   );
 }
 
@@ -96,12 +109,14 @@ export async function getServerSideProps(context: any) {
   }
   const data: ToursData = await fetchData(endpoint);
   const categoriesData = await fetchData("categories");
+  const seoData: ToursData = await fetchData("seo-page?model_type=tour");
 
   return {
     props: {
       toursData: data,
       categories: categoriesData.data,
       currentPage,
+      seoData: seoData?.data,
     },
   };
 }
